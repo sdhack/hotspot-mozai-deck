@@ -8,8 +8,10 @@
 
 ```
 === SEEDLING CHARACTER (strictly match reference image) ===
-CRITICAL: Match reference EXACTLY. Round plump black teardrop creature (plump water drop, NOT slim, NOT elongated). Matte ink-black body with visible pencil/crayon scribble texture (not flat black, has textured strokes). Thin curly tendril with spiral-shaped coil loop + TWO light sage-green leaves (exactly two leaves, not one, not three). LARGE round eyes with big white eye whites and black pupils (pupils often slightly asymmetrical - one eye may look slightly larger or offset, expressive). DEEP RED/DARK CRIMSON mouth (expression varies per page). Exactly TWO thin black arms and exactly TWO thin black legs (short stubby legs). Small shadow under feet. Cute expressive children's book illustration feel. EXACTLY ONE character on page, never two or more.
+CRITICAL: Match reference EXACTLY. Round plump black teardrop creature (plump water drop, NOT slim, NOT elongated). Matte ink-black body with visible pencil/crayon scribble texture (not flat black, has textured strokes). Thin curly tendril with spiral-shaped coil loop + TWO light sage-green leaves (exactly two leaves, not one, not three). LARGE round eyes with big white eye whites and black pupils (pupils often slightly asymmetrical - one eye may look slightly larger or offset, expressive). DEEP RED/DARK CRIMSON mouth (expression varies per page). Exactly TWO thin black arms and exactly TWO thin black legs (short stubby legs). Small shadow under feet. Cute expressive children's book illustration feel. EXACTLY ONE character on page, never two or more. The character is ONLY at [position], doing [action]. NO character inside any card, NO small character anywhere else, NO character in icons. All icons are INANIMATE objects (NO face, NO character, NO teardrop shape).
 ```
+
+> ⚠️ 使用时把 `[position]` 和 `[action]` 替换为具体的位置和动作。
 
 ---
 
@@ -27,6 +29,7 @@ CRITICAL: Match reference EXACTLY. Round plump black teardrop creature (plump wa
 | 腿 | exactly TWO short stubby legs（恰好两条短粗腿） | extra legs（多余腿）、missing legs（缺腿）、long legs（长腿） |
 | 阴影 | small shadow under feet（脚下小阴影） | no shadow（无阴影）、large shadow（大阴影） |
 | 数量 | EXACTLY ONE character（恰好一个角色） | multiple characters（多个角色）、two characters（两个） |
+| 位置 | ONLY at 指定位置 | character inside card（卡片里出现角色）、character in icon（图标里出现角色） |
 
 ---
 
@@ -54,6 +57,65 @@ CRITICAL: Match reference EXACTLY. Round plump black teardrop creature (plump wa
 
 ---
 
+## 角色唯一性强化（v1.2.0 新增，经过多轮踩坑验证）
+
+### 问题：卡片/图标里出现小角色
+
+经过多轮迭代发现，模型容易把卡片里的图标（如电脑、钱袋、银行卡）渲染成小墨仔角色，导致一页出现两个角色。
+
+### 解决方案：三重描述
+
+不要只写 "EXACTLY ONE character"，要写：
+
+```
+EXACTLY ONE character on page, never two or more.
+The character is ONLY at [position], doing [action].
+NO character inside any card, NO small character anywhere else, NO character in icons.
+All card icons are INANIMATE objects (NO face, NO character, NO teardrop shape).
+```
+
+### 每个图标必须标注
+
+每个卡片/步骤里的图标都要明确标注：
+```
+inanimate [object] icon (NO face, NO character, NO teardrop shape)
+```
+
+示例：
+- `inanimate bank card icon with chip (NO face, NO character, NO teardrop shape)`
+- `inanimate money bag icon with coins (NO face, NO character, NO teardrop shape)`
+- `inanimate laptop icon with screen (NO face, NO character, NO teardrop shape)`
+
+### 背景涂鸦也要注意
+
+背景里的 tiny doodle icons 也必须是无生命物体，不能有角色/脸：
+```
+tiny doodle icons scattered (inanimate objects only, NO character doodles, NO faces in doodles)
+```
+
+---
+
 ## image-to-image 参考
 
 生成时必须传入 `assets/seedling-character-sheet.png` 的 URL 作为 `image_reference_url_list`，用 image_edit 工具（不是 image_gen），确保角色形象严格匹配人物卡。
+
+### 人物卡 URL 管理
+
+- 人物卡本地路径：`assets/seedling-character-sheet.png`
+- 生成前用 `FileBatchUpload` 上传获取 URL（URL 可能过期，每次生成前重新上传）
+- 把 URL 传入 `image_reference_url_list` 参数
+
+---
+
+## 常见角色问题快速修复（v1.2.0 新增）
+
+| 问题 | 原因 | 修复方法 |
+|---|---|---|
+| 出现第二个角色 | prompt 不够强 | 重生成，用三重描述：EXACTLY ONE + ONLY at position + NO character in cards/icons |
+| 卡片图标变成小墨仔 | 图标被模型渲染成角色 | 重生成，每个图标标注 "inanimate icon (NO face, NO character, NO teardrop shape)" |
+| 背景涂鸦里出现小脸 | 涂鸦未限制 | 重生成，强调 "doodles are inanimate objects only, NO character doodles, NO faces" |
+| 角色太胖/太瘦 | 身体形状描述不够 | 重生成，强调 round plump teardrop (not slim, not spherical) |
+| 眼睛太大/太小 | 眼睛描述不够精确 | 重生成，强调 LARGE round eyes with big white whites (not tiny dot eyes, not extremely large chibi eyes) |
+| 嘴巴每页都一样 | 未指定每页不同嘴型 | 重生成，每页 prompt 指定不同 mouth expression |
+| 头顶尖顶 | 身体形状被误渲染 | 重生成，强调 round plump teardrop, NOT pointed top, rounded top |
+| 叶子数量不对 | 未强调 exactly two | 重生成，强调 exactly TWO light sage-green leaves |
