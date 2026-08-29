@@ -1,7 +1,7 @@
 ---
 name: hotspot-mozai-deck
-version: 1.2.0
-description: 从热点搜索→候选选题→4页墨仔(Seedling)handdrawn配图→配套文案的全流程自动化。适用于抖音/小红书竖版图文，墨仔IP出镜，手绘风格统一。当用户要求"结合热点出图""墨仔热点图文""今天热点做图文""热点新闻文案出图"时使用。
+version: 1.3.0
+description: 从热点搜索→候选选题→4-6页墨仔(Seedling)handdrawn配图→配套文案的全流程自动化。适用于抖音/小红书竖版图文，墨仔IP出镜，手绘风格统一。当用户要求"结合热点出图""墨仔热点图文""今天热点做图文""热点新闻文案出图"时使用。
 author: helloianneo
 license: MIT
 created: 2026-08-28
@@ -75,7 +75,9 @@ updated: 2026-08-29
 - 加载 `references/prompt-template.md`（4页完整 prompt 模板）
 - 把选题的具体内容填入模板的变量占位符
 - 用 `image_edit` 工具，传入 `assets/seedling-character-sheet.png` 的 URL 作为 image-to-image 参考
-- 一次调用生成 4 张图（封面 + P2 + P3 + P4），每页 prompt 前缀加唯一 tag 避免冲突
+- 一次调用生成 4-6 张图（根据内容丰富度调整），每页 prompt 前缀加唯一 tag 避免冲突
+- **生成后必须逐张下载到本地，用 Read 工具放大（thumbnail_size=large）逐张校验**，不能只看生成结果缩略图
+- **校验发现问题后，单独重生成有问题的页面**（不要全部重生成），重生成时在 prompt 中明确列出之前出现的具体错误
 - **生成后立即跑 QA checklist**，发现问题当场修正或重生成
 
 ### Step 4：生成配套文案
@@ -110,7 +112,7 @@ updated: 2026-08-29
 - 平台：抖音（3:4 竖版 1080x1440）
 - 角色：墨仔/Seedling（用户上传的人物卡）
 - 风格：refined Chinese handdrawn technical illustration
-- 页数：4页（封面 + 3页正文）
+- 页数：4-6页（根据文案内容丰富度调整，封面 + 3-5页正文）
 - 文案：墨仔第一人称，200-300字
 - 候选选题：5个
 
@@ -123,6 +125,7 @@ updated: 2026-08-29
 - 教师考低分被要求与耻辱合影
 - 开学季避坑指南：4个消费陷阱
 - 大学新生报到第一天指南：6件事别忘
+- 求职诈骗防骗指南：106人被骗1000万
 
 ## Guardrails（必须遵守）
 
@@ -211,6 +214,57 @@ The ONLY number on the page is the page number 04/04.
 ### 数字一致性检查
 生成前先核对：封面标题说"N件事/N个坑" → P2/P3 的卡片/步骤数量必须等于 N → 文案正文的编号必须连续到 N。
 
+### 卡片/步骤数量精确控制（v1.3.0 新增，实战验证）
+不要只写 "five cards"，要写：
+```
+EXACTLY FIVE cards stacked vertically. NO sixth card. NO extra card. NO more, NO less.
+Five cards only, numbered 1 through 5 in large hand-drawn circles on left side of each card.
+```
+> 实战验证：P2 原生成6张、P3 原生成7张，加此约束后修复为5张。
+
+### 编号连续性控制（v1.3.0 新增，实战验证）
+```
+numbered 1 through N consecutively. NO duplicate numbers. NO 50%. NO 20h. NO random digits in circles.
+Each circle contains ONLY the sequential number 1, 2, 3, 4, 5.
+```
+> 实战验证：P3 原编号混乱（50%/2/3/3/5/5），加此约束后修复为1-5连续。
+
+### 常见错字预防（v1.3.0 新增，实战验证）
+对于易错形近字，在 prompt 中用拼音+偏旁拆解明确区分：
+```
+TEXT MUST BE 拨打110 (拨 = 扌+发, pronounced bo). NOT 技打 (技 = 扌+支, pronounced ji).
+Also 派出所 (only one 派), 冻结 (only one 冻).
+```
+常见易错字清单：
+- 拨打 ≠ 技打
+- 派出所 ≠ 派派出所
+- 冻结 ≠ 冻冻结
+- 保留 ≠ 保保留
+> 实战验证：P4 反复生成"技打110"，加拼音+偏旁拆解后修复为"拨打110"。
+
+### 页码唯一性控制（v1.3.0 新增，实战验证）
+```
+page number appears ONLY ONCE at upper-left inside a small circle.
+NO second page number. NO 04/05 near title. NO duplicate number anywhere.
+```
+> 实战验证：P4 原标题旁重复页码，加此约束后修复为仅左上角一个。
+
+### 符号控制（v1.3.0 新增，实战验证）
+```
+NO $ sign. NO dollar sign. NO currency symbols. NO % sign in icons.
+Money bag icon is plain cloth sack with tie, NO symbol on it.
+Shield icon is plain shield, NO $ or other symbol inside.
+```
+> 实战验证：P1/P2 钱袋和盾牌反复出现$符号，加此约束后修复。
+
+### 图标内无文字/数字（v1.3.0 新增，实战验证）
+```
+All icons contain NO text, NO numbers, NO letters, NO K306, NO (136).
+Icons are pure illustrations only.
+ID card icon has chip but NO text/numbers on it.
+```
+> 实战验证：P2 身份证出现K306、卡片角出现(136)，加此约束后修复。
+
 ## 常见问题与故障排除
 
 | 问题 | 原因 | 解决方法 |
@@ -225,7 +279,13 @@ The ONLY number on the page is the page number 04/04.
 | 封面数字与正文不一致（封面4个坑正文3个） | 设计时未核对 | 生成前先核对数字一致性，封面N件=正文N件；不一致则增加卡片或改封面 |
 | 文案与往期爆款重复 | 开头/结构/金句雷同 | 换开头（场景化切入代替直接说事）、换结构、换金句、换互动问题 |
 | 角色太胖/太瘦 | 身体形状描述不够 | 重生成，强调 round plump teardrop (not slim, not spherical) |
-| 文字错字/漏字 | 模型渲染不准 | 可接受小瑕疵，严重则重生成，减少文字量 |
+| 文字错字/漏字 | 模型渲染不准 | 可接受小瑕疵，严重则重生成，减少文字量；常见错字在prompt中用拼音+偏旁拆解预防 |
+| 卡片/步骤数量错误（多了/少了） | prompt数量约束不够强 | 重生成，强调 EXACTLY N cards + NO sixth/extra card + NO more NO less |
+| 编号混乱/重复 | 未约束编号格式 | 重生成，强调 numbered 1 through N consecutively + NO duplicates + NO 50%/20h/random digits |
+| 常见错字（拨打→技打等） | 模型混淆形近字 | 重生成，prompt中用拼音+偏旁拆解明确区分（拨=扌+发 bo，技=扌+支 ji）；见"常见错字清单" |
+| 页码重复（标题旁又出现） | 页码约束不够强 | 重生成，强调 ONLY ONCE upper-left + NO second page number + NO near title |
+| 图标内出现文字/数字 | 图标未约束为纯图形 | 重生成，强调 icons contain NO text/numbers/letters + 列举具体例子 K306/(136) |
+| $符号反复出现（钱袋/盾牌） | 图标默认带货币符号 | 重生成，强调 NO $ sign + money bag is plain cloth sack with NO symbol + shield NO symbol |
 | image_edit 工具不可用 | 工具未加载 | 用 tool_search 搜索 image_edit，或降级用 image_gen |
 | 人物卡 URL 失效 | 本地文件未上传 | 用 FileBatchUpload 重新上传 assets/seedling-character-sheet.png |
 
@@ -236,6 +296,7 @@ The ONLY number on the page is the page number 04/04.
 | 1.0.0 | 2026-08-28 | 初始版本，5步工作流 + 7个参考文件 + Seedling人物卡 |
 | 1.1.0 | 2026-08-28 | 完善文档：添加快速开始/用法示例/故障排除/版本历史；更新 guardrails；添加 README.md |
 | 1.2.0 | 2026-08-29 | 实战迭代：新增排版优化指南（卡片折叠角/大圆圈编号/时间线布局）；新增 Prompt 强化技巧（角色唯一性/图标无脸/气泡唯一/无多余数字）；Guardrails 增加数字一致性/图标无脸/气泡唯一/文案不重复；故障排除增加卡片小角色/双气泡/数字不一致/文案重复等新问题；更新已做选题记忆 |
+| 1.3.0 | 2026-08-29 | 实战深度迭代：页数从固定4页改为4-6页灵活调整（根据内容丰富度）；新增6条Prompt强化技巧（卡片数量精确控制/编号连续性/常见错字预防用拼音+偏旁拆解/页码唯一性/符号控制$/图标内无文字数字）；故障排除新增6条（卡片数量错误/编号混乱/常见错字/页码重复/图标内文字/$符号）；工作流Step3新增"生成后必须逐张下载放大校验+单独重生成有问题页面"；更新已做选题记忆 |
 
 ## 最终回复格式
 
