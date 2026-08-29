@@ -1,11 +1,11 @@
 ---
 name: hotspot-mozai-deck
-version: 1.1.0
+version: 1.2.0
 description: 从热点搜索→候选选题→4页墨仔(Seedling)handdrawn配图→配套文案的全流程自动化。适用于抖音/小红书竖版图文，墨仔IP出镜，手绘风格统一。当用户要求"结合热点出图""墨仔热点图文""今天热点做图文""热点新闻文案出图"时使用。
 author: helloianneo
 license: MIT
 created: 2026-08-28
-updated: 2026-08-28
+updated: 2026-08-29
 ---
 
 # Hotspot Mozai Deck · 墨仔热点图文自动化
@@ -76,12 +76,14 @@ updated: 2026-08-28
 - 把选题的具体内容填入模板的变量占位符
 - 用 `image_edit` 工具，传入 `assets/seedling-character-sheet.png` 的 URL 作为 image-to-image 参考
 - 一次调用生成 4 张图（封面 + P2 + P3 + P4），每页 prompt 前缀加唯一 tag 避免冲突
+- **生成后立即跑 QA checklist**，发现问题当场修正或重生成
 
 ### Step 4：生成配套文案
 - 加载 `references/copy-template.md`
 - 用墨仔第一人称视角写标题 + 正文（200-300字）
 - 文案结构：钩子开头 → 事实陈述 → 3个要点 → 解决方案 → 金句落点 → 互动提问
 - 附 2-3 个话题标签
+- **检查文案与往期爆款不重复**（开头、结构、金句、互动问题都要换）
 
 ### Step 5：交付
 - 加载 `references/qa-checklist.md`，逐项检查
@@ -119,29 +121,109 @@ updated: 2026-08-28
 - 成都92岁蛋烘糕婆婆遭遇镜头霸凌
 - 高校新生开学谨防校园贷陷阱
 - 教师考低分被要求与耻辱合影
+- 开学季避坑指南：4个消费陷阱
+- 大学新生报到第一天指南：6件事别忘
 
 ## Guardrails（必须遵守）
 
+### 角色与形象
 - 每页**仅一个**墨仔/Seedling 角色，绝不出现多个
-- 所有文字必须是**中文手写风格**，无正式印刷字体，无英文
+- **卡片/图标里不能出现小角色或脸**——所有图标必须是无生命物体（银行卡、钱袋、电脑等），明确标注 "NO face, NO character, NO teardrop shape"
 - 角色形象必须严格匹配人物卡（圆胖黑泪滴、螺旋卷须双叶、大眼不对称、深红嘴、细四肢）
-- 封面必须有**强钩子**，紧贴新闻热点
 - 4页嘴巴表情必须**差异化**（不能每页都是同一个嘴型，至少3种）
+- 角色是动作主体（actor），不是角落装饰
+
+### 文字与数字
+- 所有文字必须是**中文手写风格**，无正式印刷字体，无英文
+- **数字前后必须一致**——封面说"N件事/N个坑"，正文必须对应N件，不能封面4个坑正文3个坑
+- 页码仅左上角，绝不右上角重复
+- **无多余数字标注**（如 50%、10%、32s、28%）、无多余的手/手指/对话气泡
+- P4 **只能有一个对话气泡**，绝不出现两个内容相同的气泡
+
+### 内容与质量
+- 封面必须有**强钩子**，紧贴新闻热点
 - 交付前必须跑 QA checklist
 - 热点事实必须可核查，无法核实的标注"网上正在讨论"或放弃
-- 页码仅左上角，绝不右上角重复
-- 无多余数字标注（如 50%、10%）、无多余的手/手指/对话气泡
-- 角色是动作主体（actor），不是角落装饰
+- **文案与往期爆款不重复**——开头、结构、金句、互动问题都要换，不能用"开学了先别急着买"这种用过的开头
+
+## 排版优化指南（v1.2.0 新增）
+
+经过多轮迭代验证，以下排版优化能显著提升视觉质量：
+
+### 卡片优化（P2/P3）
+- 卡片加**折叠角**（folded corner）、**双线边框**（double-line border）、**pastel 底色**（pale blue/peach/sage/lavender wash）
+- 卡片左侧加**大圆圈编号**（large hand-drawn circled number），比小数字更醒目
+- 卡片之间加**向下箭头+小星星**（small downward arrows with tiny stars），引导阅读顺序
+- 每个卡片标题旁加**小图标**（key icon、calendar icon、chat bubble icon）
+
+### 时间线布局（P3 可选）
+- 左侧画**波浪竖线**（wavy hand-drawn vertical line）
+- 圆圈编号连接到竖线，步骤卡片延伸到右侧
+- 时间线上加**向下箭头和星星闪光**（sparkles）
+
+### 标题区优化
+- 页码加**小圆圈**（small circle around page number）
+- 标题旁加**小图标**（铅笔图标、时钟图标、毕业帽图标）
+- 副标题两侧加**装饰线**（thin divider lines on both sides）
+
+### 金句框优化
+- 加**引号符号**（small quote mark symbol）
+- 周围加**装饰星星**（decorative stars around quote box）
+
+### 标签优化
+- 标签加**双线边框**（wobbly hand-drawn double borders）
+- 标签之间加**装饰点和小星星**（decorative dots and tiny stars between tags）
+
+### 场景丰富度（P1/P4）
+- 校园场景加：欢迎横幅、两棵大树、背景建筑带窗户、飞鸟、云朵、落叶、校园地图指示牌
+- 背景加**铅笔网格+涂鸦图标**（faint pencil grid + tiny doodle icons）
+
+## Prompt 强化技巧（v1.2.0 新增）
+
+经过多轮踩坑验证，以下 prompt 写法能有效避免常见问题：
+
+### 角色唯一性强化
+不要只写 "EXACTLY ONE character"，要写：
+```
+EXACTLY ONE character on page, never two or more.
+The character is ONLY at [position], doing [action].
+NO character inside any card, NO small character anywhere else, NO character in icons.
+```
+
+### 图标无脸强化
+每个卡片图标都要标注：
+```
+inanimate [object] icon (NO face, NO character, NO teardrop shape)
+```
+
+### 对话气泡唯一性强化（P4）
+```
+EXACTLY ONE speech bubble. NO second bubble, NO duplicate bubble, NO two bubbles.
+```
+
+### 无多余数字强化
+```
+NO random numbers, NO percentages, NO time labels, NO statistics.
+The ONLY number on the page is the page number 04/04.
+```
+并在 Avoid 列表列举具体例子：`50%, 32s, 28%, extra percentages`
+
+### 数字一致性检查
+生成前先核对：封面标题说"N件事/N个坑" → P2/P3 的卡片/步骤数量必须等于 N → 文案正文的编号必须连续到 N。
 
 ## 常见问题与故障排除
 
 | 问题 | 原因 | 解决方法 |
 |---|---|---|
-| 出现第二个角色 | prompt 不够强 | 重生成，强调 EXACTLY ONE character, never two or more |
+| 出现第二个角色 | prompt 不够强 | 重生成，强调 EXACTLY ONE character + 角色 ONLY 在指定位置 + NO character in cards/icons |
+| 卡片/图标里出现小墨仔 | 图标被模型渲染成角色 | 重生成，每个图标标注 "inanimate icon, NO face, NO character, NO teardrop shape" |
 | 出现英文 MOZAI/SEEDLING | 模型误渲染 prompt 中的词 | 重生成，在 Avoid 列表明确列出，或后期裁剪 |
 | 页码右上角重复 | prompt 不够强 | 重生成，强调 upper-left ONLY, no duplicate on right |
 | 嘴巴每页都一样 | 未指定每页不同嘴型 | 重生成，每页 prompt 指定不同 mouth expression |
-| 多余数字标注（50%、10%） | 模型误渲染 | 重生成，在 Avoid 列表加 random numbers, percentage signs |
+| 多余数字标注（50%、10%、32s、28%） | 模型误渲染 | 重生成，在 Avoid 列表加 random numbers, percentage signs, time labels，并列举具体例子 |
+| P4 出现两个对话气泡 | prompt 不够强 | 重生成，强调 EXACTLY ONE speech bubble, NO second/duplicate bubble |
+| 封面数字与正文不一致（封面4个坑正文3个） | 设计时未核对 | 生成前先核对数字一致性，封面N件=正文N件；不一致则增加卡片或改封面 |
+| 文案与往期爆款重复 | 开头/结构/金句雷同 | 换开头（场景化切入代替直接说事）、换结构、换金句、换互动问题 |
 | 角色太胖/太瘦 | 身体形状描述不够 | 重生成，强调 round plump teardrop (not slim, not spherical) |
 | 文字错字/漏字 | 模型渲染不准 | 可接受小瑕疵，严重则重生成，减少文字量 |
 | image_edit 工具不可用 | 工具未加载 | 用 tool_search 搜索 image_edit，或降级用 image_gen |
@@ -153,6 +235,7 @@ updated: 2026-08-28
 |---|---|---|
 | 1.0.0 | 2026-08-28 | 初始版本，5步工作流 + 7个参考文件 + Seedling人物卡 |
 | 1.1.0 | 2026-08-28 | 完善文档：添加快速开始/用法示例/故障排除/版本历史；更新 guardrails；添加 README.md |
+| 1.2.0 | 2026-08-29 | 实战迭代：新增排版优化指南（卡片折叠角/大圆圈编号/时间线布局）；新增 Prompt 强化技巧（角色唯一性/图标无脸/气泡唯一/无多余数字）；Guardrails 增加数字一致性/图标无脸/气泡唯一/文案不重复；故障排除增加卡片小角色/双气泡/数字不一致/文案重复等新问题；更新已做选题记忆 |
 
 ## 最终回复格式
 
