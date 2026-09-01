@@ -1,7 +1,7 @@
 ---
 name: hotspot-mozai-deck
-version: 1.6.0
-description: 从热点搜索→候选选题→4-6页墨仔(Mozai)handdrawn配图→配套文案的全流程自动化。v1.6.0 引入 Prompt as Code 结构化协议（借鉴 awesome-gpt-image-2），内容主导型排版，角色一致性前置，五官拆解，材质光影强化。当用户要求"结合热点出图""墨仔热点图文"时使用。
+version: 1.7.0
+description: 从热点搜索→候选选题→4-6页墨仔(Mozai)handdrawn配图→配套文案的全流程自动化。v1.7.0 核心变更：涂鸦是墨仔的天性（背景必须有铅笔网格+散布涂鸦+交叉排线，禁止大面积纯白空白）；去说教原则（文案+配图用分享式而非命令式）；image_edit 必须用 request_list 数组格式。当用户要求"结合热点出图""墨仔热点图文"时使用。
 author: helloianneo
 license: MIT
 created: 2026-08-28
@@ -29,6 +29,7 @@ updated: 2026-09-01
 
 - **角色**：墨仔/Mozai（圆胖黑泪滴 + 小芽微卷茎双叶 + 大眼不对称 + 黑色小嘴 + 细四肢，手绘墨迹质感）
 - **风格**：refined Chinese handdrawn technical illustration（暖白纸 + cross-hatching + 装饰角 + 双线边框 + 手写中文字体）
+- **涂鸦天性（v1.7.0核心）**：墨仔是"一滴在纸上活过来的墨"，它走到哪里，哪里就有涂鸦。每页背景必须有铅笔网格+散布涂鸦图标+交叉排线+墨点，禁止大面积纯白空白
 - **格式**：3:4 竖版（1080x1440），抖音/小红书适配
 - **人物卡**：`assets/seedling-character-sheet.png`（image-to-image 参考用）
 
@@ -78,17 +79,20 @@ updated: 2026-09-01
 - **v1.6.0 新增：五官拆解**——眼睛/嘴巴/头顶芽/身体质感必须拆解到可执行粒度（如眼睛=大圆眼+大白眼白占60-70%+黑瞳孔占30-40%+常不对称），不能只写"大眼睛小嘴巴"。详见 `references/character-lock.md` 五官拆解章节
 - **v1.6.0 新增：材质光影强化**——纸张/墨水/光影/pastel底色必须精细描述（如墨水=可变线宽+交叉排线+点画+自然晕染），避免画面扁平无层次。详见 `references/style-lock.md` v1.6.0 新增章节
 - **v1.6.0 新增：文案克制原则**——每页文字量上限：封面标题≤12字/行，卡片说明≤20字，金句≤10字/行。超过上限会导致模型渲染错字漏字。详见 `references/prompt-template.md` 第七节
+- **v1.7.0 新增：涂鸦是墨仔的天性**——每页背景必须有 FAINT PENCIL GRID + SCATTERED TINY DOODLE ICONS（无生命物体：星星/叶子/铅笔/箭头/圆点/闪光/音符）+ cross-hatching patches + ink dots，全页覆盖，**禁止大面积纯白空白**。涂鸦是墨仔IP的核心视觉特质，不是可选排版优化。详见 `references/style-lock.md` v1.7.0 核心变更和 `references/character-lock.md` 涂鸦天性设定
+- **v1.7.0 新增：去说教原则（配图）**——标题和卡片措辞用分享式（"我自己的3个小习惯""3个我踩过的"），非命令式（"3个防坑做法，新生必看""只认官方群和通知"）。墨仔是观察者和分享者，不是教导者。详见 `references/copy-template.md` v1.7.0 去说教措辞对照表
+- **v1.7.0 新增：image_edit 必须用 request_list 数组格式**——实战验证：扁平参数调用会报错 `required param is empty, field: request_list`。必须用 `image_edit(model_version=..., request_list=[{"prompt":..., "image_reference_url_list":[...], "height":..., "width":...}, ...])` 格式。可一次传入多个请求（如5页同时生成）。详见 `references/character-lock.md` image_edit 工具调用格式
 - **v1.5.0 新增：生成前先规划5页差异化状态表**——确保每页墨仔的眼睛状态、嘴型、身体动作全部不同（见 prompt-template.md 的"5页差异化状态规划模板"）
 - **v1.5.0 新增：模型版本选择**——初稿/迭代用 seedream_4.5（1080×1440，速度快），最终交付用 seedream_5.0_pro（1773×2364，画质优）
 - 用户选定后，加载 `references/style-lock.md`（通用风格锁）和 `references/character-lock.md`（Seedling 角色锁）
 - 加载 `references/prompt-template.md`（4页完整 prompt 模板）
 - 把选题的具体内容填入模板的变量占位符
-- 用 `image_edit` 工具，传入 `assets/seedling-character-sheet.png` 的 URL 作为 image-to-image 参考
+- 用 `image_edit` 工具（**v1.7.0：必须用 request_list 数组格式**），传入 `assets/seedling-character-sheet.png` 的 URL 作为 image-to-image 参考
 - **v1.5.1 强化：按Step 2决定的页数生成对应数量的图**（4页就生成4张，5页就生成5张，6页就生成6张），不默认5页；每页 prompt 前缀加唯一 tag 避免冲突
 - **v1.5.0 强化：prompt 必加防坑约束**——卡片内容防重复（Card 3 DIFFERENT from 1 and 2）、标签防重复（Each tag ONLY ONCE）、随机数字防护（ONLY number is page number）、墨仔周围空白防护（Area around character COMPLETELY BLANK）、逻辑标题规范（金句页不用"写在最后"）
 - **生成后必须逐张下载到本地，用 Read 工具放大（thumbnail_size=large）逐张校验**，不能只看生成结果缩略图
 - **校验发现问题后，单独重生成有问题的页面**（不要全部重生成），重生成时在 prompt 中明确列出之前出现的具体错误
-- **生成后立即跑 QA checklist**（含 v1.5.0 新增的 J1-J5 实战检查项：卡片不重复、标签不重复、逻辑标题、5页差异化、随机数字防护），发现问题当场修正或重生成
+- **生成后立即跑 QA checklist**（含 v1.7.0 新增的 J11-J15：涂鸦天性/去说教配图/去说教文案/image_edit格式/背景涂鸦无角色），发现问题当场修正或重生成
 
 ### Step 4：生成配套文案
 - 加载 `references/copy-template.md`
@@ -96,9 +100,10 @@ updated: 2026-09-01
 - 文案结构：钩子开头 → 事实陈述 → 3个要点 → 解决方案 → 金句落点 → 互动提问
 - 附 2-3 个话题标签
 - **检查文案与往期爆款不重复**（开头、结构、金句、互动问题都要换）
+- **v1.7.0 新增：去说教原则（文案）**——文案口吻是分享者（"我自己的办法是""我踩过的"），非教导者（"你必须""你应该""你千万不要"）；互动提问是平等分享式（"你呢？""你遇到过吗？"），非教导式（"你学会了吗？""你记住了吗？"）；优先用故事/经历切入开头（模板D），让墨仔以"我也踩过坑"的分享者身份出现。详见 `references/copy-template.md` v1.7.0 去说教原则和措辞对照表
 
 ### Step 5：交付
-- 加载 `references/qa-checklist.md`，逐项检查
+- 加载 `references/qa-checklist.md`，逐项检查（含 v1.7.0 新增 J11-J15）
 - 用 `present_files` 逐张交付 4 张图（每张配简短介绍）
 - 最后附总结表（4页标题、墨仔动作、状态）+ 配套文案
 - 说明小瑕疵（如有）和修正选项
@@ -109,11 +114,11 @@ updated: 2026-09-01
 | 文件 | 用途 | 何时加载 |
 |---|---|---|
 | `references/hotspot-template.md` | 热点搜索策略 + 5候选选题整理模板 | Step 1 |
-| `references/style-lock.md` | handdrawn 通用风格锁（精确描述） | Step 3 |
-| `references/character-lock.md` | Seedling 角色锁（从人物卡提取的精确描述） | Step 3 |
+| `references/style-lock.md` | handdrawn 通用风格锁（精确描述，v1.7.0含涂鸦天性） | Step 3 |
+| `references/character-lock.md` | Seedling 角色锁（从人物卡提取的精确描述，v1.7.0含涂鸦天性设定+image_edit格式） | Step 3 |
 | `references/prompt-template.md` | 4页完整 prompt 模板（含变量占位符） | Step 3 |
-| `references/copy-template.md` | 配套文案模板（标题+正文结构） | Step 4 |
-| `references/qa-checklist.md` | 交付前检查清单 | Step 5 |
+| `references/copy-template.md` | 配套文案模板（标题+正文结构，v1.7.0含去说教原则） | Step 4 |
+| `references/qa-checklist.md` | 交付前检查清单（v1.7.0含J11-J15） | Step 5 |
 | `assets/seedling-character-sheet.png` | Seedling 人物卡（image-to-image 参考） | Step 3 |
 
 ## 默认值
@@ -122,6 +127,8 @@ updated: 2026-09-01
 - 平台：抖音（3:4 竖版 1080x1440）
 - 角色：墨仔/Seedling（用户上传的人物卡）
 - 风格：refined Chinese handdrawn technical illustration
+- **涂鸦背景（v1.7.0默认开启）**：每页背景必须有铅笔网格+散布涂鸦+交叉排线+墨点，禁止大面积纯白空白
+- **去说教（v1.7.0默认开启）**：文案+配图用分享式而非命令式
 - 页数：4-6页（**v1.5.1 强化：根据内容长度和信息量决定，禁止默认5页**——4页=单一事件/观点集中/情感驱动；5页=双事件/争议性强/多维度；6页=内容特别丰富/多案例数据；详见 `references/hotspot-template.md` Step 3）
 - 文案：墨仔第一人称，200-300字
 - 候选选题：5个
@@ -141,6 +148,7 @@ updated: 2026-09-01
 - 中学收220元门禁费引争议（2026-09-01，4页版，墨仔第一人称）
 - 开学消费避坑6大陷阱（2026-09-01，5页版，墨仔第一人称）
 - 开学安全第一课·校园安全6大提醒（2026-09-01，5页版，墨仔第一人称，内容主导型排版）
+- 新生群里的套路·90%的人踩过（2026-09-01，5页版，墨仔第一人称，v1.7.0涂鸦天性+去说教）
 
 ## Guardrails（必须遵守）
 
@@ -157,6 +165,7 @@ updated: 2026-09-01
 - 4页嘴巴表情必须**差异化**（不能每页都是同一个嘴型，至少3种）
 - 角色是动作主体（actor），不是角落装饰——即使小比例在角落，也必须在做与页面主题相关的动作
 - **内容主导型排版（v1.6.0 用户硬约束）**：分析页/金句页默认内容为主，墨仔为辅。内容区（卡片/图标/文字）占页面 55-65%，墨仔仅占 8-10% 且位置在角落（左下/右下轮换，不连续同侧），墨仔周围完全空白（无文字/图标/涂鸦）。仅封面/互动页可使用角色主导型（墨仔 18-25%）
+- **涂鸦天性（v1.7.0 核心约束）**：每页背景必须有 FAINT PENCIL GRID + SCATTERED TINY DOODLE ICONS（无生命物体）+ cross-hatching patches + ink dots，全页覆盖，**禁止大面积纯白空白**。背景涂鸦必须是无生命物体（星星/叶子/铅笔/箭头/圆点/闪光/音符），无角色/脸/泪滴形
 
 ### 文字与数字
 - 所有文字必须是**中文手写风格**，无正式印刷字体，无英文
@@ -173,6 +182,7 @@ updated: 2026-09-01
 - 交付前必须跑 QA checklist
 - 热点事实必须可核查，无法核实的标注"网上正在讨论"或放弃
 - **文案与往期爆款不重复**——开头、结构、金句、互动问题都要换，不能用"开学了先别急着买"这种用过的开头
+- **去说教原则（v1.7.0 新增）**：文案+配图用分享式（"我自己的办法是""我踩过的"），非命令式（"你必须""你应该""新生必看"）；墨仔是观察者和分享者，不是教导者
 
 ## 排版优化指南（v1.2.0 新增）
 
@@ -205,6 +215,18 @@ updated: 2026-09-01
 ### 场景丰富度（P1/P4）
 - 校园场景加：欢迎横幅、两棵大树、背景建筑带窗户、飞鸟、云朵、落叶、校园地图指示牌
 - 背景加**铅笔网格+涂鸦图标**（faint pencil grid + tiny doodle icons）
+
+### 背景涂鸦（v1.7.0 从可选提升为核心）
+
+> **涂鸦是墨仔的天性**——墨仔是"一滴在纸上活过来的墨"，它走到哪里，哪里就有涂鸦。每页背景必须有手绘涂鸦质感，禁止大面积纯白空白。
+
+- **FAINT PENCIL GRID**（淡铅笔网格，全页覆盖，20-30%透明度，不突兀）
+- **SCATTERED TINY DOODLE ICONS**（散布的小涂鸦图标，必须是无生命物体：星星、叶子、铅笔、箭头、圆点、闪光、音符，不能有角色/脸）
+- **cross-hatching patches**（交叉排色块，在背景空白区域增加纹理层次）
+- **ink dots and splatters**（墨点和墨溅，增加手绘质感）
+- **tiny stars and sparkles**（小星星和闪光）
+
+> ⚠️ 涂鸦背景必须是**淡的、不抢主体的**——网格20-30%透明度，涂鸦图标小而分散，交叉排线稀疏。目的是消除大面积纯白空白，增加手绘质感，而不是让背景变得拥挤杂乱。
 
 ## Prompt 强化技巧（v1.2.0 新增）
 
@@ -290,6 +312,22 @@ ID card icon has chip but NO text/numbers on it.
 ```
 > 实战验证：P2 身份证出现K306、卡片角出现(136)，加此约束后修复。
 
+### 涂鸦背景强化（v1.7.0 新增，实战验证）
+```
+FAINT PENCIL GRID PATTERN across entire background (20-30% opacity).
+SCATTERED TINY DOODLE ICONS everywhere (stars, leaves, pencils, arrows, dots, sparkles — all inanimate, NO faces, NO characters).
+Cross-hatching patches, stippling, subtle ink bleed in background areas.
+NO large empty white spaces. NO flat plain background.
+```
+> 实战验证：v1.6.0生成的图背景大面积纯白空白，观感差；加此约束后v1.7.0生成的图手绘质感明显增强。
+
+### 去说教标题/卡片（v1.7.0 新增）
+```
+Title uses first-person sharing tone: "我自己的3个小习惯" (NOT "3个防坑做法，新生必看").
+Card text uses sharing tone: "收费先去官网确认" (NOT "只认官方群和通知").
+NO command words: "必须", "应该", "千万不要", "必看", "必读".
+```
+
 ## 常见问题与故障排除
 
 | 问题 | 原因 | 解决方法 |
@@ -324,6 +362,11 @@ ID card icon has chip but NO text/numbers on it.
 | 随机数字40%/10%（v1.5.0） | 模型角落生成随机数字 | 重生成，强调 ONLY number is page number + NO random numbers + NO 40%/10% |
 | 墨仔附近英文Mozai（v1.5.0） | 模型误渲染角色名 | 重生成，强调 Area around character COMPLETELY BLANK + no text/letters/"Mozai" |
 | 墨仔外观不一致（v1.5.0） | 角色锁不够强或人物卡URL过期 | 重新上传人物卡，重生成，强化完整角色锁描述 |
+| **背景大面积纯白空白（v1.7.0）** | **未强调涂鸦背景** | **重生成，强调 FAINT PENCIL GRID + SCATTERED TINY DOODLE ICONS + cross-hatching patches + ink dots, NO large empty white spaces, NO flat plain background** |
+| **背景涂鸦有角色/脸（v1.7.0）** | **涂鸦未限制为无生命物体** | **重生成，强调 doodles are inanimate objects only (stars, leaves, pencils, arrows, dots), NO character doodles, NO faces in doodles** |
+| **标题/卡片说教式（v1.7.0）** | **措辞用了命令式** | **改标题/卡片为分享式（"我自己的3个小习惯"而非"3个防坑做法，新生必看"）** |
+| **文案教导式（v1.7.0）** | **用了"你必须""你应该"** | **改文案为第一人称分享（"我自己的办法是""我踩过的"）** |
+| **image_edit报错required param is empty（v1.7.0）** | **用了扁平参数** | **改用request_list数组格式调用：image_edit(model_version=..., request_list=[{"prompt":..., "image_reference_url_list":[...], "height":..., "width":...}])** |
 
 ## 版本历史
 
@@ -337,6 +380,7 @@ ID card icon has chip but NO text/numbers on it.
 | 1.5.0 | 2026-09-01 | 基于课后延时服务选题10+轮迭代实战深度优化：character-lock.md新增「用户硬约束」6条（严格2手2脚/每页差异化/张嘴拟人化含粉舌/嘴不大表情不夸张/外观一致性/无红晕）+「嘴型拟人化规范」+表情库规则强化（每页嘴型/眼睛/动作全部不同）+故障排除新增7条；prompt-template.md新增「实战防坑强化模板」6条（卡片内容防重复/标签防重复/随机数字防护/逻辑标题规范/墨仔周围空白防护/5页差异化状态规划模板）+「模型版本建议」（seedream_5.0_pro推荐）；qa-checklist.md更新A8-A15（嘴巴拟人化/手臂腿强化/无红晕/外观一致性）+新增J1-J5实战检查项（卡片不重复/标签不重复/逻辑标题/5页差异化/随机数字防护）；SKILL.md Guardrails新增用户硬约束6条+标签不重复+逻辑标题规范；Step3新增5页差异化规划+模型版本选择+防坑约束；已做选题记忆追加"课后延时服务报名率跟风焦虑" |
 | 1.5.1 | 2026-09-01 | 页数决定逻辑优化：基于实战反馈"根据内容长度和信息量决定页数"未被严格执行，新增完整页数决定体系。hotspot-template.md新增Step 3「页数决定逻辑」（4页/5页/6页适用场景+内容特征+结构+检查清单+禁止事项），候选选题呈现模板新增「建议页数+理由」字段，对比表新增「建议页数」列，新增「页数与内容匹配检查」；SKILL.md Step 2新增页数决定要求，默认值强化页数决定逻辑，Step 3明确按决定页数生成对应数量图，Guardrails新增页数匹配约束；qa-checklist.md新增页数与内容匹配度检查项 |
 | 1.6.0 | 2026-09-01 | 借鉴 awesome-gpt-image-2 的 Prompt as Code 理念全面重构 prompt 体系：prompt-template.md 从空文件重构为13.9KB完整文档，新增「Prompt as Code 结构化协议」（7字段块CANVAS/STYLE/LAYOUT/CONTENT/CHARACTER/CONSTRAINTS/AVOID）、「JSON进阶模板」、「内容主导型排版协议」（内容55-65%+墨仔8-10%角落）、「5页差异化状态规划模板增强版」、「实战防坑强化模板增强版」、「模型版本适配」、「文案克制原则」、「完整Prompt示例」、「Prompt生成工作流」；character-lock.md新增「角色一致性前置原则」（CHARACTER字段放在CONTENT之前+8个身份锚点检查）、「五官拆解」（眼睛/嘴巴/头顶芽/身体质感拆解到可执行粒度）、「灵活尺寸与位置协议」（内容主导型8-10%角落+角色主导型18-25%+决策树）；style-lock.md新增「材质与光影强化」（纸张/墨水/光影/pastel底色精细描述）、「信息层级百分比控制」（内容主导型/角色主导型各区域占比+层级检查）、「seedream_5.0_pro风格适配」；SKILL.md Step3新增6条v1.6.0工作流要求，Guardrails新增内容主导型排版约束，已做选题记忆追加4个新选题 |
+| 1.7.0 | 2026-09-01 | 基于新生群套路选题多轮迭代实战深度优化，三大核心变更：①**涂鸦是墨仔的天性**——手绘涂鸦背景（铅笔网格+散布涂鸦图标+交叉排线+墨点）从可选排版优化提升为墨仔IP核心视觉特质，每页背景必须有手绘涂鸦质感，禁止大面积纯白空白；style-lock.md完整风格锁重写添加涂鸦背景要求，风格要素拆解新增涂鸦背景行，禁止元素新增大面积纯白空白/扁平无纹理背景，背景装饰从可选提升为核心；character-lock.md墨仔IP设定新增"涂鸦是墨仔的天性"条目，角色要素拆解新增涂鸦天性行，常见问题新增背景大面积纯白空白/背景涂鸦有角色脸修复方法；②**去说教原则**——文案+配图用分享式（"我自己的3个小习惯""我踩过的"）而非命令式（"3个防坑做法，新生必看""只认官方群"），墨仔是观察者和分享者不是教导者；copy-template.md全面重写添加去说教原则（开头优先故事/经历切入模板D、要点列举用分享式措辞、解决方案用第一人称分享、金句用观察型/感悟型、互动提问用平等分享式）、去说教措辞对照表（说教式vs分享式）、去AI味检查新增去说教项、文案去重检查新增去说教口吻项；SKILL.md Step4新增去说教原则（文案），Guardrails新增去说教原则，Prompt强化技巧新增去说教标题/卡片，常见问题新增标题/卡片说教式/文案教导式修复方法；③**image_edit必须用request_list数组格式**——实战验证扁平参数调用会报错required param is empty, field: request_list，必须用request_list数组格式；character-lock.md新增image_edit工具调用格式章节（含正确调用示例），SKILL.md Step3新增image_edit格式要求，常见问题新增image_edit报错修复方法；qa-checklist.md新增J11-J15检查项（涂鸦天性/去说教配图/去说教文案/image_edit格式/背景涂鸦无角色），风格一致性F8新增涂鸦背景，内容构图G7新增去说教标题/卡片，文案检查H11-H12新增去说教口吻/去说教标题提问；已做选题记忆追加"新生群里的套路·90%的人踩过" |
 
 ## 最终回复格式
 
