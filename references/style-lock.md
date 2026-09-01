@@ -148,3 +148,120 @@ ALL TEXT IS CHINESE HANDWRITTEN STYLE. Bold brush/marker hand-lettering for titl
 - shadows/gradients/neon（阴影/渐变/霓虹）
 - horizontal landscape（横版）
 - clean vector（干净矢量风格）
+
+---
+
+## v1.6.0 新增：材质与光影强化（借鉴 awesome-gpt-image-2）
+
+> awesome-gpt-image-2 避坑指南："材质和光影是灵魂——一定要堆叠材质（如'磨砂质感'）和灯光（如'轮廓光'）的关键词，商品图一旦没有光影，立刻变成地摊货。"
+
+手绘风格同样需要精细的材质和光影描述，否则画面会扁平、无层次。
+
+### 纸张材质拆解
+
+```
+PAPER TEXTURE: warm off-white paper (#FBFAF5-ish) with subtle fiber texture.
+Paper has slight unevenness — not perfectly flat, has gentle variations in tone (some areas slightly warmer, some slightly cooler).
+Faint pencil grid lines visible in background (very light, 20-30% opacity, NOT prominent).
+Paper edges within border have slight natural deckle edge feel (NOT clean cut).
+NO pure white (#FFFFFF), NO yellow paper (#FFFFE0), NO gray paper.
+```
+
+### 墨水材质拆解
+
+```
+INK TEXTURE: hand-drawn ink outlines with natural ink bleed at edges (slight softening, NOT sharp vector lines).
+Ink has variable line weight — some strokes thicker (pressure), some thinner (light touch).
+Cross-hatching lines create shading (parallel lines at 45° and 90°, varying density).
+Stippling dots create texture (small dots, varying density, NOT uniform).
+Subtle ink wash effects in some areas (diluted ink creates soft gray tones).
+Ink color is #1B1B1B-ish (deep black, NOT pure #000, NOT dark gray).
+NO thick outlines (uniform 2px+ lines), NO clean vector edges, NO flat color fills.
+```
+
+### 光影描述（手绘风格适用）
+
+```
+LIGHTING: soft, diffused overhead lighting (like natural daylight through a window).
+Subtle shadows under cards and character (soft gray, 20-30% opacity, NOT hard black shadows).
+Cards have slight drop shadow (offset 2-3px down-right, soft blur, creates layered feel).
+Character has small shadow under feet (soft ellipse, grounds character on page).
+NO harsh directional light, NO strong highlights, NO neon glow, NO gradient shadows.
+NO 3D rendering lighting — this is 2D hand-drawn illustration, lighting is subtle and flat.
+```
+
+### Pastel 底色材质
+
+```
+PASTEL WASH: watercolor-like soft wash on card backgrounds.
+Wash has uneven edges — natural watercolor bleed effect (NOT clean geometric fill).
+Wash opacity 30-40% (light, transparent, paper texture visible through it).
+Color variations within wash — some areas slightly more saturated, some lighter.
+NO flat solid color fill, NO gradient, NO opaque background.
+Colors: pale blue (#B8D4E8-ish), pale peach (#F5D5C0-ish), pale sage (#C8D8B8-ish), pale lavender (#D8C8E0-ish).
+```
+
+---
+
+## v1.6.0 新增：信息层级百分比控制
+
+借鉴 awesome-gpt-image-2 的「信息层级」理念，每页必须明确各区域占比，避免模型随意分配空间。
+
+### 内容主导型页面层级（P2/P3/P4）
+
+```
+PAGE LAYOUT (percentages of total page height):
+- Top margin + page number: 3-5%
+- Title area (title + subtitle + wavy underline): 15-20%
+- Content area (cards/icons/text — MAIN FOCUS): 55-65%
+- Character area (small corner accent): 8-10%
+- Bottom margin + tags: 5-8%
+- Total: 100%
+
+Content area must be the LARGEST zone. Character must NOT exceed 10%.
+Cards within content area: each card 25-30% of content area height, with 5-8% gap between cards.
+```
+
+### 角色主导型页面层级（P1 封面/P5 互动，可选）
+
+```
+PAGE LAYOUT (percentages of total page height):
+- Top margin + tags: 5-8%
+- Title area (large title + subtitle): 20-25%
+- Character area (main subject): 25-35%
+- Content area (small cards/icons around character): 20-25%
+- Bottom margin + tags: 5-8%
+- Total: 100%
+
+Character is the main visual focus but title must still be prominent.
+Content arranged around character, NOT overlapping character's face/body.
+```
+
+### 层级检查（生成后必做）
+
+逐张放大校验时，用目测估算各区域占比：
+- [ ] 内容主导型页面：内容区是否 ≥55%？角色区是否 ≤10%？
+- [ ] 角色主导型页面：角色区是否 ≤35%？标题区是否 ≥20%？
+- [ ] 标题是否清晰可读，不被其他元素遮挡？
+- [ ] 卡片之间是否有足够间距（不拥挤）？
+- [ ] 角色周围是否有空白（不被文字/图标包围）？
+
+---
+
+## v1.6.0 新增：seedream_5.0_pro 风格适配
+
+针对 seedream_5.0_pro 模型的特点，风格描述可以更精细：
+
+```
+FOR SEEDREAM_5.0_PRO (1773x2364):
+- Add more texture detail: "richly detailed", "intricate cross-hatching", "fine stippling"
+- Emphasize hand-drawn quality: "authentic sketchbook feel", "artist's notebook page"
+- Add subtle paper details: "paper grain visible", "slight paper texture"
+- The model handles fine detail better, so you can specify smaller decorative elements
+- Text rendering is more accurate, but still keep text short (see 文案克制原则)
+```
+
+FOR seedream_4.5 (1080x1440):
+- Simplify texture description: "hand-drawn sketch", "ink outlines"
+- Reduce decorative elements to avoid clutter
+- Keep text even shorter to reduce rendering errors
