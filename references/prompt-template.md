@@ -196,3 +196,112 @@ Avoid: TWO characters, multiple characters, second character, slim body, elongat
 - `prompt`: 上面对应页的完整 prompt（已替换变量）
 
 每页 prompt 前缀加唯一 tag（如 `ST1-cover:`、`ST2-problems:`）避免文件名冲突。
+
+---
+
+## v1.5.0 新增：实战防坑强化模板
+
+基于2026-09-01课后延时服务选题10+轮迭代实战验证，以下强化写法能有效避免模型反复出现的问题。
+
+### 1. 卡片内容防重复（P2/P3 必加）
+
+**问题**：即使写 `EXACTLY THREE cards`，模型仍可能生成4张卡片，且卡片2和卡片3内容重复。
+
+**强化写法**：
+```
+EXACTLY THREE cards arranged horizontally side by side. 
+NO fourth card. NO extra card. NO more, NO less.
+Card 3 is DIFFERENT from cards 1 and 2 - it has unique title and unique description.
+NO duplicate content between cards.
+```
+
+**实战验证**：P3原生成4张卡片且卡片2/3重复，加此约束后修复为3张不重复。
+
+### 2. 标签防重复（封面/P5 必加）
+
+**问题**：底部标签或顶部标签可能重复出现同一个标签（如"课后延时"出现两次）。
+
+**强化写法**：
+```
+EXACTLY THREE pastel tags in a single row. NO fourth tag. 
+Each tag ONLY ONCE. "{{tag1}}" ONLY ONCE. "{{tag2}}" ONLY ONCE. "{{tag3}}" ONLY ONCE.
+NO duplicate tags. NO tag appears twice.
+```
+
+**实战验证**：P1底部标签原重复出现，P5标签"课后延时"原重复，加此约束后修复。
+
+### 3. 随机数字防护（每页必加，尤其P4）
+
+**问题**：模型可能在页面角落生成随机数字（如"40%"、"10%"、"32s"）。
+
+**强化写法**：
+```
+The ONLY number on this page is the page number {{NN}}/05.
+NO random numbers. NO percentages. NO time labels. NO statistics. 
+NO 40%. NO 10%. NO 32s. NO 28%. NO any number except page number.
+```
+
+**实战验证**：P4左上角原出现"40%"随机数字，加此约束后修复。
+
+### 4. 逻辑标题规范（金句页必加）
+
+**问题**：金句页标题用"写在最后"，但后面还有互动页，逻辑矛盾。
+
+**规范**：
+- 金句页（P4）标题**不能用**"写在最后"、"最后想说"、"结束语"等暗示"这是最后一页"的词
+- 推荐标题："墨仔想说"、"一句话送给你"、"记住这句话"、"墨仔的话"
+- 金句页标题**不能与金句内容重复**（如标题"报名率是别人的节奏"+金句也是同一句话）
+
+**强化写法**：
+```
+Title is "{{title}}" - NOT containing word "最后". NOT "写在最后". 
+Title is DIFFERENT from quote content. Quote is "{{quote_line1}} / {{quote_line2}}".
+```
+
+**实战验证**：P4原标题"写在最后"逻辑矛盾，改为"墨仔想说"后修复。
+
+### 5. 墨仔周围空白防护（每页必加）
+
+**问题**：模型可能在墨仔附近生成英文角色名"Mozai"、随机文字或数字。
+
+**强化写法**：
+```
+Area around character COMPLETELY BLANK - no text, no letters, no "Mozai", no numbers, no tags. ONLY character.
+```
+
+**实战验证**：P2/P3墨仔附近原出现英文"Mozai"，加此约束后修复。
+
+### 6. 5页差异化状态规划模板（生成前必做）
+
+生成5页配图前，必须先规划每页墨仔的差异化状态，确保眼睛/嘴型/动作全部不同：
+
+| 页 | 角色定位 | 眼睛状态 | 嘴型 | 身体动作 | 场景 |
+|---|---|---|---|---|---|
+| P1 封面 | 困惑好奇 | 右眼瞪大+左眼眯起(wink) | 小O形(含粉舌) | 站立举手机+挠头 | 大手机+班级群 |
+| P2 分析 | 沉思分析 | 双眼向上看 | 波浪线~ | 盘腿坐地+托腮 | 3卡片横向排列 |
+| P3 方案 | 果断坚定 | 双眼坚定聚焦+眉蹙 | 抿嘴嘴角下撇 | 踩石头+叉腰+指方向 | 3卡片横向排列 |
+| P4 金句 | 悠闲开心 | 双眼闭成小月牙 | 小微笑弧线 | 盘腿坐大云+托腮 | 天空云朵夕阳 |
+| P5 互动 | 期待邀请 | 大圆眼注视观众 | 小O形(含粉舌) | 站立举牌子+挥手 | 对话气泡+评论图标 |
+
+**规则**：
+- 5页眼睛状态必须全部不同
+- 5页嘴型必须全部不同（P1和P5虽都是O形，但P1是wink好奇，P5是注视观众期待，场景和动作不同）
+- 5页身体动作必须全部不同
+- 张嘴页（P1/P5）必须含粉舌拟人化
+- 所有嘴型都是SMALL小比例，不夸张
+
+---
+
+## 模型版本建议（v1.5.0 新增）
+
+| 模型 | 分辨率 | 画质 | 适用场景 |
+|---|---|---|---|
+| seedream_4.5（默认） | 1080×1440 | 良好 | 快速迭代、初稿生成 |
+| **seedream_5.0_pro（推荐）** | **1773×2364** | **优秀** | **最终交付、高质量要求** |
+
+**建议**：
+- 初稿/迭代阶段用 seedream_4.5（速度快，成本低）
+- 最终交付版用 seedream_5.0_pro（画质提升64%，手绘质感更细腻，墨仔外观一致性更好）
+- PRO版在 `image_edit` 工具的 `model_version` 参数中指定 `"seedream_5.0_pro"`
+
+**实战验证**：2026-09-01课后延时服务选题，PRO版画质明显优于4.5版，墨仔外观一致性更好，手绘细节更丰富。

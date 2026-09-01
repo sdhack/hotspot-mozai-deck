@@ -2,7 +2,48 @@
 
 从用户上传的墨仔人物卡（`assets/seedling-character-sheet.png`）提取的精确角色描述。每个页面 prompt 必须包含核心形象描述，逐字复制。
 
-> v1.4.0 更新：基于2026-08-31新版墨仔IP设定图更新。关键变更：嘴巴颜色从深红改为黑色线条、头顶芽形态从螺旋卷须改为小芽微卷茎、身体质感强调手绘墨迹感、新增IP设定信息与表情库。
+> v1.5.0 更新：基于2026-09-01课后延时服务选题多轮迭代实战经验。关键变更：新增「用户硬约束」章节（2手2脚绝对不能多、每页表情/眼睛/嘴型/动作必须差异化、张嘴拟人化含舌头、嘴不能太大表情不能太夸张、外观一致性）；新增「嘴型拟人化」详细描述；表情库增强差异化要求；故障排除新增嘴型全黑/表情单一/多手多脚修复方法。
+
+---
+
+## ⚠️ 用户硬约束（v1.5.0 新增，必须严格遵守）
+
+以下约束来自用户多轮迭代中反复强调的硬性要求，**优先级高于一切其他设计考量**：
+
+| # | 约束 | 说明 | 违反后果 |
+|---|---|---|---|
+| H1 | **严格2手2脚** | 墨仔必须恰好2条手臂+2条腿，多手多脚绝对不能出现 | 直接重生成，不可交付 |
+| H2 | **每页表情/眼睛/嘴型/动作必须大幅差异化** | 4-6页中，墨仔的眼睛状态、嘴型、身体动作必须每页不同，不能单一重复 | 重生成差异化状态 |
+| H3 | **张嘴时嘴必须拟人化** | 墨仔张嘴（O形嘴/惊讶嘴）时，嘴内部必须可见舌头/牙齿/口腔层次，不能是全黑洞 | 重生成，prompt强调含粉舌 |
+| H4 | **嘴不能太大，表情不能太夸张** | 所有嘴型都是小比例（SMALL），表情克制不夸张，避免大嘴笑/大张嘴 | 重生成，强调SMALL mouth |
+| H5 | **墨仔人物外观一致性** | 每页墨仔的泪滴形身体、大眼风格、小嘴、头顶小芽+两片叶、手绘墨迹质感必须完全一致 | 重生成，强化角色锁描述 |
+| H6 | **无红晕** | 墨仔脸部不能有粉色红晕/腮红，脸部是干净的黑色墨迹 | 重生成，强调NO blush |
+
+> **实战验证**：H1-H6 在2026-09-01课后延时服务选题中经过10+轮迭代验证，是用户最核心的硬性要求。每次生成前必须逐条核对。
+
+---
+
+## 嘴型拟人化规范（v1.5.0 新增）
+
+墨仔张嘴时（curious O / surprised O / confused small 等），嘴部必须拟人化，不能是全黑洞：
+
+```
+SMALL open oval mouth (curious "oh?"). Black outline. 
+INSIDE: visible PINK/RED TONGUE at bottom of mouth. 
+NOT all-black hole. NOT large. Small and subtle.
+```
+
+**关键要点**：
+- 嘴是**小比例**（SMALL），不是大嘴
+- 嘴内部有**粉红色舌头**（PINK/RED TONGUE），不是全黑
+- 舌头在嘴的**底部**（at bottom），自然位置
+- 适用于所有张嘴表情：curious O、surprised O、confused small、互动提问页
+
+**避免**：
+- `ALL-BLACK mouth`（全黑洞）
+- `large mouth` / `wide mouth`（大嘴）
+- `mouth without tongue`（无舌头）
+- `mouth with teeth only`（只有牙齿没有舌头，墨仔风格更适合舌头）
 
 ---
 
@@ -74,7 +115,15 @@ CRITICAL: Match reference EXACTLY. Round plump black teardrop creature (plump wa
 | determined press 坚定 | 抿嘴，嘴角微下撇 | 解决方案、行动号召 |
 | confused small 困惑 | 小嘴微张，眼睛微斜 | 不解、质疑、反常识 |
 
-**规则**：4页中至少出现3种不同嘴型。封面常用 curious O 或 surprised O。落点页（P4）常用 happy smile。
+**规则（v1.5.0 强化）**：
+- 4-6页中**每页嘴型必须不同**（不是至少3种，是每页都不同）
+- 不仅嘴型不同，**眼睛状态也必须每页不同**（睁大/眯起/闭眼/向上看/坚定聚焦等）
+- **身体动作也必须每页不同**（站立/盘腿坐/踩石头/坐云上/举牌子等）
+- 封面常用 curious O 或 surprised O（含粉舌拟人化）
+- 落点页（金句页）常用 happy smile（小微笑，不夸张）
+- 互动页常用 curious O（含粉舌，提问表情）
+- **所有嘴型都是 SMALL 小比例**，不能大嘴/大张嘴
+- **张嘴必须含粉舌**，不能全黑洞
 
 ---
 
@@ -151,3 +200,9 @@ tiny doodle icons scattered (inanimate objects only, NO character doodles, NO fa
 | 头顶尖顶 | 身体形状被误渲染 | 重生成，强调 round plump teardrop, NOT pointed top, rounded top |
 | 叶子数量不对 | 未强调 exactly two | 重生成，强调 exactly TWO light sage-green leaves |
 | 身体变成纯平黑 | 质感描述不够 | 重生成，强调 hand-drawn ink texture, natural ink bleed, scribble strokes (NOT flat black) |
+| 多手多脚（v1.5.0 新增） | 模型误渲染多余肢体 | 重生成，强调 EXACTLY TWO arms + EXACTLY TWO legs + NO extra limbs + NO third arm/leg，在Avoid列表列举 extra limbs, three arms, three legs |
+| 张嘴是全黑洞（v1.5.0 新增） | 未强调嘴部拟人化 | 重生成，强调 SMALL open oval mouth + visible PINK/RED TONGUE at bottom + NOT all-black hole |
+| 嘴太大/表情太夸张（v1.5.0 新增） | 未强调小比例嘴型 | 重生成，强调 SMALL mouth + NOT wide + NOT large + restrained expression + NO big laughing mouth |
+| 每页表情/动作单一重复（v1.5.0 新增） | 未指定每页差异化 | 重生成，每页prompt指定不同的眼睛状态+嘴型+身体动作，生成前先规划5页差异化状态表 |
+| 脸部出现红晕/腮红（v1.5.0 新增） | 模型误渲染粉色脸颊 | 重生成，强调 NO blush + NO pink cheeks + NO rosy cheeks + face is clean black ink |
+| 墨仔外观不一致（v1.5.0 新增） | 角色锁描述不够强或人物卡URL过期 | 重新上传人物卡获取新URL，重生成，强化完整角色锁描述（泪滴形+大眼+小嘴+小芽双叶+手绘墨迹） |
