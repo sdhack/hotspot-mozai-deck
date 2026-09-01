@@ -2,12 +2,14 @@
 
 每个页面 prompt 必须包含以下风格描述，逐字复制，不可修改。
 
+> v1.7.0 核心变更：**涂鸦是墨仔的天性**——手绘涂鸦背景（铅笔网格+散布涂鸦图标+交叉排线+墨点）不是可选排版优化，而是墨仔IP的核心视觉特质。墨仔是"一滴在纸上活过来的墨"，它走到哪里，哪里就有涂鸦。每页背景必须有手绘涂鸦质感，**禁止大面积纯白空白**。
+
 ---
 
 ## 完整风格锁（复制到每页 prompt 开头）
 
 ```
-Chinese vertical Douyin article page, 3:4, 1080x1440. Richly detailed hand-drawn pencil sketch illustration with ink outlines on warm off-white paper. Cross-hatching, stippling, subtle ink bleed. Decorative corner flourishes. Thin double-line border. Premium sketchbook feeling.
+Chinese vertical Douyin article page, 3:4, 1080x1440. Richly detailed hand-drawn pencil sketch illustration with ink outlines on warm off-white paper. FAINT PENCIL GRID PATTERN across entire background. SCATTERED TINY DOODLE ICONS everywhere (stars, leaves, pencils, arrows, dots, sparkles — all inanimate). Cross-hatching patches, stippling, subtle ink bleed in background areas. Decorative corner flourishes. Thin double-line border. Premium sketchbook feeling. NO large empty white spaces — fill background with subtle hand-drawn texture and doodles.
 
 ALL TEXT IS CHINESE HANDWRITTEN STYLE. Bold brush/marker hand-lettering for title. Casual pencil handwriting for subtitles and labels. NO formal printed fonts, NO English text, NO character names, NO version labels.
 ```
@@ -22,11 +24,12 @@ ALL TEXT IS CHINESE HANDWRITTEN STYLE. Bold brush/marker hand-lettering for titl
 | 纸张 | warm off-white paper（暖白纸，非纯白，非黄纸） | ✓ |
 | 线条 | hand-drawn pencil sketch + ink outlines（铅笔素描+墨水轮廓） | ✓ |
 | 纹理 | cross-hatching（交叉排线）+ stippling（点画）+ subtle ink bleed（轻微墨水晕染） | ✓ |
+| **涂鸦背景（v1.7.0核心）** | **FAINT PENCIL GRID + SCATTERED TINY DOODLE ICONS + cross-hatching patches + ink dots，全页覆盖，禁止大面积纯白空白** | **✓** |
 | 边框 | thin double-line border（细双线边框） | ✓ |
 | 装饰角 | decorative corner flourishes（四角装饰花纹） | ✓ |
 | 标题字体 | bold brush/marker hand-lettering（粗毛笔/马克笔手写体） | ✓ |
 | 正文字体 | casual pencil handwriting（随意铅笔手写体） | ✓ |
-| 禁止 | formal printed fonts（正式印刷字体）、English text（英文）、character names（角色名）、version labels（版本标签）、watermark（水印） | ✓ |
+| 禁止 | formal printed fonts（正式印刷字体）、English text（英文）、character names（角色名）、version labels（版本标签）、watermark（水印）、**large empty white spaces（大面积纯白空白，v1.7.0新增）** | ✓ |
 
 ---
 
@@ -105,11 +108,17 @@ ALL TEXT IS CHINESE HANDWRITTEN STYLE. Bold brush/marker hand-lettering for titl
 - 地图指示牌（campus map signboard）
 - 阳光光线（warm light rays）
 
-### 背景装饰
+### 背景涂鸦（v1.7.0 从可选提升为核心）
 
-- faint pencil grid（淡铅笔网格）
-- tiny doodle icons scattered（散布的小涂鸦图标，必须是无生命物体，不能有角色/脸）
-- tiny doodle stars and sparkles（小星星和闪光）
+> **涂鸦是墨仔的天性**——墨仔是"一滴在纸上活过来的墨"，它走到哪里，哪里就有涂鸦。每页背景必须有手绘涂鸦质感，禁止大面积纯白空白。
+
+- **FAINT PENCIL GRID**（淡铅笔网格，全页覆盖，20-30%透明度，不突兀）
+- **SCATTERED TINY DOODLE ICONS**（散布的小涂鸦图标，必须是无生命物体：星星、叶子、铅笔、箭头、圆点、闪光、音符，不能有角色/脸）
+- **cross-hatching patches**（交叉排色块，在背景空白区域增加纹理层次）
+- **ink dots and splatters**（墨点和墨溅，增加手绘质感）
+- **tiny stars and sparkles**（小星星和闪光）
+
+> ⚠️ 涂鸦背景必须是**淡的、不抢主体的**——网格20-30%透明度，涂鸦图标小而分散，交叉排线稀疏。目的是消除大面积纯白空白，增加手绘质感，而不是让背景变得拥挤杂乱。
 
 ---
 
@@ -148,6 +157,8 @@ ALL TEXT IS CHINESE HANDWRITTEN STYLE. Bold brush/marker hand-lettering for titl
 - shadows/gradients/neon（阴影/渐变/霓虹）
 - horizontal landscape（横版）
 - clean vector（干净矢量风格）
+- **LARGE EMPTY WHITE SPACES（大面积纯白空白，v1.7.0新增）**
+- **flat plain background（扁平无纹理背景，v1.7.0新增）**
 
 ---
 
@@ -245,6 +256,7 @@ Content arranged around character, NOT overlapping character's face/body.
 - [ ] 标题是否清晰可读，不被其他元素遮挡？
 - [ ] 卡片之间是否有足够间距（不拥挤）？
 - [ ] 角色周围是否有空白（不被文字/图标包围）？
+- [ ] **背景是否有涂鸦纹理（v1.7.0新增）？是否有大面积纯白空白？**
 
 ---
 
@@ -259,6 +271,7 @@ FOR SEEDREAM_5.0_PRO (1773x2364):
 - Add subtle paper details: "paper grain visible", "slight paper texture"
 - The model handles fine detail better, so you can specify smaller decorative elements
 - Text rendering is more accurate, but still keep text short (see 文案克制原则)
+- **v1.7.0新增：强调涂鸦背景**——"FAINT PENCIL GRID + SCATTERED TINY DOODLE ICONS + cross-hatching patches, NO large empty white spaces"
 ```
 
 FOR seedream_4.5 (1080x1440):

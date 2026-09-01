@@ -2,48 +2,9 @@
 
 从用户上传的墨仔人物卡（`assets/seedling-character-sheet.png`）提取的精确角色描述。每个页面 prompt 必须包含核心形象描述，逐字复制。
 
-> v1.5.0 更新：基于2026-09-01课后延时服务选题多轮迭代实战经验。关键变更：新增「用户硬约束」章节（2手2脚绝对不能多、每页表情/眼睛/嘴型/动作必须差异化、张嘴拟人化含舌头、嘴不能太大表情不能太夸张、外观一致性）；新增「嘴型拟人化」详细描述；表情库增强差异化要求；故障排除新增嘴型全黑/表情单一/多手多脚修复方法。
-
----
-
-## ⚠️ 用户硬约束（v1.5.0 新增，必须严格遵守）
-
-以下约束来自用户多轮迭代中反复强调的硬性要求，**优先级高于一切其他设计考量**：
-
-| # | 约束 | 说明 | 违反后果 |
-|---|---|---|---|
-| H1 | **严格2手2脚** | 墨仔必须恰好2条手臂+2条腿，多手多脚绝对不能出现 | 直接重生成，不可交付 |
-| H2 | **每页表情/眼睛/嘴型/动作必须大幅差异化** | 4-6页中，墨仔的眼睛状态、嘴型、身体动作必须每页不同，不能单一重复 | 重生成差异化状态 |
-| H3 | **张嘴时嘴必须拟人化** | 墨仔张嘴（O形嘴/惊讶嘴）时，嘴内部必须可见舌头/牙齿/口腔层次，不能是全黑洞 | 重生成，prompt强调含粉舌 |
-| H4 | **嘴不能太大，表情不能太夸张** | 所有嘴型都是小比例（SMALL），表情克制不夸张，避免大嘴笑/大张嘴 | 重生成，强调SMALL mouth |
-| H5 | **墨仔人物外观一致性** | 每页墨仔的泪滴形身体、大眼风格、小嘴、头顶小芽+两片叶、手绘墨迹质感必须完全一致 | 重生成，强化角色锁描述 |
-| H6 | **无红晕** | 墨仔脸部不能有粉色红晕/腮红，脸部是干净的黑色墨迹 | 重生成，强调NO blush |
-
-> **实战验证**：H1-H6 在2026-09-01课后延时服务选题中经过10+轮迭代验证，是用户最核心的硬性要求。每次生成前必须逐条核对。
-
----
-
-## 嘴型拟人化规范（v1.5.0 新增）
-
-墨仔张嘴时（curious O / surprised O / confused small 等），嘴部必须拟人化，不能是全黑洞：
-
-```
-SMALL open oval mouth (curious "oh?"). Black outline. 
-INSIDE: visible PINK/RED TONGUE at bottom of mouth. 
-NOT all-black hole. NOT large. Small and subtle.
-```
-
-**关键要点**：
-- 嘴是**小比例**（SMALL），不是大嘴
-- 嘴内部有**粉红色舌头**（PINK/RED TONGUE），不是全黑
-- 舌头在嘴的**底部**（at bottom），自然位置
-- 适用于所有张嘴表情：curious O、surprised O、confused small、互动提问页
-
-**避免**：
-- `ALL-BLACK mouth`（全黑洞）
-- `large mouth` / `wide mouth`（大嘴）
-- `mouth without tongue`（无舌头）
-- `mouth with teeth only`（只有牙齿没有舌头，墨仔风格更适合舌头）
+> v1.4.0 更新：基于2026-08-31新版墨仔IP设定图更新。关键变更：嘴巴颜色从深红改为黑色线条、头顶芽形态从螺旋卷须改为小芽微卷茎、身体质感强调手绘墨迹感、新增IP设定信息与表情库。
+>
+> v1.7.0 核心变更：**涂鸦是墨仔的天性**——墨仔是"一滴在纸上活过来的墨"，它走到哪里，哪里就有涂鸦。涂鸦背景不是可选排版，而是墨仔IP的核心视觉特质，每页背景必须有手绘涂鸦质感。
 
 ---
 
@@ -65,6 +26,7 @@ NOT all-black hole. NOT large. Small and subtle.
 | 相信的话 | 只要想象，就能把世界点亮 |
 | 小秘密 | 爱听同学的心事，开心的时候会用小墨点跳小舞蹈 |
 | 目标 | 用想象点亮世界，让平凡的日子变有趣 |
+| **天性（v1.7.0新增）** | **涂鸦是墨仔的天性——它走到哪里，哪里就有涂鸦。每页背景必须有铅笔网格+散布涂鸦图标+交叉排线+墨点的手绘质感，禁止大面积纯白空白。** |
 
 **故事背景**：墨仔原本只是一滴普通的墨，某天在纸上意外醒来，它发现这个世界充满色彩与故事，于是决定从小墨点开始，探索奇妙的校园。在学校的每一天，墨仔都会陪伴同学，记录他们的灵感与情绪，一点一点，让生活变得更温暖。
 
@@ -97,6 +59,7 @@ CRITICAL: Match reference EXACTLY. Round plump black teardrop creature (plump wa
 | 阴影 | small shadow under feet（脚下小阴影） | no shadow（无阴影）、large shadow（大阴影） |
 | 数量 | EXACTLY ONE character（恰好一个角色） | multiple characters（多个角色）、two characters（两个） |
 | 位置 | ONLY at 指定位置 | character inside card（卡片里出现角色）、character in icon（图标里出现角色） |
+| **涂鸦天性（v1.7.0新增）** | **背景必须有FAINT PENCIL GRID + SCATTERED TINY DOODLE ICONS + cross-hatching patches + ink dots，全页覆盖，禁止大面积纯白空白** | **flat plain background（扁平无纹理背景）、large empty white spaces（大面积纯白空白）** |
 
 ---
 
@@ -115,15 +78,7 @@ CRITICAL: Match reference EXACTLY. Round plump black teardrop creature (plump wa
 | determined press 坚定 | 抿嘴，嘴角微下撇 | 解决方案、行动号召 |
 | confused small 困惑 | 小嘴微张，眼睛微斜 | 不解、质疑、反常识 |
 
-**规则（v1.5.0 强化）**：
-- 4-6页中**每页嘴型必须不同**（不是至少3种，是每页都不同）
-- 不仅嘴型不同，**眼睛状态也必须每页不同**（睁大/眯起/闭眼/向上看/坚定聚焦等）
-- **身体动作也必须每页不同**（站立/盘腿坐/踩石头/坐云上/举牌子等）
-- 封面常用 curious O 或 surprised O（含粉舌拟人化）
-- 落点页（金句页）常用 happy smile（小微笑，不夸张）
-- 互动页常用 curious O（含粉舌，提问表情）
-- **所有嘴型都是 SMALL 小比例**，不能大嘴/大张嘴
-- **张嘴必须含粉舌**，不能全黑洞
+**规则**：4页中至少出现3种不同嘴型。封面常用 curious O 或 surprised O。落点页（P4）常用 happy smile。
 
 ---
 
@@ -183,6 +138,23 @@ tiny doodle icons scattered (inanimate objects only, NO character doodles, NO fa
 - 生成前用 `FileBatchUpload` 上传获取 URL（URL 可能过期，每次生成前重新上传）
 - 把 URL 传入 `image_reference_url_list` 参数
 
+### image_edit 工具调用格式（v1.7.0 新增，实战验证）
+
+> ⚠️ **必须使用 request_list 数组格式**，不能用扁平参数。实战验证：扁平参数调用会报错 `required param is empty, field: request_list`。
+
+```
+image_edit(
+  model_version="seedream_5.0_pro",
+  request_list=[
+    {"prompt": "...", "image_reference_url_list": ["人物卡URL"], "height": 2364, "width": 1773},
+    {"prompt": "...", "image_reference_url_list": ["人物卡URL"], "height": 2364, "width": 1773},
+    ...
+  ]
+)
+```
+
+可一次传入多个请求（如5页同时生成），也可以单次传入一个请求。
+
 ---
 
 ## 常见角色问题快速修复
@@ -200,145 +172,5 @@ tiny doodle icons scattered (inanimate objects only, NO character doodles, NO fa
 | 头顶尖顶 | 身体形状被误渲染 | 重生成，强调 round plump teardrop, NOT pointed top, rounded top |
 | 叶子数量不对 | 未强调 exactly two | 重生成，强调 exactly TWO light sage-green leaves |
 | 身体变成纯平黑 | 质感描述不够 | 重生成，强调 hand-drawn ink texture, natural ink bleed, scribble strokes (NOT flat black) |
-
----
-
-## v1.6.0 新增：角色一致性前置原则（借鉴 awesome-gpt-image-2）
-
-> awesome-gpt-image-2 避坑指南："角色一致性前置——动作序列越长越容易换脸换衣服，要把'同一角色、同一服装、同比例'写在动作列表之前。"
-
-### 为什么要前置
-
-经过 10+ 轮实战迭代发现：当 prompt 中角色描述放在内容描述之后时，模型容易在生成卡片/图标时"忘记"角色设定，导致角色外观漂移（身体变圆/变瘦、头顶芽变螺旋卷、嘴巴变红、眼睛变小）。把完整角色锁放在 prompt 的 CHARACTER 字段（内容之前），能显著提升一致性。
-
-### 前置写法
-
-在每页 prompt 中，CHARACTER 字段必须包含完整角色锁（不是简写），且放在 CONTENT 字段之前：
-
-```
-=== CHARACTER ===（放在 CONTENT 之前）
-=== MOZAI CHARACTER (strictly match reference image) ===
-[完整角色锁描述，逐字复制，不可省略任何要素]
-PAGE STATE: [本页位置/尺寸/动作/眼睛/嘴型/情绪]
-EXACTLY ONE character... [唯一性强化]
-```
-
-### 一致性检查（生成后必做）
-
-逐张放大校验时，必须核对以下 8 个身份锚点：
-1. 身体形状：圆胖泪滴（非球形/非修长/非尖顶）
-2. 身体颜色：墨黑 #1B1B1B（非纯黑 #000/非深灰）
-3. 身体质感：手绘墨迹感+自然晕染（非纯平黑/非发光）
-4. 头顶芽：小芽+微卷细茎（非螺旋线圈/非直茎/非无芽）
-5. 叶子：恰好两片浅鼠尾草绿叶（非一片/非三片/非深绿）
-6. 眼睛：大圆眼+大白眼白+黑瞳孔（非小白点眼/非瞳孔居中）
-7. 嘴巴：小黑色嘴（非深红/非无嘴/非大嘴）
-8. 四肢：恰好2条手臂+2条腿（非多余/非缺失）
-
-> 任何一个锚点漂移都必须重生成，不能"差不多就行"。
-
----
-
-## v1.6.0 新增：五官拆解（借鉴 awesome-gpt-image-2「拆解五官」原则）
-
-> awesome-gpt-image-2 避坑指南："不要只写'很美的女孩'，大模型不知道你的审美标准。拆解成'桃花眼、高鼻梁、野生眉'。"
-
-墨仔的五官也必须拆解到可执行的粒度，不能只写"大眼睛小嘴巴"。
-
-### 眼睛拆解
-
-```
-LARGE round eyes (diameter approximately 25-30% of body width).
-Big white eye whites (sclera occupies 60-70% of eye area).
-Black round pupils (occupies 30-40% of eye area, NOT tiny dot).
-Pupils often slightly asymmetrical — one eye may look slightly larger or offset, or pupils point in slightly different directions (expressive, NOT cross-eyed).
-Eyes have subtle ink outline (NOT thick black ring, NOT no outline).
-NO eyelashes, NO eyebrows as separate thick lines (brows are subtle ink strokes above eyes).
-Eye white is clean white (NOT off-white, NOT yellowish).
-```
-
-### 嘴巴拆解
-
-```
-SMALL BLACK/DARK mouth (width approximately 15-20% of body width, NOT wide, NOT large).
-Mouth is simple line or curve (NOT detailed lips, NOT teeth visible unless specified).
-Expression varies per page (at least 4 different mouth shapes across 5 pages).
-When open: SMALL open oval (width ≤20% body width), visible PINK/RED TONGUE inside (small tongue, NOT filling entire mouth), anthropomorphic human-like mouth interior (NOT all-black hole, NOT abyss).
-When closed: simple curved line (smile/frown/neutral) or straight line (serious) or wavy line (thinking).
-Mouth color is black/dark ink (NOT red, NOT crimson, NOT pink unless tongue).
-NO blush around mouth, NO pink cheeks.
-```
-
-### 头顶芽拆解
-
-```
-Small sprout on top of head (height approximately 15-20% of body height).
-Thin slightly curly stem (curvature is gentle, NOT tight spiral coil loop, NOT straight vertical).
-TWO light sage-green leaves (#A8C879) at top of stem.
-Leaves are small oval/teardrop shape (each leaf approximately 8-10% of body width).
-Leaves face slightly outward (one left, one right), NOT both facing same direction.
-Stem color is dark green/black ink (NOT brown, NOT yellow).
-NO flower, NO bud, NO extra leaves.
-```
-
-### 身体质感拆解
-
-```
-Ink-black body (#1B1B1B-ish, NOT pure #000, NOT dark gray).
-Hand-drawn ink texture: visible scribble strokes, cross-hatching lines, natural ink bleed at edges.
-Body edge is slightly irregular (hand-drawn feel, NOT perfect smooth silhouette, NOT hard geometric shape).
-Subtle texture variation: some areas slightly lighter (ink wash effect), some areas darker (dense scribble), creates depth.
-NOT flat black (solid fill with no texture).
-NOT shiny/glossy (no highlights, no reflections).
-NOT pencil/crayon only (must have ink texture, not just light pencil lines).
-Body has small shadow underneath feet (soft gray shadow, NOT hard black shadow, NOT large shadow).
-```
-
----
-
-## v1.6.0 新增：灵活尺寸与位置协议
-
-基于用户硬约束"墨仔为辅，比例不能占比太高"，角色尺寸不再固定为 12-22%，而是根据布局模式灵活调整。
-
-### 内容主导型（Content-Dominant，默认）
-
-```
-CHARACTER SIZE: SMALL, occupying ONLY 8-10% of page height.
-CHARACTER POSITION: bottom-left OR bottom-right CORNER (alternate pages to avoid same side consecutively).
-Character is a small accent, NOT the main visual focus.
-Area around character is COMPLETELY BLANK (no text, no icons, no doodles within 1cm).
-Character must still be doing a relevant action (holding notebook, pointing, waving) — NOT just standing idly.
-```
-
-适用页面：P2 分析、P3 分析、P4 金句+应急
-
-### 角色主导型（Character-Dominant，仅封面/互动页）
-
-```
-CHARACTER SIZE: MEDIUM, occupying 18-25% of page height.
-CHARACTER POSITION: lower-center OR center (main visual focus).
-Character is the main subject, doing a prominent action.
-Content (cards/icons/tags) arranged around character, NOT competing with it.
-```
-
-适用页面：P1 封面（可选）、P5 互动（可选）
-
-### 尺寸选择决策树
-
-```
-用户是否明确要求"墨仔为辅/比例小/内容为主"？
-├─ 是 → 全部页面使用内容主导型（8-10%，角落）
-└─ 否 → 默认混合模式：
-    ├─ P1 封面：角色主导型（18-25%，下中）
-    ├─ P2/P3 分析：内容主导型（8-10%，角落）
-    ├─ P4 金句：内容主导型（8-10%，角落）
-    └─ P5 互动：角色主导型（18-25%，下中）
-```
-
-> ⚠️ 无论哪种模式，角色都必须是"动作主体"（在做与页面主题相关的动作），不能变成纯装饰。即使小比例在角落，也要有明确的动作和表情。
-| 多手多脚（v1.5.0 新增） | 模型误渲染多余肢体 | 重生成，强调 EXACTLY TWO arms + EXACTLY TWO legs + NO extra limbs + NO third arm/leg，在Avoid列表列举 extra limbs, three arms, three legs |
-| 张嘴是全黑洞（v1.5.0 新增） | 未强调嘴部拟人化 | 重生成，强调 SMALL open oval mouth + visible PINK/RED TONGUE at bottom + NOT all-black hole |
-| 嘴太大/表情太夸张（v1.5.0 新增） | 未强调小比例嘴型 | 重生成，强调 SMALL mouth + NOT wide + NOT large + restrained expression + NO big laughing mouth |
-| 每页表情/动作单一重复（v1.5.0 新增） | 未指定每页差异化 | 重生成，每页prompt指定不同的眼睛状态+嘴型+身体动作，生成前先规划5页差异化状态表 |
-| 脸部出现红晕/腮红（v1.5.0 新增） | 模型误渲染粉色脸颊 | 重生成，强调 NO blush + NO pink cheeks + NO rosy cheeks + face is clean black ink |
-| 墨仔外观不一致（v1.5.0 新增） | 角色锁描述不够强或人物卡URL过期 | 重新上传人物卡获取新URL，重生成，强化完整角色锁描述（泪滴形+大眼+小嘴+小芽双叶+手绘墨迹） |
+| **背景大面积纯白空白（v1.7.0新增）** | **未强调涂鸦背景** | **重生成，强调 FAINT PENCIL GRID + SCATTERED TINY DOODLE ICONS + cross-hatching patches + ink dots, NO large empty white spaces, NO flat plain background** |
+| **背景涂鸦有角色/脸（v1.7.0新增）** | **涂鸦未限制为无生命物体** | **重生成，强调 doodles are inanimate objects only (stars, leaves, pencils, arrows, dots), NO character doodles, NO faces in doodles** |
