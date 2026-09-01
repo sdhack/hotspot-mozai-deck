@@ -1,307 +1,308 @@
-# Prompt Template · 4页完整 Prompt 模板
+# Prompt Template · 配图 Prompt 模板（v1.6.0 重构）
 
-使用方法：
-1. 复制每页模板
-2. 把 `{{变量}}` 替换为选题的具体内容
-3. 把 style-lock 和 character-lock 的完整内容粘贴到每页 prompt 开头
-4. 用 image_edit 工具，传入人物卡 URL，一次调用生成 4 张
-5. 生成后立即跑 QA checklist，发现问题当场修正
+> v1.6.0 借鉴 awesome-gpt-image-2 的「Prompt as Code」理念重构：把散文式提示词压缩成结构化协议，原子化字段可组合，角色一致性前置，材质光影精细描述，文案克制原则。
 
 ---
 
-## 变量清单
+## 一、Prompt as Code 结构化协议（核心，每页必用）
 
-| 变量 | 说明 | 示例 |
-|---|---|---|
-| `{{cover_tag1}}` | 封面顶部标签1（热点类型） | 实时热点 |
-| `{{cover_tag2}}` | 封面顶部标签2（地点/分类） | 四川凉山 |
-| `{{cover_title_line1}}` | 封面标题第一行 | 考低分就和耻辱合影？ |
-| `{{cover_title_line2}}` | 封面标题第二行 | 这操作我看不懂 |
-| `{{cover_subtitle}}` | 封面副标题 | 四川雷波县·2026秋季教育行政会·8月28日热搜 |
-| `{{cover_scene}}` | 封面中间场景描述 | 舞台+大屏幕"耻辱"+教师低头+手机拍照 |
-| `{{cover_seedling_action}}` | 封面墨仔动作 | 举"？"牌挠头，困惑表情 |
-| `{{cover_mouth}}` | 封面墨仔嘴型 | confused small / surprised O |
-| `{{cover_tag_bottom1}}` | 封面底部标签1 | 羞辱式管理 |
-| `{{cover_tag_bottom2}}` | 封面底部标签2 | 教师尊严 |
-| `{{cover_tag_bottom3}}` | 封面底部标签3 | 教育争议 |
-| `{{p2_title}}` | P2标题 | 耻辱教育的3个问题 |
-| `{{p2_subtitle}}` | P2副标题 | 羞辱从来不是激励 |
-| `{{p2_card1_title}}` | P2卡片1标题 | 问题一：羞辱≠激励 |
-| `{{p2_card1_desc}}` | P2卡片1描述 | 当众羞辱只会打击自信，不会提升成绩 |
-| `{{p2_card2_title}}` | P2卡片2标题 | 问题二：践踏教师尊严 |
-| `{{p2_card2_desc}}` | P2卡片2描述 | 老师也是人，尊严被踩碎了怎么好好教书 |
-| `{{p2_card3_title}}` | P2卡片3标题 | 问题三：传递错误价值观 |
-| `{{p2_card3_desc}}` | P2卡片3描述 | 老师被羞辱，学生学会的是用羞辱解决问题 |
-| `{{p2_seedling_action}}` | P2墨仔动作 | 持放大镜审视卡片，认真表情 |
-| `{{p2_mouth}}` | P2墨仔嘴型 | serious line |
-| `{{p3_title}}` | P3标题 | 成绩差该怎么办？ |
-| `{{p3_subtitle}}` | P3副标题 | 3个正确做法，比羞辱有用一万倍 |
-| `{{p3_step1_title}}` | P3步骤1标题 | 做法一：教研帮扶 |
-| `{{p3_step1_desc}}` | P3步骤1描述 | 优秀老师带教，集体备课，不是一个人扛 |
-| `{{p3_step2_title}}` | P3步骤2标题 | 做法二：分层教学 |
-| `{{p3_step2_desc}}` | P3步骤2描述 | 承认学生差异，不同基础用不同方法，不搞一刀切 |
-| `{{p3_step3_title}}` | P3步骤3标题 | 做法三：家校沟通 |
-| `{{p3_step3_desc}}` | P3步骤3描述 | 和家长一起找原因，不是把锅甩给老师 |
-| `{{p3_quote_line1}}` | P3金句第一行 | 好的教育是点燃一把火 |
-| `{{p3_quote_line2}}` | P3金句第二行 | 不是浇灭一个人的尊严 |
-| `{{p3_seedling_action}}` | P3墨仔动作 | 持清单核对，坚定表情 |
-| `{{p3_mouth}}` | P3墨仔嘴型 | determined press |
-| `{{p4_title}}` | P4标题 | 教育需要尊严，不是羞辱 |
-| `{{p4_subtitle}}` | P4副标题 | 老师有尊严，学生才能学会尊重 |
-| `{{p4_tag1}}` | P4标签1 | 拒绝羞辱 |
-| `{{p4_tag2}}` | P4标签2 | 尊重教师 |
-| `{{p4_tag3}}` | P4标签3 | 科学育人 |
-| `{{p4_scene}}` | P4中间场景 | 温暖教室+老师微笑+学生举手 |
-| `{{p4_sign_text}}` | P4墨仔举牌文字 | 尊严 |
-| `{{p4_bubble_line1}}` | P4对话气泡第一行 | 你怎么看这种耻辱合影？ |
-| `{{p4_bubble_line2}}` | P4对话气泡第二行 | 评论区说说你的看法 |
-| `{{p4_seedling_action}}` | P4墨仔动作 | 举牌子，微笑表情 |
-| `{{p4_mouth}}` | P4墨仔嘴型 | friendly smile |
+每页 prompt 必须按以下 7 个字段块顺序组织，字段名用大写标记，不可省略。这是从 awesome-gpt-image-2 借鉴的核心方法论——结构化比散文更可控。
+
+```
+=== CANVAS ===
+[画布比例、尺寸、平台适配]
+
+=== STYLE ===
+[风格锁：纸张、线条、纹理、边框、字体、配色——逐字复制 style-lock.md]
+
+=== LAYOUT ===
+[布局协议：信息层级、各区域占比百分比、角色位置与尺寸]
+
+=== CONTENT ===
+[内容主体：标题、副标题、卡片/图标/文字的具体内容与数量]
+
+=== CHARACTER ===
+[角色锁：完整角色描述+本页差异化状态——逐字复制 character-lock.md 核心+本页变量]
+
+=== CONSTRAINTS ===
+[硬约束：数字一致性、卡片不重复、标签不重复、页码唯一等]
+
+=== AVOID ===
+[禁止列表：具体列举模型容易犯的错误]
+```
+
+> ⚠️ **为什么用结构化协议**：awesome-gpt-image-2 的 544 个案例逆向工程证明，结构化字段比散文描述的可控性高 3-5 倍。模型对大写字段标记的注意力更强，字段顺序固定后，Agent 可以批量替换变量而不破坏结构。
 
 ---
 
-## 数字一致性检查（生成前必做，v1.2.0 新增）
+## 二、JSON 进阶模板（推荐给 Agent 批量调用）
 
-生成 prompt 前，先核对：
-1. 封面标题说"N件事/N个坑" → P2 的卡片数量必须 = N
-2. P2 的问题数量 → P3 的解决方案数量必须 = N（或明确说明覆盖关系）
-3. 文案正文的编号（第一/第二/...）必须连续到 N
-4. 封面底部标签数量 = P4 顶部标签数量（或有明确理由）
+当需要批量生成多页或多选题时，使用 JSON 模板，Agent 可程序化填充变量后转成自然语言 prompt。
 
-不一致时，先调整设计再生成，不要生成后再改数字。
-
----
-
-## 完整 Prompt 模板（4页，直接复制替换变量）
-
-### 第1页：封面
-
-```
-ST1-cover: [在这里粘贴 style-lock 完整内容]
-
-[在这里粘贴 character-lock 完整内容]
-Mouth expression: {{cover_mouth}}
-
-Composition:
-- Top: decorative corners. Top-center: tiny icon + pale peach tag handwritten {{cover_tag1}} + pale blue tag handwritten {{cover_tag2}}.
-- Upper 22%: LARGE BOLD HAND-LETTERED title two lines: first line {{cover_title_line1}}, second line {{cover_title_line2}}. Second line has wavy underline.
-- Below: thin divider + subtitle in pencil handwriting {{cover_subtitle}}.
-- Middle 38%: detailed hand-drawn scene: {{cover_scene}}. SEEDLING CHARACTER stands at lower center, {{cover_seedling_action}}. Cross-hatching. Small relevant icon near scene.
-- Lower 20%: faint pencil grid + doodle icons. Bottom center: three pastel tags with handwritten text: {{cover_tag_bottom1}} (pale blue), {{cover_tag_bottom2}} (pale peach), {{cover_tag_bottom3}} (pale sage green).
-- Bottom: decorative corners.
-
-Required Chinese text (ALL HANDWRITTEN): {{cover_tag1}}, {{cover_tag2}}, {{cover_title_line1}}, {{cover_title_line2}}, {{cover_subtitle}}, {{cover_tag_bottom1}}, {{cover_tag_bottom2}}, {{cover_tag_bottom3}}
-
-Avoid: TWO characters, multiple characters, slim body, elongated body, pointed sharp top, tiny white-dot eyes, centered pupils, no mouth, black mouth, extra limbs, three leaves, one leaf, simple loop, formal fonts, English text, character names, version labels, MOZAI, SEEDLING, pure black background, yellow paper, giant title, heavy boxes, gibberish, watermark, childish cartoons, thick outlines, saturated colors, corporate template, shadows, gradients, neon, horizontal landscape, clean vector, random numbers, percentages.
-```
-
-### 第2页：问题/分析（3-4卡片，v1.2.0 强化排版+图标无脸）
-
-```
-ST2-problems: [在这里粘贴 style-lock 完整内容]
-
-[在这里粘贴 character-lock 完整内容]
-CRITICAL: EXACTLY ONE character on this page. The character is ONLY at right side of card stack, holding magnifying glass. NO character inside any card, NO small character anywhere else, NO character in icons. All card icons are INANIMATE objects (NO face, NO character, NO teardrop shape).
-Mouth expression: {{p2_mouth}}
-
-Composition (optimized layout):
-- Decorative corners, double-line border.
-- Upper 10%: page number 02/04 handwritten upper-left ONLY with small circle. Centered title {{p2_title}} in bold hand-lettering with wavy underline and small pencil icon. Subtitle {{p2_subtitle}} in pencil handwriting below with thin divider lines on both sides.
-- Below title: horizontal divider with swirls and small stars.
-- Middle 60%: three/four stacked cards from top to bottom, each with folded top-right corner, double-line border, pastel wash background, subtle drop shadow, and a large hand-drawn circled number on left side. Each card contains ONLY text and an inanimate object icon (NO face, NO character):
-  Card 1 (top, pale blue wash): large circled number 1, inanimate [object1] icon (NO face, NO character), bold title {{p2_card1_title}}, sub-label {{p2_card1_desc}}. Small relevant icon next to title.
-  Card 2 (middle, pale peach wash): large circled number 2, inanimate [object2] icon (NO face, NO character), bold title {{p2_card2_title}}, sub-label {{p2_card2_desc}}. Small relevant icon next to title.
-  Card 3 (bottom, pale sage wash): large circled number 3, inanimate [object3] icon (NO face, NO character), bold title {{p2_card3_title}}, sub-label {{p2_card3_desc}}. Small relevant icon next to title.
-  (Card 4 if needed, pale lavender wash: large circled number 4, ...)
-- Small downward arrows between cards with tiny stars.
-- SEEDLING CHARACTER stands ONLY at right side of card stack, {{p2_seedling_action}}. Fine cross-hatching on body. This is the ONLY character on the entire page.
-- Background: faint pencil grid throughout, tiny doodle icons scattered (inanimate objects only, NO character doodles, NO faces in doodles).
-
-Required Chinese text (ALL HANDWRITTEN): 02/04, {{p2_title}}, {{p2_subtitle}}, {{p2_card1_title}}, {{p2_card1_desc}}, {{p2_card2_title}}, {{p2_card2_desc}}, {{p2_card3_title}}, {{p2_card3_desc}}
-
-Avoid: TWO characters, multiple characters, second character, small character, character inside card, character in icon, face in icon, teardrop shape in card, slim body, elongated body, pointed sharp top, tiny eyes, centered pupils, O mouth, smiling mouth, pressed mouth, extra limbs, three leaves, one leaf, simple loop, formal fonts, English text, character names, version labels, MOZAI, SEEDLING, pure black background, yellow paper, heavy boxes, gibberish, watermark, childish cartoons, thick outlines, saturated colors, corporate template, horizontal landscape, duplicate page number on right, random numbers, percentages, time labels.
-```
-
-### 第3页：解决方案（3-4步骤 + 金句，v1.2.0 强化）
-
-```
-ST3-solutions: [在这里粘贴 style-lock 完整内容]
-
-[在这里粘贴 character-lock 完整内容]
-CRITICAL: EXACTLY ONE character on this page. The character is ONLY at right side of step stack. NO character inside any step card, NO character in icons. All step icons are INANIMATE objects (NO face, NO character).
-Mouth expression: {{p3_mouth}}
-
-PAGE NUMBER: upper-left handwritten 03/04 ONLY with small circle.
-
-Composition (timeline layout optional):
-- Decorative corners, double-line border.
-- Upper 10%: page number 03/04 upper-left in circle. Centered title {{p3_title}} in bold hand-lettering with wavy underline and small clock icon. Subtitle {{p3_subtitle}} in pencil handwriting below with divider lines.
-- Below title: horizontal divider with swirls.
-- Middle 50%: three/four step cards stacked vertically, connected by downward arrows with tiny stars, each with checkmark icon and inanimate object icon (NO face, NO character). Optional: wavy vertical timeline on left with circled numbers connected to it.
-  Step 1 (top, pale blue wash): inanimate [object1] icon (NO face), bold title {{p3_step1_title}}, sub-label {{p3_step1_desc}}.
-  Step 2 (middle, pale peach wash): inanimate [object2] icon (NO face), bold title {{p3_step2_title}}, sub-label {{p3_step2_desc}}.
-  Step 3 (bottom, pale sage wash): inanimate [object3] icon (NO face), bold title {{p3_step3_title}}, sub-label {{p3_step3_desc}}.
-  (Step 4 if needed, pale lavender wash: ...)
-- SEEDLING CHARACTER stands ONLY at right side of step stack, {{p3_seedling_action}}. Fine cross-hatching on body. Ink splatter near feet. This is the ONLY character on the page.
-- Lower 25%: detailed hand-drawn quote box centered, double-line border with ornamental corner brackets and small quote mark symbol, no fill. Two lines of natural handwritten Chinese: first line {{p3_quote_line1}}, with small ink dot quote mark; second line {{p3_quote_line2}}. Ink dot divider between lines. Small decorative stars around quote box.
-- Bottom: decorative corners. Faint pencil grid background with tiny inanimate doodles.
-
-Required Chinese text (ALL HANDWRITTEN, NO ENGLISH): 03/04, {{p3_title}}, {{p3_subtitle}}, {{p3_step1_title}}, {{p3_step1_desc}}, {{p3_step2_title}}, {{p3_step2_desc}}, {{p3_step3_title}}, {{p3_step3_desc}}, {{p3_quote_line1}}, {{p3_quote_line2}}
-
-Avoid: TWO characters, multiple characters, second character, character inside card, character in icon, face in icon, slim body, elongated body, pointed sharp top, tiny eyes, centered pupils, O mouth, smiling mouth, straight line mouth, extra limbs, three leaves, one leaf, simple loop, formal fonts, English text, Latin chars, character names, version labels, MOZAI, SEEDLING, pure black background, yellow paper, oversized objects, heavy boxes, gibberish, watermark, crowded, childish cartoons, thick outlines, saturated colors, corporate template, horizontal landscape, clean vector, percent sign in page number, color codes, duplicate page number on right, extra speech bubble near character, random numbers, 50%, extra percentages, time labels, statistics.
-```
-
-### 第4页：落点（温暖场景 + 举牌 + 互动气泡，v1.2.0 强化气泡唯一+无多余数字）
-
-```
-ST4-takeaway: [在这里粘贴 style-lock 完整内容]
-
-[在这里粘贴 character-lock 完整内容]
-CRITICAL: EXACTLY ONE character on this page. EXACTLY ONE speech bubble on this page. NO second bubble, NO duplicate bubble, NO two bubbles. The ONLY number on this page is the page number 04/04. NO random numbers, NO percentages, NO time labels, NO statistics.
-Mouth expression: {{p4_mouth}}
-
-Composition (FIXED - ONE character, ONE bubble, NO extra hand, NO random numbers):
-- Decorative corners all four, double-line border.
-- Upper 10%: page number 04/04 handwritten UPPER-LEFT ONLY in small circle. This is the ONLY number on the page. Centered title {{p4_title}} in bold hand-lettering with wavy underline and small graduation cap icon. Subtitle {{p4_subtitle}} in pencil handwriting below with divider lines.
-- Below title: small horizontal row of three/four pastel tags with wobbly hand-drawn double borders and handwritten text: pale blue {{p4_tag1}}, pale peach {{p4_tag2}}, pale sage green {{p4_tag3}}, (pale lavender {{p4_tag4}} if 4 tags). Decorative dots and tiny stars between tags. NO numbers in tags.
-- Middle 30%: a richly detailed hand-drawn warm scene: {{p4_scene}}. Warm light rays. Large negative space with faint pencil grid, tiny doodle stars and sparkles. NO extra hand, NO extra fingers, NO numbers, NO percentages, NO time labels in scene.
-- Lower 30%: SEEDLING CHARACTER stands at lower-center, holding a small detailed rectangular sign with both arms, sign has double-line border and reads {{p4_sign_text}} in bold hand-lettered ink. Character with fine cross-hatching on body, upward-gazing friendly smile. Above character, EXACTLY ONE detailed hand-drawn speech bubble (double-line border, ornamental tail pointing to character, no fill, small decorative dots around) containing two lines of natural handwritten Chinese: first line {{p4_bubble_line1}}, second line smaller {{p4_bubble_line2}}. NO second bubble, NO duplicate bubble.
-- Bottom: decorative corners. Faint pencil grid throughout with tiny doodles (star, heart, flower, leaf, sparkles). NO random numbers, NO percentages, NO time stamps, NO extra text, NO statistics.
-
-Required Chinese text (ALL HANDWRITTEN, NO ENGLISH): 04/04, {{p4_title}}, {{p4_subtitle}}, {{p4_tag1}}, {{p4_tag2}}, {{p4_tag3}}, {{p4_sign_text}}, {{p4_bubble_line1}}, {{p4_bubble_line2}}
-
-Avoid: TWO characters, multiple characters, second character, slim body, elongated body, pointed sharp top, tiny eyes, centered pupils, O mouth, straight line mouth, pressed mouth, extra limbs, three leaves, one leaf, simple loop, formal fonts, English text, color codes, character names, version labels, MOZAI, SEEDLING, pure black background, yellow paper, oversized objects, heavy boxes, gibberish, watermark, crowded, childish cartoons, thick outlines, saturated colors, corporate template, horizontal landscape, clean vector, SECOND hand, extra fingers, hand pointing, duplicate page number on right, DUPLICATE SPEECH BUBBLE, second bubble, TWO bubbles, RANDOM NUMBERS, percentages, 32s, 28%, 50%, time labels, statistics, any number except 04/04, extra text.
+```json
+{
+  "canvas": {
+    "ratio": "3:4",
+    "size": "1773x2364",
+    "platform": "Douyin vertical article"
+  },
+  "style": {
+    "paper": "warm off-white (#FBFAF5)",
+    "lines": "hand-drawn pencil sketch + ink outlines",
+    "texture": "cross-hatching + stippling + subtle ink bleed",
+    "border": "thin double-line border + decorative corner flourishes",
+    "fonts": "bold brush/marker hand-lettering for title, casual pencil handwriting for body",
+    "colors": "pastel pale blue/peach/sage/lavender washes, ink-black #1B1B1B"
+  },
+  "layout": {
+    "mode": "content-dominant",
+    "title_area": "top 15-20%",
+    "content_area": "middle 55-65% (cards/icons/text)",
+    "character_area": "corner 8-10% (bottom-left or bottom-right)",
+    "decoration_area": "background doodles + tags, scattered"
+  },
+  "content": {
+    "title": "{{页面标题}}",
+    "subtitle": "{{副标题}}",
+    "page_number": "{{0X/0N}}",
+    "cards": [
+      {"number": 1, "title": "{{卡片1标题}}", "text": "{{卡片1说明}}", "icon": "{{无生命物体图标}}", "color": "pale blue"},
+      {"number": 2, "title": "{{卡片2标题}}", "text": "{{卡片2说明}}", "icon": "{{无生命物体图标}}", "color": "pale peach"},
+      {"number": 3, "title": "{{卡片3标题}}", "text": "{{卡片3说明}}", "icon": "{{无生命物体图标}}", "color": "pale sage"}
+    ],
+    "tags": ["#{{标签1}}", "#{{标签2}}", "#{{标签3}}"],
+    "quote": "{{金句，仅金句页}}"
+  },
+  "character": {
+    "core_lock": "round plump black teardrop + small sprout with slightly curly stem + TWO light sage-green leaves + LARGE round eyes with big white whites + SMALL BLACK mouth + exactly TWO thin arms + exactly TWO short legs + hand-drawn ink texture",
+    "page_state": {
+      "position": "{{bottom-left or bottom-right corner}}",
+      "size": "8-10% of page height (content-dominant mode)",
+      "action": "{{本页动作}}",
+      "eyes": "{{本页眼睛状态}}",
+      "mouth": "{{本页嘴型}}",
+      "expression": "{{本页情绪}}"
+    }
+  },
+  "constraints": {
+    "exactly_one_character": true,
+    "exactly_two_arms_legs": true,
+    "cards_different": true,
+    "tags_no_duplicate": true,
+    "page_number_only_once": true,
+    "no_random_numbers": true,
+    "no_english_text": true,
+    "mouth_pink_tongue_when_open": true,
+    "no_blush": true,
+    "character_consistency": true
+  },
+  "avoid": [
+    "extra limbs, third arm, third leg",
+    "all-black mouth hole, no tongue",
+    "large mouth, exaggerated expression",
+    "pink blush on cheeks",
+    "duplicate cards, duplicate tags",
+    "random numbers (50%, 10%, 32s, 28%, 40%)",
+    "English text (MOZAI, SEEDLING, STOP)",
+    "character inside cards or icons",
+    "face in icons",
+    "formal printed fonts",
+    "saturated colors, pure black background"
+  ]
+}
 ```
 
 ---
 
-## Prompt 强化技巧速查（v1.2.0 新增）
+## 三、布局协议（v1.6.0 新增，借鉴信息层级控制）
 
-| 问题 | 强化写法 |
-|---|---|
-| 出现第二个角色 | `EXACTLY ONE character. The character is ONLY at [position]. NO character inside any card, NO small character anywhere else.` |
-| 卡片图标变成小墨仔 | 每个图标标注 `inanimate [object] icon (NO face, NO character, NO teardrop shape)` |
-| P4 出现两个气泡 | `EXACTLY ONE speech bubble. NO second bubble, NO duplicate bubble, NO two bubbles.` |
-| 出现多余数字 | `The ONLY number on this page is the page number. NO random numbers, NO percentages, NO time labels.` + Avoid 列举 `50%, 32s, 28%` |
-| 封面数字与正文不一致 | 生成前先核对：封面N件=P2卡片数=P3步骤数=文案编号数 |
+### 3.1 内容主导型排版（Content-Dominant，默认推荐）
+
+> 基于用户硬约束："生图必须以内容为主，排版美化，手绘风，墨仔为辅，墨仔比例不能占比太高"
+
+```
+=== LAYOUT ===
+LAYOUT MODE: CONTENT-DOMINANT (content is MAIN visual focus, character is secondary accent).
+
+TITLE AREA: top 15-20% of page. Large bold hand-lettered title with wavy underline + subtitle with thin divider lines.
+
+CONTENT AREA: middle 55-65% of page. This is the MAIN visual focus. Cards/icons/text occupy this space. Cards have folded corners, double-line borders, pastel wash backgrounds, large circled numbers on left, small downward arrows with stars between cards.
+
+CHARACTER AREA: ONLY 8-10% of page height. Positioned at bottom-left OR bottom-right CORNER (never center, never upper area). Character is a small accent, NOT the main subject. Area around character is COMPLETELY BLANK (no text, no icons, no doodles within 1cm of character).
+
+DECORATION AREA: scattered tiny doodle icons (inanimate objects only, NO faces, NO characters) in background gaps, faint pencil grid, pastel tags at bottom.
+
+PAGE NUMBER: upper-left ONLY, inside small circle, appears ONLY ONCE.
+```
+
+### 3.2 角色主导型排版（Character-Dominant，仅封面/互动页可选）
+
+```
+=== LAYOUT ===
+LAYOUT MODE: CHARACTER-DOMINANT (character is main visual focus, content supports it).
+
+CHARACTER AREA: center or lower-center, 20-30% of page height. Character is the main subject, doing a prominent action.
+
+TITLE AREA: top 20-25%. Large title.
+
+CONTENT AREA: surrounding character, 30-40%. Small cards, icons, tags arranged around character.
+
+⚠️ 仅封面页和互动页可使用此模式。分析页/金句页必须使用内容主导型。
+```
 
 ---
 
-## 调用方式
+## 四、5 页差异化状态规划模板（v1.6.0 增强）
 
-用 `image_edit` 工具，`request_list` 包含 4 个对象（每页一个），每个对象：
-- `height`: 1440
-- `width`: 1080
-- `image_reference_url_list`: `["人物卡URL"]`
-- `prompt`: 上面对应页的完整 prompt（已替换变量）
+生成前必须先填写此表，确保每页眼睛/嘴型/动作/位置全部不同。借鉴 awesome-gpt-image-2 的「角色一致性前置」原则——把差异化状态写在内容之前。
 
-每页 prompt 前缀加唯一 tag（如 `ST1-cover:`、`ST2-problems:`）避免文件名冲突。
+| 页 | 位置 | 尺寸 | 动作 | 眼睛 | 嘴型 | 情绪 | 布局模式 |
+|---|---|---|---|---|---|---|---|
+| P1 封面 | 右下角 | 8-10% | {{动作1}} | {{眼睛1}} | {{嘴型1}} | {{情绪1}} | 角色主导或内容主导 |
+| P2 分析 | 左下角 | 8-10% | {{动作2}} | {{眼睛2}} | {{嘴型2}} | {{情绪2}} | 内容主导 |
+| P3 分析 | 右下角 | 8-10% | {{动作3}} | {{眼睛3}} | {{嘴型3}} | {{情绪3}} | 内容主导 |
+| P4 金句 | 左下角 | 8-10% | {{动作4}} | {{眼睛4}} | {{嘴型4}} | {{情绪4}} | 内容主导 |
+| P5 互动 | 右下角 | 8-10% | {{动作5}} | {{眼睛5}} | {{嘴型5}} | {{情绪5}} | 角色主导或内容主导 |
 
----
-
-## v1.5.0 新增：实战防坑强化模板
-
-基于2026-09-01课后延时服务选题10+轮迭代实战验证，以下强化写法能有效避免模型反复出现的问题。
-
-### 1. 卡片内容防重复（P2/P3 必加）
-
-**问题**：即使写 `EXACTLY THREE cards`，模型仍可能生成4张卡片，且卡片2和卡片3内容重复。
-
-**强化写法**：
-```
-EXACTLY THREE cards arranged horizontally side by side. 
-NO fourth card. NO extra card. NO more, NO less.
-Card 3 is DIFFERENT from cards 1 and 2 - it has unique title and unique description.
-NO duplicate content between cards.
-```
-
-**实战验证**：P3原生成4张卡片且卡片2/3重复，加此约束后修复为3张不重复。
-
-### 2. 标签防重复（封面/P5 必加）
-
-**问题**：底部标签或顶部标签可能重复出现同一个标签（如"课后延时"出现两次）。
-
-**强化写法**：
-```
-EXACTLY THREE pastel tags in a single row. NO fourth tag. 
-Each tag ONLY ONCE. "{{tag1}}" ONLY ONCE. "{{tag2}}" ONLY ONCE. "{{tag3}}" ONLY ONCE.
-NO duplicate tags. NO tag appears twice.
-```
-
-**实战验证**：P1底部标签原重复出现，P5标签"课后延时"原重复，加此约束后修复。
-
-### 3. 随机数字防护（每页必加，尤其P4）
-
-**问题**：模型可能在页面角落生成随机数字（如"40%"、"10%"、"32s"）。
-
-**强化写法**：
-```
-The ONLY number on this page is the page number {{NN}}/05.
-NO random numbers. NO percentages. NO time labels. NO statistics. 
-NO 40%. NO 10%. NO 32s. NO 28%. NO any number except page number.
-```
-
-**实战验证**：P4左上角原出现"40%"随机数字，加此约束后修复。
-
-### 4. 逻辑标题规范（金句页必加）
-
-**问题**：金句页标题用"写在最后"，但后面还有互动页，逻辑矛盾。
-
-**规范**：
-- 金句页（P4）标题**不能用**"写在最后"、"最后想说"、"结束语"等暗示"这是最后一页"的词
-- 推荐标题："墨仔想说"、"一句话送给你"、"记住这句话"、"墨仔的话"
-- 金句页标题**不能与金句内容重复**（如标题"报名率是别人的节奏"+金句也是同一句话）
-
-**强化写法**：
-```
-Title is "{{title}}" - NOT containing word "最后". NOT "写在最后". 
-Title is DIFFERENT from quote content. Quote is "{{quote_line1}} / {{quote_line2}}".
-```
-
-**实战验证**：P4原标题"写在最后"逻辑矛盾，改为"墨仔想说"后修复。
-
-### 5. 墨仔周围空白防护（每页必加）
-
-**问题**：模型可能在墨仔附近生成英文角色名"Mozai"、随机文字或数字。
-
-**强化写法**：
-```
-Area around character COMPLETELY BLANK - no text, no letters, no "Mozai", no numbers, no tags. ONLY character.
-```
-
-**实战验证**：P2/P3墨仔附近原出现英文"Mozai"，加此约束后修复。
-
-### 6. 5页差异化状态规划模板（生成前必做）
-
-生成5页配图前，必须先规划每页墨仔的差异化状态，确保眼睛/嘴型/动作全部不同：
-
-| 页 | 角色定位 | 眼睛状态 | 嘴型 | 身体动作 | 场景 |
-|---|---|---|---|---|---|
-| P1 封面 | 困惑好奇 | 右眼瞪大+左眼眯起(wink) | 小O形(含粉舌) | 站立举手机+挠头 | 大手机+班级群 |
-| P2 分析 | 沉思分析 | 双眼向上看 | 波浪线~ | 盘腿坐地+托腮 | 3卡片横向排列 |
-| P3 方案 | 果断坚定 | 双眼坚定聚焦+眉蹙 | 抿嘴嘴角下撇 | 踩石头+叉腰+指方向 | 3卡片横向排列 |
-| P4 金句 | 悠闲开心 | 双眼闭成小月牙 | 小微笑弧线 | 盘腿坐大云+托腮 | 天空云朵夕阳 |
-| P5 互动 | 期待邀请 | 大圆眼注视观众 | 小O形(含粉舌) | 站立举牌子+挥手 | 对话气泡+评论图标 |
-
-**规则**：
-- 5页眼睛状态必须全部不同
-- 5页嘴型必须全部不同（P1和P5虽都是O形，但P1是wink好奇，P5是注视观众期待，场景和动作不同）
-- 5页身体动作必须全部不同
-- 张嘴页（P1/P5）必须含粉舌拟人化
-- 所有嘴型都是SMALL小比例，不夸张
+**差异化检查清单（生成前必过）**：
+- [ ] 5 页眼睛状态全部不同（至少 4 种）
+- [ ] 5 页嘴型全部不同（至少 4 种，张嘴页含粉舌）
+- [ ] 5 页身体动作全部不同
+- [ ] 5 页位置交替（左下/右下轮换，不连续同侧）
+- [ ] 张嘴页不超过 2 页（通常 P1 封面 + P5 互动）
+- [ ] 闭眼/微笑页至少 1 页（通常 P4 金句）
 
 ---
 
-## 模型版本建议（v1.5.0 新增）
+## 五、实战防坑强化模板（v1.6.0 增强，借鉴避坑指南）
 
-| 模型 | 分辨率 | 画质 | 适用场景 |
-|---|---|---|---|
-| seedream_4.5（默认） | 1080×1440 | 良好 | 快速迭代、初稿生成 |
-| **seedream_5.0_pro（推荐）** | **1773×2364** | **优秀** | **最终交付、高质量要求** |
+以下约束必须写入每页 prompt 的 CONSTRAINTS 和 AVOID 字段。每条都来自实战踩坑验证。
 
-**建议**：
-- 初稿/迭代阶段用 seedream_4.5（速度快，成本低）
-- 最终交付版用 seedream_5.0_pro（画质提升64%，手绘质感更细腻，墨仔外观一致性更好）
-- PRO版在 `image_edit` 工具的 `model_version` 参数中指定 `"seedream_5.0_pro"`
+### 5.1 角色防坑
+```
+=== CONSTRAINTS ===
+EXACTLY ONE character on page, never two or more.
+EXACTLY TWO thin black arms with small hands, EXACTLY TWO short black legs with small feet. NO extra limbs, NO third arm, NO third leg, NO multi-hand multi-foot.
+Character is ONLY at [position], doing [action]. NO character inside any card, NO small character anywhere else, NO character in icons.
+All card icons are INANIMATE objects (NO face, NO character, NO teardrop shape).
+Character appearance strictly matches reference: round plump black teardrop, small sprout with slightly curly stem + TWO light sage-green leaves, LARGE round eyes with big white whites, SMALL BLACK mouth, hand-drawn ink texture with natural ink bleed.
+When mouth is open: SMALL open oval shape, visible PINK/RED TONGUE inside, anthropomorphic human-like mouth interior, NOT all-black hole, NOT wide, NOT large.
+NO blush, NO pink cheeks, NO red cheeks. Face is clean black ink.
+Mouth expression is SMALL and restrained, NOT exaggerated, NOT wide open.
+```
 
-**实战验证**：2026-09-01课后延时服务选题，PRO版画质明显优于4.5版，墨仔外观一致性更好，手绘细节更丰富。
+### 5.2 内容防坑
+```
+=== CONSTRAINTS ===
+EXACTLY [N] cards stacked vertically. NO [N+1]th card. NO extra card. NO more, NO less.
+Card [N] is DIFFERENT from Card 1 and Card 2. NO duplicate content, NO repeated titles, NO same icon.
+Each tag appears ONLY ONCE. NO duplicate tags.
+Page number appears ONLY ONCE at upper-left inside small circle. NO second page number. NO page number near title.
+The ONLY number on the page is the page number [0X/0N]. NO random numbers, NO percentages, NO time labels, NO statistics, NO 50%, NO 10%, NO 32s, NO 28%, NO 40%.
+ALL TEXT IS CHINESE HANDWRITTEN STYLE. NO English text, NO character names (NO "Mozai", NO "SEEDLING"), NO version labels, NO formal printed fonts.
+Area around character is COMPLETELY BLANK. No text, no icons, no doodles, no letters within 1cm of character.
+Title and quote content are DIFFERENT. Title does NOT repeat quote text.
+```
+
+### 5.3 常见错字预防（拼音+偏旁拆解）
+```
+=== CONSTRAINTS ===
+TEXT MUST BE 拨打110 (拨 = 扌+发, pronounced bo). NOT 技打 (技 = 扌+支, pronounced ji).
+TEXT MUST BE 过马路 (马 = 马字旁, pronounced ma). NOT 过下路 (下 = 下, pronounced xia).
+Also 派出所 (only one 派), 冻结 (only one 冻), 保留 (only one 保).
+```
+
+### 5.4 符号控制
+```
+=== CONSTRAINTS ===
+NO $ sign. NO dollar sign. NO currency symbols. NO % sign in icons.
+Money bag icon is plain cloth sack with tie, NO symbol on it.
+Shield icon is plain shield, NO $ or other symbol inside.
+All icons contain NO text, NO numbers, NO letters. Icons are pure illustrations only.
+```
+
+---
+
+## 六、模型版本适配（v1.6.0 新增）
+
+### seedream_5.0_pro（最终交付推荐，1773×2364）
+- 画质更优，细节更丰富，文字渲染更准确
+- prompt 中可增加更精细的材质描述（见 style-lock.md 增强版）
+- 对结构化协议的响应更好，字段标记更有效
+- 适合最终交付版
+
+### seedream_4.5（初稿/迭代用，1080×1440）
+- 速度快，适合快速验证布局和内容
+- prompt 可适当简化，减少材质细节描述
+- 适合初稿和迭代修改
+
+---
+
+## 七、文案克制原则（v1.6.0 新增，借鉴 awesome-gpt-image-2）
+
+> awesome-gpt-image-2 避坑指南："图表场景优先使用短句文案，千万不要把大段正文塞进画面里，模型不是排版工人。"
+
+每页文字量上限：
+- **封面标题**：最多 2 行，每行不超过 12 字
+- **副标题**：最多 1 行，不超过 15 字
+- **卡片标题**：每张卡片不超过 6 字
+- **卡片说明**：每张卡片不超过 20 字（1-2 句短句）
+- **金句**：最多 2 行，每行不超过 10 字
+- **互动气泡**：最多 2 行，每行不超过 12 字
+- **标签**：每页 2-4 个，每个不超过 8 字
+
+> ⚠️ 超过上限的文字会导致模型渲染错字、漏字、乱码。宁可文字少而精，不要多而乱。
+
+---
+
+## 八、完整 Prompt 示例（P2 分析页，内容主导型）
+
+```
+=== CANVAS ===
+Chinese vertical Douyin article page, 3:4 ratio, 1773x2364 pixels.
+
+=== STYLE ===
+Richly detailed hand-drawn pencil sketch illustration with ink outlines on warm off-white paper (#FBFAF5). Cross-hatching, stippling, subtle ink bleed. Decorative corner flourishes. Thin double-line border. Premium sketchbook feeling.
+ALL TEXT IS CHINESE HANDWRITTEN STYLE. Bold brush/marker hand-lettering for title. Casual pencil handwriting for subtitles and labels. NO formal printed fonts, NO English text, NO character names, NO version labels.
+Pastel color palette: pale blue wash, pale peach wash, pale sage green wash, pale lavender wash. Ink-black #1B1B1B.
+
+=== LAYOUT ===
+LAYOUT MODE: CONTENT-DOMINANT. Content (cards/icons/text) is MAIN visual focus occupying 55-65% of page. Character is secondary accent.
+TITLE AREA: top 15-20%. Large bold hand-lettered title "3个最应该记住的安全提醒" with wavy underline + warning triangle icon. Subtitle "交通·防溺水·防欺凌" with thin divider lines on both sides.
+CONTENT AREA: middle 55-65%. EXACTLY THREE cards stacked vertically with small downward arrows and tiny stars between cards. Each card has folded top-right corner, double-line border, pastel wash background, large hand-drawn circled number on left side, small relevant icon next to title.
+  Card 1 (pale blue): circled number 1, title "交通安全", text "未满12岁不骑自行车，未满16岁不骑电动车，过马路走斑马线", icon: inanimate traffic light and bicycle (NO face, NO character).
+  Card 2 (pale peach): circled number 2, title "防溺水", text "不私自下水，遇到溺水立即呼救拨打110/120，不盲目下水施救", icon: inanimate lifebuoy (NO face, NO character).
+  Card 3 (pale sage): circled number 3, title "防欺凌", text "遭遇欺负不隐忍，第一时间告知老师家长，同学友善相处", icon: inanimate shield (NO face, NO character).
+CHARACTER AREA: ONLY 8-10% of page height at BOTTOM-LEFT corner. Character is small accent, NOT main subject. Area around character COMPLETELY BLANK.
+DECORATION AREA: faint pencil grid in background, tiny doodle icons scattered in gaps (inanimate objects only: small helmet, tiny lifebuoy outline, shield outline — NO faces, NO characters), page number "02/05" at upper-left inside small circle (ONLY ONCE).
+
+=== CHARACTER ===
+=== MOZAI CHARACTER (strictly match reference image) ===
+Round plump black teardrop creature (plump water drop shape, NOT slim, NOT elongated, NOT spherical). Ink-black body (#1B1B1B-ish) with hand-drawn ink texture, natural ink bleed and scribble strokes (NOT flat black). Small sprout on top with slightly curly thin stem + TWO light sage-green leaves (#A8C879, exactly two leaves). LARGE round eyes with big white eye whites and black pupils (pupils slightly asymmetrical). SMALL BLACK mouth (wavy line ~ shape, thinking expression, NOT red, NOT large). Exactly TWO thin black arms with small hands and exactly TWO short black legs with small feet. Small shadow under feet. Cute warm hand-drawn children's book illustration feel.
+PAGE STATE: sitting cross-legged at bottom-left corner, holding small notebook in left hand, right hand resting on cheek (thinking pose). Eyes looking upward to the side with slightly furrowed brows. Mouth is wavy line ~ (thinking). Expression: thoughtful, concerned. Size: 8-10% of page height.
+EXACTLY ONE character on page, never two or more. NO character inside any card, NO small character anywhere else, NO character in icons. NO blush, NO pink cheeks.
+
+=== CONSTRAINTS ===
+EXACTLY THREE cards. NO fourth card. Card 3 is DIFFERENT from Card 1 and 2. NO duplicate content.
+Each tag ONLY ONCE. Page number "02/05" appears ONLY ONCE at upper-left. NO second page number.
+The ONLY number on page is page number 02/05 and card numbers 1,2,3. NO random numbers, NO percentages.
+TEXT MUST BE 过马路 (马 = 马字旁). NOT 过下路. TEXT MUST BE 拨打110 (拨 = 扌+发). NOT 技打.
+NO $ sign, NO currency symbols. All icons contain NO text, NO numbers, NO letters.
+Area around character COMPLETELY BLANK. NO text/icons/doodles within 1cm of character.
+Character appearance strictly consistent with reference image.
+
+=== AVOID ===
+extra limbs, third arm, third leg, multi-hand multi-foot, all-black mouth hole, large mouth, exaggerated expression, pink blush, duplicate cards, duplicate tags, random numbers (50%, 10%, 32s, 28%), English text (MOZAI, SEEDLING, STOP), character inside cards or icons, face in icons, formal printed fonts, saturated colors, pure black background, yellow paper, giant title, heavy boxes, gibberish, childish cartoons, thick outlines, corporate template, shadows/gradients/neon, horizontal landscape, clean vector.
+```
+
+---
+
+## 九、Prompt 生成工作流（Agent 执行步骤）
+
+1. **填写 5 页差异化状态表**（第四节），确保每页眼睛/嘴型/动作/位置不同
+2. **确定每页布局模式**（内容主导型 or 角色主导型），分析页/金句页必须内容主导
+3. **按结构化协议组装 prompt**（第一节 7 字段块顺序），或用 JSON 模板（第二节）
+4. **填入实战防坑约束**（第五节），根据页面类型选择适用的防坑条目
+5. **检查文案克制原则**（第七节），每页文字量不超过上限
+6. **传入人物卡 URL**，用 image_edit 工具生成
+7. **生成后逐张下载放大校验**，发现问题单独重生成（在 prompt 中明确列出之前的错误）
