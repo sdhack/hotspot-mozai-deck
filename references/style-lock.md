@@ -130,8 +130,10 @@ ALL TEXT IS CHINESE HANDWRITTEN STYLE. Bold brush/marker hand-lettering for titl
 | 标签2（暖色） | pale peach wash（淡桃） |
 | 标签3（中性） | pale sage green wash（淡鼠尾草绿） |
 | 标签4（可选） | pale lavender wash（淡薰衣草紫） |
-| 墨水 | ink-black (#1A1A1A-ish, not pure #000) |
-| 纸张 | warm off-white (#FBFAF5-ish) |
+| 墨水 | ink-black (deep black, NOT pure black, NOT dark gray) |
+| 纸张 | warm off-white (NOT pure white, NOT yellow, NOT gray) |
+
+> ⚠️ **v1.7.2 颜色代码防护**：prompt中禁止使用任何十六进制颜色代码（如 #FBFAF5、#1B1B1B、#A8C879），seedream模型会把它们渲染成画面文字乱码。必须用文字描述颜色。此表中的颜色名称仅供参考，写入prompt时用文字描述而非代码。
 
 ---
 
@@ -159,6 +161,8 @@ ALL TEXT IS CHINESE HANDWRITTEN STYLE. Bold brush/marker hand-lettering for titl
 - clean vector（干净矢量风格）
 - **LARGE EMPTY WHITE SPACES（大面积纯白空白，v1.7.0新增）**
 - **flat plain background（扁平无纹理背景，v1.7.0新增）**
+- **hex color codes（十六进制颜色代码，v1.7.2新增）**——如 #FBFAF5、#1B1B1B、#A8C879，会被渲染成画面文字乱码
+- **pound sign codes（#号后跟字母数字，v1.7.2新增）**
 
 ---
 
@@ -171,11 +175,12 @@ ALL TEXT IS CHINESE HANDWRITTEN STYLE. Bold brush/marker hand-lettering for titl
 ### 纸张材质拆解
 
 ```
-PAPER TEXTURE: warm off-white paper (#FBFAF5-ish) with subtle fiber texture.
+PAPER TEXTURE: warm off-white paper with subtle fiber texture.
 Paper has slight unevenness — not perfectly flat, has gentle variations in tone (some areas slightly warmer, some slightly cooler).
 Faint pencil grid lines visible in background (very light, 20-30% opacity, NOT prominent).
 Paper edges within border have slight natural deckle edge feel (NOT clean cut).
-NO pure white (#FFFFFF), NO yellow paper (#FFFFE0), NO gray paper.
+NO pure white, NO yellow paper, NO gray paper.
+NO hex color codes in prompt — use text descriptions only.
 ```
 
 ### 墨水材质拆解
@@ -186,8 +191,9 @@ Ink has variable line weight — some strokes thicker (pressure), some thinner (
 Cross-hatching lines create shading (parallel lines at 45° and 90°, varying density).
 Stippling dots create texture (small dots, varying density, NOT uniform).
 Subtle ink wash effects in some areas (diluted ink creates soft gray tones).
-Ink color is #1B1B1B-ish (deep black, NOT pure #000, NOT dark gray).
+Ink color is deep ink-black (NOT pure black, NOT dark gray).
 NO thick outlines (uniform 2px+ lines), NO clean vector edges, NO flat color fills.
+NO hex color codes in prompt — use text descriptions only.
 ```
 
 ### 光影描述（手绘风格适用）
@@ -209,7 +215,8 @@ Wash has uneven edges — natural watercolor bleed effect (NOT clean geometric f
 Wash opacity 30-40% (light, transparent, paper texture visible through it).
 Color variations within wash — some areas slightly more saturated, some lighter.
 NO flat solid color fill, NO gradient, NO opaque background.
-Colors: pale blue (#B8D4E8-ish), pale peach (#F5D5C0-ish), pale sage (#C8D8B8-ish), pale lavender (#D8C8E0-ish).
+Colors (use text descriptions, NO hex codes): pale blue, pale peach, pale sage, pale lavender.
+NO hex color codes in prompt — use text descriptions only.
 ```
 
 ---
@@ -278,3 +285,38 @@ FOR seedream_4.5 (1080x1440):
 - Simplify texture description: "hand-drawn sketch", "ink outlines"
 - Reduce decorative elements to avoid clutter
 - Keep text even shorter to reduce rendering errors
+
+---
+
+## 原始画风不可变（v1.8.0 核心约束）
+
+> **触发**：用户强调"原始画风要求不能变"（尤其在做封面强钩子改造、场景叙事型切换后）。任何对标题、画面、布局的改动，都不得弱化本技能定义的原始画风。这是比"内容改动"更高的优先级——内容可以换，画风必须锁死。
+
+### 封面原始元素清单（改钩子/改画面时必须逐项核对，缺一项即重生成）
+
+| # | 元素 | 必须保持 |
+|---|---|---|
+| 1 | 双线边框 | THIN DOUBLE-LINE BORDER around whole page |
+| 2 | 四角装饰花纹 | DECORATIVE CORNER FLOURISHES in all four corners |
+| 3 | 标题波浪下划线 | WAVY UNDERLINE under title line 2 |
+| 4 | 顶部标签 | 2 个 pastel tags（wobbly double-border，如 #家长群 #教育公平） |
+| 5 | 底部标签 | 3-4 个 pastel tags + 装饰点（如 #家校关系 #开学季 #教育） |
+| 6 | 涂鸦背景 | FAINT PENCIL GRID + SCATTERED TINY DOODLE ICONS + cross-hatching + ink dots，无大面积空白 |
+| 7 | 纸张/墨水 | warm off-white paper + ink-black（非纯黑/非灰）+ 手绘铅笔+墨水轮廓 |
+| 8 | 墨仔形象 | 圆胖黑泪滴+小芽微卷茎双叶+大眼+小黑嘴+细四肢+手绘墨迹（strictly match 人物卡） |
+
+### 正文页原始元素清单
+
+| # | 元素 | 必须保持 |
+|---|---|---|
+| 1 | 页码 | upper-left ONLY inside small circle |
+| 2 | 标题 | centered bold hand-lettering + wavy underline |
+| 3 | 涂鸦背景 | 同封面（铅笔网格+散布涂鸦+交叉排线+墨点，无大面积空白） |
+| 4 | 边框/装饰角 | 细双线边框+四角装饰花纹 |
+| 5 | 手写字体 | 全中文手写，无英文/角色名/版本标签/印刷体 |
+
+### 实战教训（为什么必须锁定）
+
+- 封面强钩子改造（v1.8.0 实战）曾把标题改成"一条自我介绍/让家长群安静了"、画面聚焦手机消息，但 v2 弱化了原始画风（边框/装饰角/标签/波浪下划线被简化），用户反馈"原始画风要求不能变"。
+- 修复（v3）：在保留强钩子标题与画面冲突的同时，**逐项恢复**双线边框+四角装饰+波浪下划线+顶部底部 pastel 标签+铅笔网格涂鸦，才通过。
+- **结论**：钩子/画面可以改，原始画风元素一个都不能少。生成前把上表清单写进 prompt，生成后逐项核对。

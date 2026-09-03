@@ -47,12 +47,13 @@
     "platform": "Douyin vertical article"
   },
   "style": {
-    "paper": "warm off-white (#FBFAF5)",
+    "paper": "warm off-white (NOT pure white, NOT yellow)",
     "lines": "hand-drawn pencil sketch + ink outlines",
     "texture": "cross-hatching + stippling + subtle ink bleed",
     "border": "thin double-line border + decorative corner flourishes",
     "fonts": "bold brush/marker hand-lettering for title, casual pencil handwriting for body",
-    "colors": "pastel pale blue/peach/sage/lavender washes, ink-black #1B1B1B"
+    "colors": "pastel pale blue/peach/sage/lavender washes, ink-black (deep black, NOT pure black)",
+    "warning": "NO hex color codes in prompt — use text descriptions only"
   },
   "layout": {
     "mode": "content-dominant",
@@ -226,6 +227,32 @@ Shield icon is plain shield, NO $ or other symbol inside.
 All icons contain NO text, NO numbers, NO letters. Icons are pure illustrations only.
 ```
 
+### 5.5 颜色代码防护（v1.7.2 新增，实战验证）
+
+> ⚠️ **seedream模型会把prompt中的十六进制颜色代码渲染成画面文字乱码**——如 `#FBFAF5` 会变成角落的"183:5@FBAF5"，`#1B1B1B` 会变成"#1B-COB"，`#A8C879` 会变成乱码符号。这是经过多轮实战验证的严重问题，必须在prompt中完全避免。
+
+```
+=== CONSTRAINTS ===
+NO hex color codes anywhere in prompt. NO #FBFAF5, NO #1B1B1B, NO #A8C879, NO #FBAF5, NO any # followed by letters/numbers.
+Use text descriptions instead: warm off-white paper, ink-black body, light sage-green leaves, pale blue/peach/sage/lavender wash.
+NO color code text in corners or margins.
+```
+
+```
+=== AVOID ===
+hex color codes, pound sign codes, # followed by letters/numbers, color code text in margins, #FBFAF5, #1B1B1B, #A8C879, #FBAF5.
+```
+
+> 实战验证：v1.7.1及之前版本的prompt中大量使用 `#FBFAF5`、`#1B1B1B`、`#A8C879`，导致生成图角落出现"183:5@FBAF5""#1B-COB""#15-2065"等乱码。v1.7.2全部改为文字描述后，乱码问题完全消除。
+
+### 5.6 副标题/装饰线防护（v1.7.2 新增，实战验证）
+
+```
+=== CONSTRAINTS ===
+Subtitle appears ONLY ONCE below title. NO duplicate subtitle. NO second line with same text.
+Divider line is plain, NO numbers on it. NO random digits on decorative lines.
+```
+
 ---
 
 ## 六、模型版本适配（v1.6.0 新增）
@@ -267,9 +294,10 @@ All icons contain NO text, NO numbers, NO letters. Icons are pure illustrations 
 Chinese vertical Douyin article page, 3:4 ratio, 1773x2364 pixels.
 
 === STYLE ===
-Richly detailed hand-drawn pencil sketch illustration with ink outlines on warm off-white paper (#FBFAF5). Cross-hatching, stippling, subtle ink bleed. Decorative corner flourishes. Thin double-line border. Premium sketchbook feeling.
+Richly detailed hand-drawn pencil sketch illustration with ink outlines on warm off-white paper. Cross-hatching, stippling, subtle ink bleed. Decorative corner flourishes. Thin double-line border. Premium sketchbook feeling.
 ALL TEXT IS CHINESE HANDWRITTEN STYLE. Bold brush/marker hand-lettering for title. Casual pencil handwriting for subtitles and labels. NO formal printed fonts, NO English text, NO character names, NO version labels.
-Pastel color palette: pale blue wash, pale peach wash, pale sage green wash, pale lavender wash. Ink-black #1B1B1B.
+Pastel color palette: pale blue wash, pale peach wash, pale sage green wash, pale lavender wash. Ink-black (deep black, NOT pure black).
+NO hex color codes in prompt — use text descriptions only.
 
 === LAYOUT ===
 LAYOUT MODE: CONTENT-DOMINANT. Content (cards/icons/text) is MAIN visual focus occupying 55-65% of page. Character is secondary accent.
@@ -283,7 +311,8 @@ DECORATION AREA: faint pencil grid in background, tiny doodle icons scattered in
 
 === CHARACTER ===
 === MOZAI CHARACTER (strictly match reference image) ===
-Round plump black teardrop creature (plump water drop shape, NOT slim, NOT elongated, NOT spherical). Ink-black body (#1B1B1B-ish) with hand-drawn ink texture, natural ink bleed and scribble strokes (NOT flat black). Small sprout on top with slightly curly thin stem + TWO light sage-green leaves (#A8C879, exactly two leaves). LARGE round eyes with big white eye whites and black pupils (pupils slightly asymmetrical). SMALL BLACK mouth (wavy line ~ shape, thinking expression, NOT red, NOT large). Exactly TWO thin black arms with small hands and exactly TWO short black legs with small feet. Small shadow under feet. Cute warm hand-drawn children's book illustration feel.
+Round plump black teardrop creature (plump water drop shape, NOT slim, NOT elongated, NOT spherical). Ink-black body (deep black, NOT pure black, NOT dark gray) with hand-drawn ink texture, natural ink bleed and scribble strokes (NOT flat black). Small sprout on top with slightly curly thin stem + TWO light sage-green leaves (exactly two leaves). LARGE round eyes with big white eye whites and black pupils (pupils slightly asymmetrical). SMALL BLACK mouth (wavy line ~ shape, thinking expression, NOT red, NOT large). Exactly TWO thin black arms with small hands and exactly TWO short black legs with small feet. Small shadow under feet. Cute warm hand-drawn children's book illustration feel.
+NO hex color codes in prompt — use text descriptions only.
 PAGE STATE: sitting cross-legged at bottom-left corner, holding small notebook in left hand, right hand resting on cheek (thinking pose). Eyes looking upward to the side with slightly furrowed brows. Mouth is wavy line ~ (thinking). Expression: thoughtful, concerned. Size: 8-10% of page height.
 EXACTLY ONE character on page, never two or more. NO character inside any card, NO small character anywhere else, NO character in icons. NO blush, NO pink cheeks.
 
@@ -311,3 +340,61 @@ extra limbs, third arm, third leg, multi-hand multi-foot, all-black mouth hole, 
 5. **检查文案克制原则**（第七节），每页文字量不超过上限
 6. **传入人物卡 URL**，用 image_edit 工具生成
 7. **生成后逐张下载放大校验**，发现问题单独重生成（在 prompt 中明确列出之前的错误）
+
+---
+
+## 十、场景叙事型排版协议（v1.8.0 新增）
+
+> **触发条件**：用户反馈"不能老画文字，也得配图""画面感更强""少文字多配图"时，从默认的"内容主导型/角色主导型"切换为本模式。这是第三种排版模式，与内容主导型（文字卡片）并列可选。
+
+### 10.1 核心原则
+
+**每页以一个场景画为主，文字是配角。** 墨仔融入真实场景做与页面主题强关联的动作，场景本身承载信息，文字只保留标题 + 短标签（≤4字）+ 金句，其余内容全部用画面表达。
+
+| 对比维度 | 内容主导型（默认） | 场景叙事型（v1.8.0） |
+|---|---|---|
+| 主要视觉 | 卡片/图标/文字（55-65%） | **场景画**（60-70%）：手机界面/黑板/校门/天平/聊天气泡等 |
+| 墨仔 | 角落8-10%点缀 | 融入场景做主题动作（20-25%或场景内） |
+| 文字量 | 卡片说明≤20字 | 仅标题+短标签≤4字+金句，**严禁文字卡片** |
+| 信息承载 | 文字卡片列举 | **画面场景 + 短标签**（如黑板上画图标、手机屏1条消息） |
+| 适用 | 信息点多的分析/方案页 | 画面冲击力优先、情绪/冲突驱动的页面 |
+
+### 10.2 场景-动作-表情-文字对照（实战案例：家长群晒身份）
+
+| 页 | 场景画 | 墨仔动作 | 表情 | 文字（克制） |
+|---|---|---|---|---|
+| P1 封面 | 手机聊天界面，1条高亮消息"我是单位纪委书记"，其余气泡灰化 | 双手举手机、微微后仰 | 惊讶O | 标题2行+1条消息 |
+| P2 分析 | 教室黑板，画3个图形图标（印章/钥匙/倾斜天平） | 拿教鞭指黑板 | 思考 | 标题+3个四字标签 |
+| P3 方案 | 校门口，3张图形卡片（握手/书本/尺子） | 举"一视同仁"牌 | 坚定 | 标题+3个四字标签 |
+| P4 金句 | 大天平，两端各一本打开的书 | 站横梁保持平衡 | 温暖微笑 | 标题+金句 |
+| P5 互动 | 散落的空聊天气泡 | 挥手+喇叭 | 好奇邀请 | 标题+1个气泡 |
+
+### 10.3 文字克制强化
+
+场景叙事型的文字比内容主导型**更少**：
+```
+=== CONSTRAINTS ===
+Text is MINIMAL: only title (≤2 lines) + short labels (each ≤4 chars) + quote (≤10 chars/line).
+NO long sentences, NO text cards, NO paragraphs.
+Other bubbles/cards contain NO text — use pictures or plain grey lines instead.
+Highlight ONE key message in the scene (e.g. the phone message) — the ONLY text bubble.
+```
+> 实战验证：手机屏只留1条高亮消息、其余气泡用灰色横线（无文字）；黑板上画图标+四字标签，比长句卡片更稳、更少错字。
+
+### 10.4 场景叙事型 LAYOUT 示例（P1 封面）
+
+```
+=== LAYOUT ===
+LAYOUT MODE: SCENE-NARRATIVE (scene is MAIN visual, text is minimal).
+TITLE AREA: top 20-22%. Large bold hand-lettered title 2 lines with wavy underline. Top 2 pastel tags + bottom 3-4 pastel tags (original cover style).
+SCENE AREA: middle-lower 55-70%. A large hand-drawn scene: [手机/黑板/校门/天平/气泡]. ONE key message highlighted bold; surrounding bubbles/cards FAINT GREY with NO text (silence/drama contrast).
+CHARACTER AREA: integrated into the scene, lower-right 20-25%, doing a theme action [举手机/指黑板/举牌/站天平/挥手+喇叭].
+DECORATION: thin double-line border + corner flourishes + faint pencil grid + scattered tiny doodles (NO large empty white spaces).
+PAGE NUMBER: upper-left ONLY inside small circle (body pages only, cover has none).
+```
+
+### 10.5 场景叙事型防坑
+
+- **严禁回到文字卡片**：文字只限标题+短标签≤4字+金句，其余用画面表达；如模型仍渲染长句，重生成强化"Text is MINIMAL"。
+- **场景里的"文字"克制**：手机屏只1条消息、黑板只画图标+四字标签、气泡大部分空/灰化。
+- **原始画风不可变**：切到场景叙事型也不得丢 style-lock 元素（双线边框/装饰角/波浪下划线/pastel标签/涂鸦背景）——见 style-lock.md「原始画风不可变（v1.8.0）」。

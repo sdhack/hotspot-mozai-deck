@@ -36,7 +36,8 @@
 
 ```
 === MOZAI CHARACTER (strictly match reference image) ===
-CRITICAL: Match reference EXACTLY. Round plump black teardrop creature (plump water drop shape, NOT slim, NOT elongated, NOT spherical). Ink-black body (#1B1B1B-ish) with hand-drawn ink texture, natural ink bleed and scribble strokes (NOT flat black, has textured ink strokes). Small sprout on top with slightly curly thin stem + TWO light sage-green leaves (芽叶绿 #A8C879, exactly two leaves, not one, not three). LARGE round eyes with big white eye whites and black pupils (pupils often slightly asymmetrical - one eye may look slightly larger or offset, expressive). SMALL BLACK/DARK mouth (simple line or curve, expression varies per page, NOT red). Exactly TWO thin black arms with small hands and exactly TWO short black legs with small feet. Small shadow under feet. Cute warm hand-drawn children's book illustration feel. EXACTLY ONE character on page, never two or more. The character is ONLY at [position], doing [action]. NO character inside any card, NO small character anywhere else, NO character in icons. All icons are INANIMATE objects (NO face, NO character, NO teardrop shape).
+CRITICAL: Match reference EXACTLY. Round plump black teardrop creature (plump water drop shape, NOT slim, NOT elongated, NOT spherical). Ink-black body (deep black, NOT pure black, NOT dark gray) with hand-drawn ink texture, natural ink bleed and scribble strokes (NOT flat black, has textured ink strokes). Small sprout on top with slightly curly thin stem + TWO light sage-green leaves (exactly two leaves, not one, not three). LARGE round eyes with big white eye whites and black pupils (pupils often slightly asymmetrical - one eye may look slightly larger or offset, expressive). SMALL BLACK/DARK mouth (simple line or curve, expression varies per page, NOT red). Exactly TWO thin black arms with small hands and exactly TWO short black legs with small feet. Small shadow under feet. Cute warm hand-drawn children's book illustration feel. EXACTLY ONE character on page, never two or more. The character is ONLY at [position], doing [action]. NO character inside any card, NO small character anywhere else, NO character in icons. All icons are INANIMATE objects (NO face, NO character, NO teardrop shape).
+NO hex color codes in prompt — use text descriptions only (ink-black, light sage-green, warm off-white).
 ```
 
 > ⚠️ 使用时把 `[position]` 和 `[action]` 替换为具体的位置和动作。
@@ -48,10 +49,10 @@ CRITICAL: Match reference EXACTLY. Round plump black teardrop creature (plump wa
 | 要素 | 描述 | 常见错误（必须避免） |
 |---|---|---|
 | 身体形状 | round plump black teardrop（圆胖黑色泪滴/水滴形） | slim/elongated（修长）、spherical（球形）、pointed top（尖顶） |
-| 身体颜色 | ink-black 墨黑 (#1B1B1B-ish) | 纯黑 #000、深灰、其他颜色 |
+| 身体颜色 | ink-black 墨黑 (deep black, NOT pure black, NOT dark gray) | 纯黑、深灰、其他颜色 |
 | 身体质感 | hand-drawn ink texture, natural ink bleed, scribble strokes（手绘墨迹感，自然墨迹晕染，涂鸦笔触） | flat black（纯平黑）、shiny（发光）、hard silhouette（硬剪影）、pencil/crayon only（仅铅笔蜡笔，缺墨迹感） |
 | 头顶芽 | small sprout with slightly curly thin stem + TWO light sage-green leaves（小芽+微卷细茎+两片芽叶绿） | spiral coil loop（螺旋线圈）、straight stem（直茎）、no sprout（无芽） |
-| 叶子 | TWO light sage-green leaves 芽叶绿 (#A8C879)（两片浅鼠尾草绿叶） | one leaf（一片）、three leaves（三片）、no leaves（无叶）、dark green（深绿） |
+| 叶子 | TWO light sage-green leaves 芽叶绿（两片浅鼠尾草绿叶） | one leaf（一片）、three leaves（三片）、no leaves（无叶）、dark green（深绿） |
 | 眼睛 | LARGE round eyes with big white whites + black pupils（大圆眼+大白眼白+黑瞳孔），常不对称 | tiny white-dot eyes（小白点眼）、centered pupils（瞳孔居中）、no eyes（无眼）、extremely large chibi eyes（超大萌系眼） |
 | 嘴巴 | SMALL BLACK/DARK mouth（小黑色/深色嘴），简单线条或弧线，每页表情不同 | DEEP RED/CRIMSON mouth（深红嘴）、no mouth（无嘴）、same shape every page（每页同形状）、large mouth（大嘴） |
 | 手臂 | exactly TWO thin black arms with small hands（恰好两条细黑手臂+小手） | extra limbs（多余肢体）、missing arms（缺手臂）、three arms（三臂） |
