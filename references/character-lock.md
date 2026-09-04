@@ -1,7 +1,9 @@
 # Character Lock · 墨仔(Mozai) 角色锁
 
-从用户上传的墨仔人物卡（`assets/seedling-character-sheet.png`）提取的精确角色描述。每个页面 prompt 必须包含核心形象描述，逐字复制。
+从用户上传的墨仔人物卡（`assets/mozai-ip-sheet-4k.png` 主卡，另含 `assets/mozai-three-view.png` 三视图、`assets/mozai-expressions.png` 表情动作、`assets/mozai-core-settings.png` 核心设定）提取的精确角色描述。每个页面 prompt 必须包含核心形象描述，逐字复制。
 
+> v1.9.0 更新：基于2026-09-04新版墨仔人物卡（四卡：IP设定手册/三视图/表情动作/核心设定）更新。关键变更：**墨仔右手执毛笔/墨滴小画笔（核心道具，必须保留）**、表情动作库补入8种新状态（开心挥手/好奇探头/思考挠头/惊喜跳起/认真写字/发现灵感/给你加油/安心休息）、image-to-image 参考升级为四卡协议（主卡必传+支持卡可选）。
+>
 > v1.4.0 更新：基于2026-08-31新版墨仔IP设定图更新。关键变更：嘴巴颜色从深红改为黑色线条、头顶芽形态从螺旋卷须改为小芽微卷茎、身体质感强调手绘墨迹感、新增IP设定信息与表情库。
 >
 > v1.7.0 核心变更：**涂鸦是墨仔的天性**——墨仔是"一滴在纸上活过来的墨"，它走到哪里，哪里就有涂鸦。涂鸦背景不是可选排版，而是墨仔IP的核心视觉特质，每页背景必须有手绘涂鸦质感。
@@ -26,6 +28,7 @@
 | 相信的话 | 只要想象，就能把世界点亮 |
 | 小秘密 | 爱听同学的心事，开心的时候会用小墨点跳小舞蹈 |
 | 目标 | 用想象点亮世界，让平凡的日子变有趣 |
+| **道具（v1.9.0新增）** | **右手执毛笔/墨滴小画笔（small ink brush / ink-drop brush held in RIGHT hand）——新版人物卡的核心标志道具，每页 prompt 的 CHARACTER 字段必须保留** |
 | **天性（v1.7.0新增）** | **涂鸦是墨仔的天性——它走到哪里，哪里就有涂鸦。每页背景必须有铅笔网格+散布涂鸦图标+交叉排线+墨点的手绘质感，禁止大面积纯白空白。** |
 
 **故事背景**：墨仔原本只是一滴普通的墨，某天在纸上意外醒来，它发现这个世界充满色彩与故事，于是决定从小墨点开始，探索奇妙的校园。在学校的每一天，墨仔都会陪伴同学，记录他们的灵感与情绪，一点一点，让生活变得更温暖。
@@ -36,7 +39,7 @@
 
 ```
 === MOZAI CHARACTER (strictly match reference image) ===
-CRITICAL: Match reference EXACTLY. Round plump black teardrop creature (plump water drop shape, NOT slim, NOT elongated, NOT spherical). Ink-black body (deep black, NOT pure black, NOT dark gray) with hand-drawn ink texture, natural ink bleed and scribble strokes (NOT flat black, has textured ink strokes). Small sprout on top with slightly curly thin stem + TWO light sage-green leaves (exactly two leaves, not one, not three). LARGE round eyes with big white eye whites and black pupils (pupils often slightly asymmetrical - one eye may look slightly larger or offset, expressive). SMALL BLACK/DARK mouth (simple line or curve, expression varies per page, NOT red). Exactly TWO thin black arms with small hands and exactly TWO short black legs with small feet. Small shadow under feet. Cute warm hand-drawn children's book illustration feel. EXACTLY ONE character on page, never two or more. The character is ONLY at [position], doing [action]. NO character inside any card, NO small character anywhere else, NO character in icons. All icons are INANIMATE objects (NO face, NO character, NO teardrop shape).
+CRITICAL: Match reference EXACTLY. Round plump black teardrop creature (plump water drop shape, NOT slim, NOT elongated, NOT spherical). Ink-black body (deep black, NOT pure black, NOT dark gray) with hand-drawn ink texture, natural ink bleed and scribble strokes (NOT flat black, has textured ink strokes). Small sprout on top with slightly curly thin stem + TWO light sage-green leaves (exactly two leaves, not one, not three). LARGE round eyes with big white eye whites and black pupils (pupils often slightly asymmetrical - one eye may look slightly larger or offset, expressive). SMALL BLACK/DARK mouth (simple line or curve, expression varies per page, NOT red). Exactly TWO thin black arms with small hands and exactly TWO short black legs with small feet. Holds a small ink brush / ink-drop brush in RIGHT hand (v1.9.0 prop, brush clearly visible, NOT a pen, NOT a pencil). Small shadow under feet. Cute warm hand-drawn children's book illustration feel. EXACTLY ONE character on page, never two or more. The character is ONLY at [position], doing [action]. NO character inside any card, NO small character anywhere else, NO character in icons. All icons are INANIMATE objects (NO face, NO character, NO teardrop shape).
 NO hex color codes in prompt — use text descriptions only (ink-black, light sage-green, warm off-white).
 ```
 
@@ -60,6 +63,7 @@ NO hex color codes in prompt — use text descriptions only (ink-black, light sa
 | 阴影 | small shadow under feet（脚下小阴影） | no shadow（无阴影）、large shadow（大阴影） |
 | 数量 | EXACTLY ONE character（恰好一个角色） | multiple characters（多个角色）、two characters（两个） |
 | 位置 | ONLY at 指定位置 | character inside card（卡片里出现角色）、character in icon（图标里出现角色） |
+| **道具·毛笔（v1.9.0新增）** | **右手执毛笔/墨滴小画笔（small ink brush with dark bristles + thin bamboo handle, or ink-drop brush），笔尖朝上/朝外清晰可见** | **无道具（brush missing）、左手执笔（wrong hand）、误渲染成铅笔/钢笔（wrong prop）、笔尖被遮挡（brush hidden）** |
 | **涂鸦天性（v1.7.0新增）** | **背景必须有FAINT PENCIL GRID + SCATTERED TINY DOODLE ICONS + cross-hatching patches + ink dots，全页覆盖，禁止大面积纯白空白** | **flat plain background（扁平无纹理背景）、large empty white spaces（大面积纯白空白）** |
 
 ---
@@ -80,6 +84,23 @@ NO hex color codes in prompt — use text descriptions only (ink-black, light sa
 | confused small 困惑 | 小嘴微张，眼睛微斜 | 不解、质疑、反常识 |
 
 **规则**：4页中至少出现3种不同嘴型。封面常用 curious O 或 surprised O。落点页（P4）常用 happy smile。
+
+### v1.9.0 表情动作参考（来自 `assets/mozai-expressions.png` 表情与动作卡）
+
+新版人物卡定义了8种「表情+动作」组合状态，生成差异化状态表时可优先选用，且与 v1.7.1 内容关联原则一一对应：
+
+| 状态 | 表情 | 动作 | 内容关联适用 |
+|---|---|---|---|
+| 开心挥手 | happy smile 开心 | 挥手 | 互动页邀请、温暖落点 |
+| 好奇探头 | curious O 好奇 | 探头/前倾 | 封面钩子、探索新事物 |
+| 思考挠头 | thinking 思考 | 挠头 | 分析问题、拆解套路 |
+| 惊喜跳起 | surprised O 惊喜 | 跳起 | 封面冲击、好消息 |
+| 认真写字 | serious line 认真 | 拿毛笔写字/记录 | 方案页、清单核对 |
+| 发现灵感 | curious + 闪光 | 举毛笔、头顶闪光 | 解决方案、灵感揭示 |
+| 给你加油 | determined press 坚定 | 举拳/竖拇指 | 方案页、鼓励收尾 |
+| 安心休息 | happy smile 温暖 | 托腮/闭眼 | 金句页、温暖落点 |
+
+> 组合使用时：表情锁定每页差异（至少3种嘴型），动作锁定与内容关联（见「表情动作与内容关联原则」）。右手始终执毛笔。
 
 ---
 
@@ -173,13 +194,17 @@ tiny doodle icons scattered (inanimate objects only, NO character doodles, NO fa
 
 ## image-to-image 参考
 
-生成时必须传入 `assets/seedling-character-sheet.png` 的 URL 作为 `image_reference_url_list`，用 image_edit 工具（不是 image_gen），确保角色形象严格匹配人物卡。
+生成时必须传入人物卡 URL 作为 `image_reference_url_list`，用 image_edit 工具（不是 image_gen），确保角色形象严格匹配人物卡。
 
-### 人物卡 URL 管理
+### 人物卡 URL 管理（v1.9.0 四卡协议）
 
-- 人物卡本地路径：`assets/seedling-character-sheet.png`
+- **主人物卡**（必传）：`assets/mozai-ip-sheet-4k.png`（墨仔完整IP设定手册，右手执毛笔）
+- **支持人物卡**（可选，建议一并传入提升一致性）：
+  - `assets/mozai-three-view.png`（三视图与道具——正面/侧面/背面 + 墨滴小画笔画法）
+  - `assets/mozai-expressions.png`（表情与动作——8种表情动作参考）
+  - `assets/mozai-core-settings.png`（核心设定——身份/性格 + 墨黑/芽叶绿/纸张白三色）
 - 生成前用 `FileBatchUpload` 上传获取 URL（URL 可能过期，每次生成前重新上传）
-- 把 URL 传入 `image_reference_url_list` 参数
+- 把 URL 列表传入 `image_reference_url_list` 参数（最多支持6张，主卡放第一位）
 
 ### image_edit 工具调用格式（v1.7.0 新增，实战验证）
 
@@ -189,14 +214,14 @@ tiny doodle icons scattered (inanimate objects only, NO character doodles, NO fa
 image_edit(
   model_version="seedream_5.0_pro",
   request_list=[
-    {"prompt": "...", "image_reference_url_list": ["人物卡URL"], "height": 2364, "width": 1773},
-    {"prompt": "...", "image_reference_url_list": ["人物卡URL"], "height": 2364, "width": 1773},
+    {"prompt": "...", "image_reference_url_list": ["主人物卡URL", "三视图URL", "表情URL", "核心设定URL"], "height": 2364, "width": 1773},
+    {"prompt": "...", "image_reference_url_list": ["主人物卡URL", "三视图URL", "表情URL", "核心设定URL"], "height": 2364, "width": 1773},
     ...
   ]
 )
 ```
 
-可一次传入多个请求（如5页同时生成），也可以单次传入一个请求。
+可一次传入多个请求（如5页同时生成），也可以单次传入一个请求。至少传入主人物卡URL（第一位）。
 
 ---
 
@@ -217,3 +242,4 @@ image_edit(
 | 身体变成纯平黑 | 质感描述不够 | 重生成，强调 hand-drawn ink texture, natural ink bleed, scribble strokes (NOT flat black) |
 | **背景大面积纯白空白（v1.7.0新增）** | **未强调涂鸦背景** | **重生成，强调 FAINT PENCIL GRID + SCATTERED TINY DOODLE ICONS + cross-hatching patches + ink dots, NO large empty white spaces, NO flat plain background** |
 | **背景涂鸦有角色/脸（v1.7.0新增）** | **涂鸦未限制为无生命物体** | **重生成，强调 doodles are inanimate objects only (stars, leaves, pencils, arrows, dots), NO character doodles, NO faces in doodles** |
+| **墨仔没拿毛笔/道具缺失（v1.9.0新增）** | **CHARACTER字段未强调道具** | **重生成，强调 holds a small ink brush in RIGHT hand + brush clearly visible；参考 mozai-three-view.png 的墨滴小画笔画法** |
