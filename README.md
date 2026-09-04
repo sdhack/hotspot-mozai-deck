@@ -98,7 +98,10 @@ hotspot-mozai-deck/
 ├── LICENSE                           # MIT 许可证
 ├── .gitignore                        # Git 忽略规则
 ├── assets/
-│   └── seedling-character-sheet.png # Seedling 人物卡（image-to-image 参考）
+│   ├── mozai-ip-sheet-4k.png       # 主人物卡·墨仔完整IP设定手册（右手执毛笔，image-to-image 参考）
+│   ├── mozai-three-view.png        # 人物卡·三视图与道具（正面/侧面/背面 + 墨滴小画笔）
+│   ├── mozai-expressions.png       # 人物卡·表情与动作（8种）
+│   └── mozai-core-settings.png     # 人物卡·核心设定（身份/性格/爱好/目标 + 墨黑/芽叶绿/纸张白）
 └── references/
     ├── style-lock.md                 # 通用风格锁 + 排版优化指南（v1.2.0）
     ├── character-lock.md             # Seedling 角色锁（精确描述+嘴巴表情库）
@@ -114,10 +117,11 @@ hotspot-mozai-deck/
 
 | 要素 | 描述 |
 |---|---|
-| 身体 | 圆胖黑色泪滴/水滴形，哑光墨黑+铅笔/蜡笔涂鸦纹理 |
-| 头顶 | 细卷发须 + 螺旋形线圈 + 两片浅鼠尾草绿叶 |
+| 身体 | 圆胖黑色泪滴/水滴形，手绘墨迹质感+自然墨晕（非纯平黑） |
+| 头顶 | 小芽 + 微卷细茎 + 两片浅鼠尾草绿叶 |
 | 眼睛 | 大圆眼 + 大白眼白 + 黑瞳孔，常不对称（一大一小） |
-| 嘴巴 | 深红/暗红，每页表情不同（惊讶O/认真一字/坚定抿嘴/友好微笑等） |
+| 嘴巴 | 小黑色/深色嘴，每页表情不同（惊讶O/思考/坚定/温暖微笑等） |
+| 道具 | 右手执毛笔/墨滴小画笔（v1.9.0新增） |
 | 四肢 | 恰好两条细黑手臂 + 两条短粗腿 |
 | 其他 | 脚下小阴影，儿童绘本风格 |
 
@@ -170,7 +174,7 @@ hotspot-mozai-deck/
 
 ## 🛠️ 技术栈
 
-- **图像生成**：`image_edit`（image-to-image，传入人物卡参考）
+- **图像生成**：`image_edit`（image-to-image，传入4张人物卡参考：主卡 `mozai-ip-sheet-4k.png` 必传，可搭配三视图/表情/核心设定）
 - **热点搜索**：`general_search`
 - **文件交付**：`present_files`
 - **风格**：refined Chinese handdrawn technical illustration
@@ -182,6 +186,7 @@ hotspot-mozai-deck/
 
 | 版本 | 日期 | 变更 |
 |---|---|---|
+| 1.9.0 | 2026-09-04 | **人物卡四卡更新**：assets/ 由单卡升级为4张人物卡（主卡 mozai-ip-sheet-4k.png + 三视图 + 表情动作 + 核心设定）；墨仔新增核心道具「右手执毛笔/墨滴小画笔」；角色设定表同步更新 |
 | 1.0.0 | 2026-08-28 | 初始版本，5步工作流 + 7个参考文件 + Seedling人物卡 |
 | 1.1.0 | 2026-08-28 | 完善文档：添加快速开始/用法示例/故障排除/版本历史；更新 guardrails；添加 README.md |
 | 1.2.0 | 2026-08-29 | 实战迭代：新增排版优化指南+Prompt强化技巧；Guardrails增加数字一致性/图标无脸/气泡唯一/文案不重复；QA Checklist增加9大类；新增数据驱动选题策略；文案模板增加去重检查和多种开头模板 |

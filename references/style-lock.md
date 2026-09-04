@@ -303,7 +303,7 @@ FOR seedream_4.5 (1080x1440):
 | 5 | 底部标签 | 3-4 个 pastel tags + 装饰点（如 #家校关系 #开学季 #教育） |
 | 6 | 涂鸦背景 | FAINT PENCIL GRID + SCATTERED TINY DOODLE ICONS + cross-hatching + ink dots，无大面积空白 |
 | 7 | 纸张/墨水 | warm off-white paper + ink-black（非纯黑/非灰）+ 手绘铅笔+墨水轮廓 |
-| 8 | 墨仔形象 | 圆胖黑泪滴+小芽微卷茎双叶+大眼+小黑嘴+细四肢+手绘墨迹（strictly match 人物卡） |
+| 8 | 墨仔形象 | 圆胖黑泪滴+小芽微卷茎双叶+大眼+小黑嘴+细四肢+手绘墨迹+**右手执毛笔/墨滴小画笔**（strictly match 人物卡 assets/mozai-ip-sheet-4k.png） |
 
 ### 正文页原始元素清单
 

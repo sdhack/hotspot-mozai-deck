@@ -3,6 +3,8 @@
 生成 4 张图后、交付前，逐项检查。发现问题立即修正或重生成。
 
 > v1.7.0 新增：J11-J15 检查项——去说教原则（文案+配图）、涂鸦天性（背景无大面积纯白空白）、image_edit request_list 格式。
+>
+> v1.9.0 新增：角色一致性 A5/A8 修正为最新人物卡设定（头顶小芽微卷茎 / 小黑嘴），新增 A14「道具·毛笔」检查项（右手执毛笔/墨滴小画笔）。
 
 ---
 
@@ -14,15 +16,16 @@
 | A2 | 卡片/图标无角色 | 卡片里的图标是无生命物体，无小墨仔/无脸/无泪滴形 | 重生成，每个图标标注 "inanimate icon, NO face, NO character" |
 | A3 | 身体形状 | 圆胖黑泪滴，非修长/球形/尖顶 | 重生成，prompt 强调 round plump teardrop |
 | A4 | 身体质感 | 哑光墨黑+铅笔/蜡笔涂鸦纹理，非纯平黑/发光 | 重生成，prompt 强调 scribble texture |
-| A5 | 卷须 | 细卷发须+螺旋形线圈，非简单圆圈/直茎 | 重生成，prompt 强调 spiral-shaped coil loop |
+| A5 | 头顶芽 | 小芽+微卷细茎，非螺旋线圈/直茎/尖顶 | 重生成，prompt 强调 small sprout with slightly curly stem, NOT spiral coil loop |
 | A6 | 叶子 | 恰好两片浅鼠尾草绿叶，非一片/三片/无叶 | 重生成，prompt 强调 exactly TWO leaves |
 | A7 | 眼睛 | 大圆眼+大白眼白+黑瞳孔，常不对称；非小白点眼/瞳孔居中 | 重生成，prompt 强调 large eyes asymmetrical |
-| A8 | 嘴巴 | 深红/暗红，每页表情不同；非黑嘴/无嘴/每页同形状 | 重生成，prompt 指定不同 mouth expression |
+| A8 | 嘴巴 | 小黑色/深色嘴，每页表情不同；非深红嘴/无嘴/每页同形状 | 重生成，prompt 指定不同 mouth expression |
 | A9 | 手臂 | 恰好两条细黑手臂，非多余/缺失 | 重生成，prompt 强调 exactly TWO arms |
 | A10 | 腿 | 恰好两条短粗腿，非多余/缺失 | 重生成，prompt 强调 exactly TWO legs |
 | A11 | 阴影 | 脚下有小阴影 | 可接受，不强制 |
 | A12 | 角色尺寸 | 活跃时占页面高度 12-22%，非填满页面 | 可接受，不强制 |
 | A13 | 角色是动作主体 | 在做与页面主题相关的动作，非角落装饰 | 重生成，prompt 强调 actor role |
+| A14 | 道具·毛笔（v1.9.0新增） | 右手执毛笔/墨滴小画笔，笔尖清晰可见；非左手执笔/无道具/被遮挡/误渲染成铅笔钢笔 | 重生成，prompt 强调 holds a small ink brush in RIGHT hand + brush clearly visible |
 
 ---
 

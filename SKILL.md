@@ -1,11 +1,11 @@
 ---
 name: hotspot-mozai-deck
-version: 1.8.0
-description: 从热点搜索→候选选题→4-6页墨仔(Mozai)handdrawn配图→配套文案的全流程自动化。v1.8.0 核心变更：①场景叙事型排版（用户要求"少文字多配图"时，每页以一个场景画为主、文字仅标题+短标签≤4字+金句）；②原始画风不可变（任何改动标题/画面/布局都不得弱化style-lock原始画风：双线边框/四角装饰/波浪下划线/pastel标签/铅笔网格涂鸦/墨仔形象一致）；③封面强钩子（第一张图钩子与画面必须吸引人，悬念+反差型"一条自我介绍/让家长群安静了"优于直白陈述型"家长群晒身份？求老师多关照"）；④文案master-copywriting合规检查（G1-G12事实层/抖音生活故事体/去AI味H2/画面感与配图呼应）。v1.7.2 核心变更：颜色代码防护（prompt中禁止出现#XXXXXX十六进制颜色代码，会被渲染成画面乱码，改用文字描述如warm off-white/ink-black/pale blue，并在AVOID中明确禁止hex color codes）。v1.7.1 核心变更：表情动作与内容关联原则。v1.7.0 变更：涂鸦是墨仔的天性+去说教原则+image_edit request_list格式。当用户要求"结合热点出图""墨仔热点图文"时使用。
+version: 1.9.0
+description: 从热点搜索→候选选题→4-6页墨仔(Mozai)handdrawn配图→配套文案的全流程自动化。v1.9.0 核心变更：人物卡四卡更新（assets/ 由单卡升级为4张人物卡：mozai-ip-sheet-4k主卡+三视图+表情动作+核心设定；墨仔右手执毛笔/墨滴小画笔为核心新道具；角色锁/表情库/QA清单同步更新）。v1.8.0 核心变更：①场景叙事型排版（用户要求"少文字多配图"时，每页以一个场景画为主、文字仅标题+短标签≤4字+金句）；②原始画风不可变（任何改动标题/画面/布局都不得弱化style-lock原始画风：双线边框/四角装饰/波浪下划线/pastel标签/铅笔网格涂鸦/墨仔形象一致）；③封面强钩子（第一张图钩子与画面必须吸引人，悬念+反差型"一条自我介绍/让家长群安静了"优于直白陈述型"家长群晒身份？求老师多关照"）；④文案master-copywriting合规检查（G1-G12事实层/抖音生活故事体/去AI味H2/画面感与配图呼应）。v1.7.2 核心变更：颜色代码防护（prompt中禁止出现#XXXXXX十六进制颜色代码，会被渲染成画面乱码，改用文字描述如warm off-white/ink-black/pale blue，并在AVOID中明确禁止hex color codes）。v1.7.1 核心变更：表情动作与内容关联原则。v1.7.0 变更：涂鸦是墨仔的天性+去说教原则+image_edit request_list格式。当用户要求"结合热点出图""墨仔热点图文"时使用。
 author: helloianneo
 license: MIT
 created: 2026-08-28
-updated: 2026-09-03
+updated: 2026-09-04
 ---
 
 # Hotspot Mozai Deck · 墨仔热点图文自动化
@@ -27,11 +27,11 @@ updated: 2026-09-03
 
 ## 核心资产
 
-- **角色**：墨仔/Mozai（圆胖黑泪滴 + 小芽微卷茎双叶 + 大眼不对称 + 黑色小嘴 + 细四肢，手绘墨迹质感）
+- **角色**：墨仔/Mozai（圆胖黑泪滴 + 小芽微卷茎双叶 + 大眼不对称 + 黑色小嘴 + 细四肢 + 右手执毛笔/墨滴小画笔，手绘墨迹质感）
 - **风格**：refined Chinese handdrawn technical illustration（暖白纸 + cross-hatching + 装饰角 + 双线边框 + 手写中文字体）
 - **涂鸦天性（v1.7.0核心）**：墨仔是"一滴在纸上活过来的墨"，它走到哪里，哪里就有涂鸦。每页背景必须有铅笔网格+散布涂鸦图标+交叉排线+墨点，禁止大面积纯白空白
 - **格式**：3:4 竖版（1080x1440），抖音/小红书适配
-- **人物卡**：`assets/seedling-character-sheet.png`（image-to-image 参考用）
+- **人物卡（v1.9.0 四卡更新）**：`assets/mozai-ip-sheet-4k.png`（**主人物卡**·完整IP设定手册，右手执毛笔/墨滴小画笔）、`assets/mozai-three-view.png`（三视图与道具）、`assets/mozai-expressions.png`（表情与动作·8种）、`assets/mozai-core-settings.png`（核心设定）（image-to-image 参考用，可多卡同时传入 `image_reference_url_list`）
 
 ## 快速开始
 
@@ -75,7 +75,7 @@ updated: 2026-09-03
 ### Step 3：生成 4-6 页配图
 - **v1.6.0 新增：Prompt as Code 结构化协议**——每页 prompt 必须按 7 字段块顺序组织：CANVAS / STYLE / LAYOUT / CONTENT / CHARACTER / CONSTRAINTS / AVOID，大写字段标记不可省略。借鉴 awesome-gpt-image-2 的 544 案例逆向工程方法论，结构化比散文可控性高 3-5 倍。详见 `references/prompt-template.md` 第一节
 - **v1.6.0 新增：内容主导型排版（默认）**——分析页/金句页必须使用内容主导型：内容区（卡片/图标/文字）占页面 55-65%，墨仔仅占 8-10% 且位置在角落（左下/右下轮换），墨仔周围完全空白。仅封面/互动页可使用角色主导型（墨仔 18-25%）。详见 `references/prompt-template.md` 第三节和 `references/character-lock.md` 灵活尺寸协议
-- **v1.6.0 新增：角色一致性前置**——CHARACTER 字段必须放在 CONTENT 字段之前，且包含完整角色锁（不可简写），避免模型生成内容时"忘记"角色设定导致外观漂移。生成后必须核对 8 个身份锚点（身体形状/颜色/质感/头顶芽/叶子/眼睛/嘴巴/四肢）。详见 `references/character-lock.md` v1.6.0 新增章节
+- **v1.6.0 新增：角色一致性前置**——CHARACTER 字段必须放在 CONTENT 字段之前，且包含完整角色锁（不可简写），避免模型生成内容时"忘记"角色设定导致外观漂移。生成后必须核对 **9 个身份锚点**（身体形状/颜色/质感/头顶芽/叶子/眼睛/嘴巴/四肢/**道具·右手毛笔·v1.9.0新增**）。详见 `references/character-lock.md` v1.6.0 新增章节
 - **v1.6.0 新增：五官拆解**——眼睛/嘴巴/头顶芽/身体质感必须拆解到可执行粒度（如眼睛=大圆眼+大白眼白占60-70%+黑瞳孔占30-40%+常不对称），不能只写"大眼睛小嘴巴"。详见 `references/character-lock.md` 五官拆解章节
 - **v1.6.0 新增：材质光影强化**——纸张/墨水/光影/pastel底色必须精细描述（如墨水=可变线宽+交叉排线+点画+自然晕染），避免画面扁平无层次。详见 `references/style-lock.md` v1.6.0 新增章节
 - **v1.6.0 新增：文案克制原则**——每页文字量上限：封面标题≤12字/行，卡片说明≤20字，金句≤10字/行。超过上限会导致模型渲染错字漏字。详见 `references/prompt-template.md` 第七节
@@ -91,7 +91,8 @@ updated: 2026-09-03
 - 用户选定后，加载 `references/style-lock.md`（通用风格锁）和 `references/character-lock.md`（Seedling 角色锁）
 - 加载 `references/prompt-template.md`（4页完整 prompt 模板）
 - 把选题的具体内容填入模板的变量占位符
-- 用 `image_edit` 工具（**v1.7.0：必须用 request_list 数组格式**），传入 `assets/seedling-character-sheet.png` 的 URL 作为 image-to-image 参考
+- 用 `image_edit` 工具（**v1.7.0：必须用 request_list 数组格式**），传入 `assets/mozai-ip-sheet-4k.png` 的 URL 作为 image-to-image 参考
+- **v1.9.0 新增：四卡人物卡参考协议**——`image_reference_url_list` 建议传入 `assets/mozai-ip-sheet-4k.png`（主卡·必传）并搭配 `assets/mozai-three-view.png`、`assets/mozai-expressions.png`、`assets/mozai-core-settings.png`（支持卡·可选），最多可一次传入多张人物卡 URL（上限6张），提升角色外观/表情/道具的一致性；生成前用 `FileBatchUpload` 重新上传
 - **v1.5.1 强化：按Step 2决定的页数生成对应数量的图**（4页就生成4张，5页就生成5张，6页就生成6张），不默认5页；每页 prompt 前缀加唯一 tag 避免冲突
 - **v1.5.0 强化：prompt 必加防坑约束**——卡片内容防重复（Card 3 DIFFERENT from 1 and 2）、标签防重复（Each tag ONLY ONCE）、随机数字防护（ONLY number is page number）、墨仔周围空白防护（Area around character COMPLETELY BLANK）、逻辑标题规范（金句页不用"写在最后"）
 - **生成后必须逐张下载到本地，用 Read 工具放大（thumbnail_size=large）逐张校验**，不能只看生成结果缩略图
@@ -124,7 +125,10 @@ updated: 2026-09-03
 | `references/prompt-template.md` | 4页完整 prompt 模板（含变量占位符） | Step 3 |
 | `references/copy-template.md` | 配套文案模板（标题+正文结构，v1.7.0含去说教原则） | Step 4 |
 | `references/qa-checklist.md` | 交付前检查清单（v1.7.0含J11-J15） | Step 5 |
-| `assets/seedling-character-sheet.png` | Seedling 人物卡（image-to-image 参考） | Step 3 |
+| `assets/mozai-ip-sheet-4k.png` | **主人物卡**·墨仔完整IP设定手册（右手执毛笔，含角色档案/表情/三视图/动作/色彩/材质/IP方向） | Step 3 |
+| `assets/mozai-three-view.png` | 人物卡·三视图与道具（正面/侧面/背面 + 墨滴小画笔） | Step 3 |
+| `assets/mozai-expressions.png` | 人物卡·表情与动作（8种：开心挥手/好奇探头/思考挠头/惊喜跳起/认真写字/发现灵感/给你加油/安心休息） | Step 3 |
+| `assets/mozai-core-settings.png` | 人物卡·核心设定（身份/性格/爱好/目标 + 墨黑/芽叶绿/纸张白） | Step 3 |
 
 ## 默认值
 
@@ -170,7 +174,7 @@ updated: 2026-09-03
 - **墨仔外观一致性**（v1.5.0 用户硬约束）：每页泪滴形身体、大眼、小嘴、小芽双叶、手绘墨迹质感完全一致
 - **无红晕**（v1.5.0 用户硬约束）：脸部无粉色红晕/腮红，是干净黑色墨迹
 - **卡片/图标里不能出现小角色或脸**——所有图标必须是无生命物体（银行卡、钱袋、电脑等），明确标注 "NO face, NO character, NO teardrop shape"
-- 角色形象必须严格匹配人物卡（圆胖黑泪滴、小芽微卷茎双叶、大眼不对称、黑色小嘴、细四肢、手绘墨迹质感）
+- 角色形象必须严格匹配人物卡（圆胖黑泪滴、小芽微卷茎双叶、大眼不对称、黑色小嘴、细四肢、手绘墨迹质感、**右手执毛笔/墨滴小画笔**）
 - 4页嘴巴表情必须**差异化**（不能每页都是同一个嘴型，至少3种）
 - 角色是动作主体（actor），不是角落装饰——即使小比例在角落，也必须在做与页面主题相关的动作
 - **内容主导型排版（v1.6.0 用户硬约束）**：分析页/金句页默认内容为主，墨仔为辅。内容区（卡片/图标/文字）占页面 55-65%，墨仔仅占 8-10% 且位置在角落（左下/右下轮换，不连续同侧），墨仔周围完全空白（无文字/图标/涂鸦）。仅封面/互动页可使用角色主导型（墨仔 18-25%）
@@ -377,7 +381,7 @@ In AVOID list: hex color codes, pound sign codes, # followed by letters/numbers,
 | 图标内出现文字/数字 | 图标未约束为纯图形 | 重生成，强调 icons contain NO text/numbers/letters + 列举具体例子 K306/(136) |
 | $符号反复出现（钱袋/盾牌） | 图标默认带货币符号 | 重生成，强调 NO $ sign + money bag is plain cloth sack with NO symbol + shield NO symbol |
 | image_edit 工具不可用 | 工具未加载 | 用 tool_search 搜索 image_edit，或降级用 image_gen |
-| 人物卡 URL 失效 | 本地文件未上传 | 用 FileBatchUpload 重新上传 assets/seedling-character-sheet.png |
+| 人物卡 URL 失效 | 本地文件未上传 | 用 FileBatchUpload 重新上传 assets/mozai-ip-sheet-4k.png（主卡，可连同三视图/表情/核心设定共4张一并上传） |
 | 多手多脚（v1.5.0） | 模型误渲染多余肢体 | 重生成，强调 EXACTLY TWO arms/legs + NO extra limbs + NO third arm/leg |
 | 张嘴全黑洞（v1.5.0） | 未强调嘴部拟人化 | 重生成，强调 SMALL open oval + visible PINK/RED TONGUE + NOT all-black |
 | 嘴太大表情夸张（v1.5.0） | 未强调小比例嘴型 | 重生成，强调 SMALL mouth + NOT wide + NOT large + restrained expression |
@@ -389,6 +393,7 @@ In AVOID list: hex color codes, pound sign codes, # followed by letters/numbers,
 | 随机数字40%/10%（v1.5.0） | 模型角落生成随机数字 | 重生成，强调 ONLY number is page number + NO random numbers + NO 40%/10% |
 | 墨仔附近英文Mozai（v1.5.0） | 模型误渲染角色名 | 重生成，强调 Area around character COMPLETELY BLANK + no text/letters/"Mozai" |
 | 墨仔外观不一致（v1.5.0） | 角色锁不够强或人物卡URL过期 | 重新上传人物卡，重生成，强化完整角色锁描述 |
+| **墨仔没拿毛笔/道具缺失（v1.9.0）** | **未在CHARACTER字段强调道具** | **重生成，CHARACTER字段加"holds a small ink brush / ink-drop brush in RIGHT hand"，CONSTRAINTS加"brush clearly visible in right hand"；参考 assets/mozai-three-view.png 的道具画法** |
 | **背景大面积纯白空白（v1.7.0）** | **未强调涂鸦背景** | **重生成，强调 FAINT PENCIL GRID + SCATTERED TINY DOODLE ICONS + cross-hatching patches + ink dots, NO large empty white spaces, NO flat plain background** |
 | **背景涂鸦有角色/脸（v1.7.0）** | **涂鸦未限制为无生命物体** | **重生成，强调 doodles are inanimate objects only (stars, leaves, pencils, arrows, dots), NO character doodles, NO faces in doodles** |
 | **标题/卡片说教式（v1.7.0）** | **措辞用了命令式** | **改标题/卡片为分享式（"我自己的3个小习惯"而非"3个防坑做法，新生必看"）** |
@@ -407,6 +412,7 @@ In AVOID list: hex color codes, pound sign codes, # followed by letters/numbers,
 
 | 版本 | 日期 | 变更 |
 |---|---|---|
+| 1.9.0 | 2026-09-04 | **人物卡四卡更新**：用户提供4张新版墨仔人物卡，替换原单卡 `seedling-character-sheet.png`。assets/ 新增 `mozai-ip-sheet-4k.png`（主人物卡·完整IP设定手册，墨仔**右手执毛笔/墨滴小画笔**）、`mozai-three-view.png`（三视图与道具）、`mozai-expressions.png`（表情与动作·8种：开心挥手/好奇探头/思考挠头/惊喜跳起/认真写字/发现灵感/给你加油/安心休息）、`mozai-core-settings.png`（核心设定+墨黑/芽叶绿/纸张白三色）；character-lock.md 角色锁新增「右手执毛笔」道具锚点、表情库补入新表情、image-to-image 参考升级为四卡协议（主卡必传+支持卡可选，多URL同时传入）；style-lock.md 墨仔形象行补充毛笔；qa-checklist.md 修正旧版卷须/深红嘴残留并新增道具检查项；prompt-template.md 工作流第6步更新四卡URL；README.md 目录结构与角色设定同步；SKILL.md Step3/Guardrails/故障排除/资源地图/版本历史同步更新；原旧人物卡已移除（git可回溯） |
 | 1.0.0 | 2026-08-28 | 初始版本，5步工作流 + 7个参考文件 + Seedling人物卡 |
 | 1.1.0 | 2026-08-28 | 完善文档：添加快速开始/用法示例/故障排除/版本历史；更新 guardrails；添加 README.md |
 | 1.2.0 | 2026-08-29 | 实战迭代：新增排版优化指南（卡片折叠角/大圆圈编号/时间线布局）；新增 Prompt 强化技巧（角色唯一性/图标无脸/气泡唯一/无多余数字）；Guardrails 增加数字一致性/图标无脸/气泡唯一/文案不重复；故障排除增加卡片小角色/双气泡/数字不一致/文案重复等新问题；更新已做选题记忆 |

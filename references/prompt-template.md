@@ -75,7 +75,7 @@
     "quote": "{{金句，仅金句页}}"
   },
   "character": {
-    "core_lock": "round plump black teardrop + small sprout with slightly curly stem + TWO light sage-green leaves + LARGE round eyes with big white whites + SMALL BLACK mouth + exactly TWO thin arms + exactly TWO short legs + hand-drawn ink texture",
+    "core_lock": "round plump black teardrop + small sprout with slightly curly stem + TWO light sage-green leaves + LARGE round eyes with big white whites + SMALL BLACK mouth + exactly TWO thin arms + exactly TWO short legs + hand-drawn ink texture + small ink brush in RIGHT hand (v1.9.0 prop)",
     "page_state": {
       "position": "{{bottom-left or bottom-right corner}}",
       "size": "8-10% of page height (content-dominant mode)",
@@ -191,7 +191,7 @@ EXACTLY ONE character on page, never two or more.
 EXACTLY TWO thin black arms with small hands, EXACTLY TWO short black legs with small feet. NO extra limbs, NO third arm, NO third leg, NO multi-hand multi-foot.
 Character is ONLY at [position], doing [action]. NO character inside any card, NO small character anywhere else, NO character in icons.
 All card icons are INANIMATE objects (NO face, NO character, NO teardrop shape).
-Character appearance strictly matches reference: round plump black teardrop, small sprout with slightly curly stem + TWO light sage-green leaves, LARGE round eyes with big white whites, SMALL BLACK mouth, hand-drawn ink texture with natural ink bleed.
+Character appearance strictly matches reference: round plump black teardrop, small sprout with slightly curly stem + TWO light sage-green leaves, LARGE round eyes with big white whites, SMALL BLACK mouth, hand-drawn ink texture with natural ink bleed, small ink brush in RIGHT hand (v1.9.0 prop).
 When mouth is open: SMALL open oval shape, visible PINK/RED TONGUE inside, anthropomorphic human-like mouth interior, NOT all-black hole, NOT wide, NOT large.
 NO blush, NO pink cheeks, NO red cheeks. Face is clean black ink.
 Mouth expression is SMALL and restrained, NOT exaggerated, NOT wide open.
@@ -311,7 +311,7 @@ DECORATION AREA: faint pencil grid in background, tiny doodle icons scattered in
 
 === CHARACTER ===
 === MOZAI CHARACTER (strictly match reference image) ===
-Round plump black teardrop creature (plump water drop shape, NOT slim, NOT elongated, NOT spherical). Ink-black body (deep black, NOT pure black, NOT dark gray) with hand-drawn ink texture, natural ink bleed and scribble strokes (NOT flat black). Small sprout on top with slightly curly thin stem + TWO light sage-green leaves (exactly two leaves). LARGE round eyes with big white eye whites and black pupils (pupils slightly asymmetrical). SMALL BLACK mouth (wavy line ~ shape, thinking expression, NOT red, NOT large). Exactly TWO thin black arms with small hands and exactly TWO short black legs with small feet. Small shadow under feet. Cute warm hand-drawn children's book illustration feel.
+Round plump black teardrop creature (plump water drop shape, NOT slim, NOT elongated, NOT spherical). Ink-black body (deep black, NOT pure black, NOT dark gray) with hand-drawn ink texture, natural ink bleed and scribble strokes (NOT flat black). Small sprout on top with slightly curly thin stem + TWO light sage-green leaves (exactly two leaves). LARGE round eyes with big white eye whites and black pupils (pupils slightly asymmetrical). SMALL BLACK mouth (wavy line ~ shape, thinking expression, NOT red, NOT large). Exactly TWO thin black arms with small hands and exactly TWO short black legs with small feet. Holds a small ink brush / ink-drop brush in RIGHT hand (v1.9.0 prop, brush clearly visible). Small shadow under feet. Cute warm hand-drawn children's book illustration feel.
 NO hex color codes in prompt — use text descriptions only.
 PAGE STATE: sitting cross-legged at bottom-left corner, holding small notebook in left hand, right hand resting on cheek (thinking pose). Eyes looking upward to the side with slightly furrowed brows. Mouth is wavy line ~ (thinking). Expression: thoughtful, concerned. Size: 8-10% of page height.
 EXACTLY ONE character on page, never two or more. NO character inside any card, NO small character anywhere else, NO character in icons. NO blush, NO pink cheeks.
@@ -338,7 +338,7 @@ extra limbs, third arm, third leg, multi-hand multi-foot, all-black mouth hole, 
 3. **按结构化协议组装 prompt**（第一节 7 字段块顺序），或用 JSON 模板（第二节）
 4. **填入实战防坑约束**（第五节），根据页面类型选择适用的防坑条目
 5. **检查文案克制原则**（第七节），每页文字量不超过上限
-6. **传入人物卡 URL**，用 image_edit 工具生成
+6. **传入人物卡 URL**（v1.9.0：主卡 `assets/mozai-ip-sheet-4k.png` 必传，可搭配 `mozai-three-view.png`/`mozai-expressions.png`/`mozai-core-settings.png` 共4张一并传入），用 image_edit 工具生成
 7. **生成后逐张下载放大校验**，发现问题单独重生成（在 prompt 中明确列出之前的错误）
 
 ---
