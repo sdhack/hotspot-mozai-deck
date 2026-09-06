@@ -103,10 +103,10 @@ hotspot-mozai-deck/
 - [`references/copy-template.md`](references/copy-template.md)：配套文案、互动主钩子及与 `master-copywriting` 的衔接；
 - [`references/prompt-template.md`](references/prompt-template.md)：逐页职责、完整文字成图和 Prompt 结构；
 - [`references/character-lock.md`](references/character-lock.md) 与 [`references/style-lock.md`](references/style-lock.md)：墨仔角色与统一视觉语言；
-- [`references/v1.9-image-profile.md`](references/v1.9-image-profile.md)：默认原始手账出图基线（双线边框、角花、标签、涂鸦背景、右手毛笔与场景叙事）；
+- [`references/v1.9-image-profile.md`](references/v1.9-image-profile.md)：默认原始手账出图基线（双线边框、角花、标签、涂鸦背景、右手毛笔、场景叙事与四卡一致性模式）；
 - [`references/qa-checklist.md`](references/qa-checklist.md)：事实、人物、文字、比例、页码和安全区检查；
 - [`references/early-style-reproduction.md`](references/early-style-reproduction.md)：仅在要求复刻早期账号风格或手账热点卡片时读取。
 
-## 版本 2.5.1
+## 版本 2.5.2
 
-本版在 2.5.0 的自适应 4–10 页、`master-copywriting` 平台规范、事实边界与 v1.9 原始手账基线基础上，补充封面—内页的视觉层级：封面作为整套视觉母版，内页继承其纸张、墨线、边框、角部纹样和色板；但解释、步骤、对比和提醒页以信息卡、关键词组或手绘场景为主，墨仔退为边角辅助角色。极简、留白、纯插画或用户指定视觉体系仍以用户要求为准。
+本版在 2.5.1 的自适应 4–10 页、`master-copywriting` 平台规范、事实边界与 v1.9 原始手账基线基础上，新增显式触发的四卡一致性模式：当用户要求同时使用四张最新人物卡或沿用 v1.9.0 四卡规则时，生成会携带完整四卡组合，并额外检查人物卡文字、示意角色与额外肢体不会误入成图。未触发时仍使用最少必要参考图。
