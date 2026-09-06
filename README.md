@@ -101,9 +101,10 @@ hotspot-mozai-deck/
 - [`references/copy-template.md`](references/copy-template.md)：配套文案、互动主钩子及与 `master-copywriting` 的衔接；
 - [`references/prompt-template.md`](references/prompt-template.md)：逐页职责、完整文字成图和 Prompt 结构；
 - [`references/character-lock.md`](references/character-lock.md) 与 [`references/style-lock.md`](references/style-lock.md)：墨仔角色与统一视觉语言；
+- [`references/v1.9-image-profile.md`](references/v1.9-image-profile.md)：默认原始手账出图基线（双线边框、角花、标签、涂鸦背景、右手毛笔与场景叙事）；
 - [`references/qa-checklist.md`](references/qa-checklist.md)：事实、人物、文字、比例、页码和安全区检查；
 - [`references/early-style-reproduction.md`](references/early-style-reproduction.md)：仅在要求复刻早期账号风格或手账热点卡片时读取。
 
-## 版本 2.4.0
+## 版本 2.5.0
 
-本版将页数从通常 4–6 页升级为按内容自适应的 4–10 页；将抖音和小红书文案接入 `master-copywriting` 的平台、真实性与人声规范；并明确墨仔作为 IP 默认以种草、涨粉及自然互动为生成目标，同时保留事实、身份和非操纵性互动边界。
+本版在 2.4 的自适应 4–10 页、`master-copywriting` 平台规范、事实边界与 IP 内容目标基础上，融合 v1.9 原始出图原则：默认采用细双线边框、四角低密度纹样、波浪下划线、pastel 标签、铅笔网格与无生命小涂鸦；墨仔右手毛笔成为默认身份锚点；少字场景页须以一条连贯事件路径承载内容，而非堆叠无关联图标。极简、留白、纯插画或用户指定视觉体系仍以用户要求为准。
