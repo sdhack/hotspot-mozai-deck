@@ -1,5 +1,7 @@
 # 页面规划与 Prompt
 
+生成前还必须读取 [image-generation-protocol.md](image-generation-protocol.md)。该协议提供五卡角色输入、统一 `CANVAS → STYLE → CHARACTER → LAYOUT → CONTENT → CONSTRAINTS → AVOID` 母版、文本卡片约束、参考卡拼贴故障处理和逐页重生边界；本文件负责页数、页面职责与工具适配。
+
 ## 先规划，再生成
 
 建立 N 页页面表。用户未指定时，N 由文案长度、信息单元与可独立承载的视觉场景共同决定，范围为 4–10：

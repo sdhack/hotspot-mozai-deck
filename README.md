@@ -90,6 +90,7 @@ hotspot-mozai-deck/
     ├── character-lock.md
     ├── style-lock.md
     ├── prompt-template.md
+    ├── image-generation-protocol.md
     ├── early-style-reproduction.md
     ├── copy-template.md
     └── qa-checklist.md
@@ -103,11 +104,12 @@ hotspot-mozai-deck/
 - [`references/hotspot-template.md`](references/hotspot-template.md)：热点搜索、事实卡、候选池与页数决策；
 - [`references/copy-template.md`](references/copy-template.md)：配套文案、互动主钩子及与 `master-copywriting` 的衔接；
 - [`references/prompt-template.md`](references/prompt-template.md)：逐页职责、完整文字成图和 Prompt 结构；
+- [`references/image-generation-protocol.md`](references/image-generation-protocol.md)：五张人物卡的选择与降级、可复制七字段 Prompt 母版、卡片/文字合同、跨页表情规划、逐页 QA 与定向重生；
 - [`references/character-lock.md`](references/character-lock.md) 与 [`references/style-lock.md`](references/style-lock.md)：墨仔角色与统一视觉语言；
 - [`references/v1.9-image-profile.md`](references/v1.9-image-profile.md)：默认原始手账出图基线（双线边框、角花、标签、涂鸦背景、右手毛笔、场景叙事与五卡一致性模式）；
 - [`references/qa-checklist.md`](references/qa-checklist.md)：事实、人物、文字、比例、页码和安全区检查；
 - [`references/early-style-reproduction.md`](references/early-style-reproduction.md)：仅在要求复刻早期账号风格或手账热点卡片时读取。
 
-## 版本 2.5.2
+## 版本 2.6.0
 
-v2.5.3 更新为五卡人物体系：新增标准分辨率人物设定卡 `mozai-ip-sheet.png`，并更新 4K 主卡。用户明确要求同时使用五张最新人物卡时，生成会携带完整五卡组合；沿用 v1.9.0 四卡规则时，仍使用旧版四卡组合。两种模式都会额外检查人物卡文字、示意角色与额外肢体不会误入成图；未触发时仍使用最少必要参考图。
+v2.6.0 将《墨仔出图提示词模板》融入正式生成流程：新增模型中性的五卡出图协议，统一七字段 Prompt 结构、角色与毛笔锁、内容主导布局、完整文字成图、卡片计数、互动气泡、逐页 QA 和两次定向重生规则。它保留当前环境优先的工具适配，不绑定某个历史接口、模型或上传方式。

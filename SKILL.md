@@ -3,10 +3,10 @@ name: hotspot-mozai-deck
 description: 为墨仔 IP 日更制作抖音或小红书热点图文：核验当日热点，生成以种草、涨粉和自然互动为目标的文案，并按内容自适应规划 4–10 页场景与统一角色成图。用户要求墨仔日更、墨仔热点图文、结合热点出图或指定事件制作墨仔内容时使用。
 license: MIT
 metadata:
-  version: 2.5.3
+  version: 2.6.0
   author: helloianneo
   created: 2026-08-28
-  updated: 2026-09-08
+  updated: 2026-09-09
 ---
 
 # Hotspot Mozai Deck
@@ -41,7 +41,7 @@ metadata:
 2. **选题与页数**：日更模式默认给 10 条有来源的短文案候选；用户只问推荐时给 3 个精简候选。用户要求的具体数量优先。未指定时，先列必要信息单元，并根据文案长度、可证事实数量、背景/解释层次、实用信息和视觉场景的独立性，在 4–10 页内决定页数；不按事件类型机械套页数，也不为了达到上限拆散可在同页清楚表达的信息。简短单一观点通常用 4–5 页，含多项事实或一个完整解释链的内容通常用 6–7 页，需分层说明背景、变化、影响、方法或多方信息的长内容可扩展至 8–10 页。
 3. **平台文案生成**：目标为抖音图文或小红书图文时，先读取 `C:\Users\Administrator\.codex\skills\master-copywriting\SKILL.md`，并按其中的路由、事实边界、平台原生、人声处理、审核与最终输出规则完成文案；再将已通过文案拆为墨仔页面。默认选择该技能的 `IP 内容` 或 `IP 种草` 目的，并以本技能的 IP 内容目标决定首要优化方向；用户明确要求卖货时才改为相应目的。平台规则以该技能为唯一来源，不在本技能重复或改写。抖音图文须以“争夺注意力”为核心，开头尽快进入可视化场景、问题或信息增量，并保持页面推进与自然互动；小红书图文须以“参考价值”为核心，标题和关键词服务搜索匹配，内容提供真实、具体、可收藏的选择依据，包括适用条件、取舍、细节或避坑。无真实经历或事实依据时，不得为模仿平台感补写第一人称体验、实测、对比或结果。
 4. **页面规划**：为每页定义职责、可见文字、场景、墨仔动作、表情和布局模式。动作服从内容，允许情绪连续；不要强制每页所有五官都不同。
-5. **生成与排版**：读取 [references/style-lock.md](references/style-lock.md)、[references/character-lock.md](references/character-lock.md)、[references/prompt-template.md](references/prompt-template.md) 和 [references/v1.9-image-profile.md](references/v1.9-image-profile.md)。默认以 v1.9 原始手账视觉基线生成：细双线边框、四角低密度纹样、波浪下划线、pastel 标签、铅笔网格与无生命小涂鸦、右手毛笔锚点、场景与表情关联。用户明确要求极简、留白、纯插画或其他视觉体系时，以用户要求为准并仅保留角色与成品 QA 不变量。当用户要求“复刻早期作品 / 早期账号风格 / 手账热点卡片”时，额外读取 [references/early-style-reproduction.md](references/early-style-reproduction.md)，并将其视为该次任务的视觉锁。使用当前环境可用的图像生成或编辑能力；先检查工具实际参数，不假定固定供应商、模型名、上传器或批量格式。
+5. **生成与排版**：读取 [references/style-lock.md](references/style-lock.md)、[references/character-lock.md](references/character-lock.md)、[references/prompt-template.md](references/prompt-template.md)、[references/image-generation-protocol.md](references/image-generation-protocol.md) 和 [references/v1.9-image-profile.md](references/v1.9-image-profile.md)。默认以 v1.9 原始手账视觉基线生成，并以五卡出图协议组织逐页 Prompt、参考图选择、文本卡片和坏页重生：细双线边框、四角低密度纹样、波浪下划线、pastel 标签、铅笔网格与无生命小涂鸦、右手毛笔锚点、场景与表情关联。用户明确要求极简、留白、纯插画或其他视觉体系时，以用户要求为准并仅保留角色与成品 QA 不变量。当用户要求“复刻早期作品 / 早期账号风格 / 手账热点卡片”时，额外读取 [references/early-style-reproduction.md](references/early-style-reproduction.md)，并将其视为该次任务的视觉锁。使用当前环境可用的图像生成或编辑能力；先检查工具实际参数，不假定固定供应商、模型名、上传器或批量格式。
 6. **文案与交付**：读取 [references/copy-template.md](references/copy-template.md)，再按 [references/qa-checklist.md](references/qa-checklist.md) 检查全部 N 页、事实卡和文案。交付时附来源链接与检索日期。
 
 ## 品牌不变量
