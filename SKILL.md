@@ -3,7 +3,7 @@ name: hotspot-mozai-deck
 description: 为墨仔 IP 日更制作抖音或小红书热点图文：核验当日热点，生成以种草、涨粉和自然互动为目标的文案，并按内容自适应规划 4–10 页场景与统一角色成图。用户要求墨仔日更、墨仔热点图文、结合热点出图或指定事件制作墨仔内容时使用。
 license: MIT
 metadata:
-  version: 2.6.0
+  version: 2.6.1
   author: helloianneo
   created: 2026-08-28
   updated: 2026-09-09
@@ -41,7 +41,7 @@ metadata:
 2. **选题与页数**：日更模式默认给 10 条有来源的短文案候选；用户只问推荐时给 3 个精简候选。用户要求的具体数量优先。未指定时，先列必要信息单元，并根据文案长度、可证事实数量、背景/解释层次、实用信息和视觉场景的独立性，在 4–10 页内决定页数；不按事件类型机械套页数，也不为了达到上限拆散可在同页清楚表达的信息。简短单一观点通常用 4–5 页，含多项事实或一个完整解释链的内容通常用 6–7 页，需分层说明背景、变化、影响、方法或多方信息的长内容可扩展至 8–10 页。
 3. **平台文案生成**：目标为抖音图文或小红书图文时，先读取 `C:\Users\Administrator\.codex\skills\master-copywriting\SKILL.md`，并按其中的路由、事实边界、平台原生、人声处理、审核与最终输出规则完成文案；再将已通过文案拆为墨仔页面。默认选择该技能的 `IP 内容` 或 `IP 种草` 目的，并以本技能的 IP 内容目标决定首要优化方向；用户明确要求卖货时才改为相应目的。平台规则以该技能为唯一来源，不在本技能重复或改写。抖音图文须以“争夺注意力”为核心，开头尽快进入可视化场景、问题或信息增量，并保持页面推进与自然互动；小红书图文须以“参考价值”为核心，标题和关键词服务搜索匹配，内容提供真实、具体、可收藏的选择依据，包括适用条件、取舍、细节或避坑。无真实经历或事实依据时，不得为模仿平台感补写第一人称体验、实测、对比或结果。
 4. **页面规划**：为每页定义职责、可见文字、场景、墨仔动作、表情和布局模式。动作服从内容，允许情绪连续；不要强制每页所有五官都不同。
-5. **生成与排版**：读取 [references/style-lock.md](references/style-lock.md)、[references/character-lock.md](references/character-lock.md)、[references/prompt-template.md](references/prompt-template.md)、[references/image-generation-protocol.md](references/image-generation-protocol.md) 和 [references/v1.9-image-profile.md](references/v1.9-image-profile.md)。默认以 v1.9 原始手账视觉基线生成，并以五卡出图协议组织逐页 Prompt、参考图选择、文本卡片和坏页重生：细双线边框、四角低密度纹样、波浪下划线、pastel 标签、铅笔网格与无生命小涂鸦、右手毛笔锚点、场景与表情关联。用户明确要求极简、留白、纯插画或其他视觉体系时，以用户要求为准并仅保留角色与成品 QA 不变量。当用户要求“复刻早期作品 / 早期账号风格 / 手账热点卡片”时，额外读取 [references/early-style-reproduction.md](references/early-style-reproduction.md)，并将其视为该次任务的视觉锁。使用当前环境可用的图像生成或编辑能力；先检查工具实际参数，不假定固定供应商、模型名、上传器或批量格式。
+5. **生成与排版**：读取 [references/style-lock.md](references/style-lock.md)、[references/character-lock.md](references/character-lock.md)、[references/prompt-template.md](references/prompt-template.md)、[references/image-generation-protocol.md](references/image-generation-protocol.md) 和 [references/v1.9-image-profile.md](references/v1.9-image-profile.md)。出图提示词默认使用 [references/v1.9-prompt-boilerplate.md](references/v1.9-prompt-boilerplate.md) 的 v1.9 母版组装逐页 Prompt（原生 3:4 满幅构图、四边约 30px 留白、封面必带主题相关中层背景），并以五卡出图协议组织参考图选择、文本卡片和坏页重生：细双线边框、四角低密度纹样、波浪下划线、pastel 标签、铅笔网格与无生命小涂鸦、右手毛笔锚点、场景与表情关联。用户明确要求极简、留白、纯插画或其他视觉体系时，以用户要求为准并仅保留角色与成品 QA 不变量。当用户要求“复刻早期作品 / 早期账号风格 / 手账热点卡片”时，额外读取 [references/early-style-reproduction.md](references/early-style-reproduction.md)，并将其视为该次任务的视觉锁。使用当前环境可用的图像生成或编辑能力；先检查工具实际参数，不假定固定供应商、模型名、上传器或批量格式。
 6. **文案与交付**：读取 [references/copy-template.md](references/copy-template.md)，再按 [references/qa-checklist.md](references/qa-checklist.md) 检查全部 N 页、事实卡和文案。交付时附来源链接与检索日期。
 
 ## 品牌不变量
@@ -56,15 +56,13 @@ metadata:
 
 五张人物卡位于 `assets/`：
 
-- `mozai-ip-sheet-4k.png`：主参考；默认优先。
-- `mozai-ip-sheet.png`：标准分辨率人物设定卡；适合工具对输入尺寸有限制时使用。
-- `mozai-three-view.png`：需要侧面或背面动作时使用。
-- `mozai-expressions.png`：需要特定表情时使用。
-- `mozai-core-settings.png`：用于人工理解设定，不默认作为视觉参考输入。
+- `mozai-ip-sheet-4k.png`：主真值；五卡组合中首选。
+- `mozai-ip-sheet.png`：标准分辨率人物设定卡；工具对输入尺寸有限制时替代主卡。
+- `mozai-three-view.png`：正面、侧面、背面与毛笔结构。
+- `mozai-expressions.png`：表情与动作原型。
+- `mozai-core-settings.png`：气质与色板；默认作为五卡组合的一员输入，仅在工具限制时改为人工理解用途。
 
-只传当前页面需要的最少参考图。多参考图可能稀释主角色特征或引入人物卡文字、多姿势和重复角色。
-
-**五卡一致性模式**：用户明确要求“五张最新人物卡都要用”“五卡一起用”时，4K 主卡、标准分辨率人物设定卡、三视图、表情卡和核心设定卡必须同时作为参考输入。若用户明确要求沿用旧版“四卡规则”，则仅使用 4K 主卡、三视图、表情卡和核心设定卡。Prompt 仍须重申单一角色、两臂两腿、两片叶子与右手毛笔；成图后检查是否混入人物卡文字、第二角色或额外肢体。仅在用户显式触发时启用，不替代默认的最小参考图策略。
+**五卡一致性为默认参考策略**：每次出图默认将 `mozai-ip-sheet-4k.png`、`mozai-ip-sheet.png`、`mozai-three-view.png`、`mozai-expressions.png` 与 `mozai-core-settings.png` 五张人物卡同时作为参考输入，以保证墨仔形体、配色、毛笔结构与表情的跨页一致性。工具对输入尺寸或数量有限制时，按 4K 主卡 → 标准分辨率人物设定卡 → 三视图 → 表情卡 → 核心设定卡的顺序裁剪到工具可承受的上限，且不得低于“主卡 + 三视图 + 表情卡”三张。用户明确要求沿用旧版“四卡规则”或“最少参考图”时按用户要求执行。无论输入几张卡，Prompt 都必须重申单一角色、两臂两腿、两片叶子与右手毛笔，并声明参考图仅作外观真值；若成图混入人物卡文字、多姿势拼贴或额外角色，第一次重试强化该声明，第二次重试减少到单一最干净参考（4K 主卡），不得把不合格的参考卡拼贴图交付为成品。
 
 ## 内容安全与真实性
 

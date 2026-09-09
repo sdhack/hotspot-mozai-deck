@@ -14,9 +14,9 @@
 | `mozai-expressions.png` | 表情与动作原型 | 特定表情或姿势 |
 | `mozai-core-settings.png` | 气质与色板 | 默认只供人工理解，不直接传入模型 |
 
-默认采用最少必要参考图。用户明确说“五张人物卡一起用”“五卡一起用”时，全部五张均作为参考输入；用户明确指定旧版四卡规则时，不输入 `mozai-ip-sheet.png`。无论输入数量，人物卡只定义单一角色外观，绝不能被拼贴、复刻为人物设定页、三视图、九宫格、色卡、箭头或中文说明。
+默认采用五卡一致性策略：五张人物卡同时作为参考输入，以保证跨页一致性。工具对输入尺寸或数量有限制时，按 4K 主卡 → 标准分辨率人物设定卡 → 三视图 → 表情卡 → 核心设定卡顺序裁剪，且不得低于"主卡 + 三视图 + 表情卡"三张；用户明确要求旧版四卡规则或最少参考图时按用户要求执行。无论输入数量，人物卡只定义单一角色外观，绝不能被拼贴、复刻为人物设定页、三视图、九宫格、色卡、箭头或中文说明。
 
-若完整五卡导致参考卡文字、多角色或卡片布局进入画面，第一次重试先强化“参考图只作外观真值”；第二次重试改用 4K 主卡或标准分辨率人物设定卡之一，并保留完整文字角色锁。不得把不合格的参考卡拼贴图交付为成品。
+若五卡输入导致参考卡文字、多角色或卡片布局进入画面，第一次重试先强化"参考图只作外观真值"；第二次重试改用 4K 主卡或标准分辨率人物设定卡之一，并保留完整文字角色锁。不得把不合格的参考卡拼贴图交付为成品。
 
 ## 逐页规划
 
@@ -61,7 +61,7 @@ Exactly one Mozai, matching the selected reference cards: a round plump black in
 
 ## Layout and text contract
 
-- **Cover:** no page number by default; at most two title lines, wave underline under the second line, one short subtitle, up to two top labels and 3–4 keyword capsules. It must enter a concrete scene, problem or information gain immediately.
+- **Cover:** no page number by default; at most two title lines, wave underline under the second line, one short subtitle, a low-contrast theme-related mid-ground scene layer between the title area and Mozai (paler than the foreground, roughly 40% line strength, no human figures or faces, never overlapping title, subtitle or capsules; Mozai's silhouette stays crisp against it), up to two top labels and 3–4 keyword capsules. It must enter a concrete scene, problem or information gain immediately.
 - **Content cards:** place the single page number once at the same chosen location across the set. Use exactly the planned number of cards; every card has a distinct title, body and inanimate icon. Do not invent statistics, time stamps, currencies or symbols.
 - **Closing page:** one concrete, answerable interaction question. Use exactly one speech bubble if a bubble is planned; do not add a second.
 - **Text:** list exact Chinese text in the prompt and render it on the image by default. Split long prose into short cards; title no more than two lines. Do not use pinyin, radicals or text outside the image to work around rendering. After two targeted text retries, stop and ask whether post-layout text replacement is acceptable.
