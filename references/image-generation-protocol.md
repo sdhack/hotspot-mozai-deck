@@ -8,7 +8,7 @@
 
 | 文件 | 角色 | 默认使用条件 |
 |---|---|---|
-| `mozai-ip-sheet-4k.png` | 形体、配色、墨迹质感与默认毛笔姿态的唯一人物真值 | 所有页面默认使用 |
+| `mozai-ip-sheet-4k.png` | 形体、配色、墨迹质感、体态比例与默认持笔姿态的唯一人物真值 | 所有页面默认使用 |
 
 默认采用单人物卡一致性策略：仅使用 4K 主卡作为参考输入，以保证跨页一致性。人物卡只定义单一角色外观，绝不能被拼贴、复刻为人物设定页、九宫格、色卡、箭头或中文说明。
 
@@ -18,7 +18,7 @@
 
 生成前建立下表。N 由已冻结文案决定，不以固定五页或六页为目标。
 
-| 页 | 职责 | 页面模式 | 墨仔位置/占比 | 表情与动作 | 毛笔规则 | 可见文字 |
+| 页 | 职责 | 页面模式 | 墨仔位置/占比 | 表情与动作 | 持笔规则（笔型按主题） | 可见文字 |
 |---:|---|---|---|---|---|---|
 | 1 | 封面 / 钩子 | 角色主导 | 下方约 18–25% | 好奇或惊讶，动作指向冲突物 | 右手持笔 | 两行以内标题、短副题、标签 |
 | 2 | 问题 / 事实 | 内容主导 | 左下或右下约 8–10% | 思考、困惑或认真 | 右手持笔 | 标题、信息卡、页码 |
@@ -37,10 +37,10 @@
 [实际可用的严格 3:4 尺寸；四边至少 20px 连续暖白外留白；内缩边框]
 
 === STYLE ===
-Vertical 3:4 hand-drawn journal news card. Warm off-white to light cream paper with subtle fiber grain and a faint pencil grid across the entire background. Black hand-drawn pencil-and-ink line art with natural uneven line weight, light cross-hatching, stippling and subtle ink bleed. Restrained mist blue, peach pink, light sage green and pale cream yellow accents only. Inset thin double-line hand-drawn border with low-density corner flourishes. Scattered tiny inanimate doodles only: stars, leaves, pencils, arrows, dots and sparkles. Not photography, not plastic 3D, not clean vector, no neon, no saturated colors, no large flat blank white areas. All visible text is Chinese handwritten style; title uses bold brush-marker lettering and supporting text uses casual pencil handwriting. No English, pinyin, character name, version label or watermark.
+Vertical 3:4 hand-drawn journal news card. Warm off-white to light cream paper with subtle fiber grain and a faint pencil grid across the entire background. Black hand-drawn pencil-and-ink line art with natural uneven line weight, light cross-hatching, stippling and subtle ink bleed. Restrained mist blue, peach pink, light sage green and pale cream yellow accents only. Inset thin double-line hand-drawn border with low-density corner flourishes. Scattered tiny inanimate doodles only: stars, leaves, pencils, arrows, dots and sparkles. Not photography, not plastic 3D, not clean vector, no neon, no saturated colors, no large flat blank white areas. All visible text is Chinese handwritten style; title uses large hand-lettering with MEDIUM-THIN light strokes (big size, never heavy thick brush — 用户规则 2026-09-10：字体不要过粗) and supporting text uses casual pencil handwriting. No English, pinyin, character name, version label or watermark.
 
 === CHARACTER ===
-Exactly one Mozai, matching the selected reference: a round plump black ink-drop body with organic hand-drawn ink texture; one thin slightly curled sprout stem with exactly two light sage-green leaves; large round eyes with visible white sclera and subtly asymmetric pupils; a small restrained black mouth [current mouth shape]; exactly two thin arms and two short legs; no blush and no clothes. [Current position, size, eye direction, expression and action.] Right hand clearly holds a small calligraphy brush with visible tapered bristle tip, not a pen, pencil or wand. [If both hands are required: the brush lies visibly beside the character; never add an arm.]
+Exactly one Mozai, matching the selected reference: a plump pear/teardrop black ink-drop body (height about 1.1-1.2x width, round heavy bottom tapering to a small point at the top — never a perfect circle, ball or egg; this proportion is identical on every page of the set) with organic hand-drawn ink texture; one thin slightly curled sprout stem with exactly two light sage-green leaves; large round eyes with visible white sclera and subtly asymmetric pupils; a small restrained black mouth [current mouth shape]; exactly two thin arms and two short legs; no blush and no clothes. [Current position, size, eye direction, expression and action.] Right hand clearly holds a pen chosen for this page's theme (calligraphy brush, pencil, fountain pen or marker), fingers wrapped around the shaft. [If both hands are required: the pen lies visibly beside the character; never add an arm.]
 
 === LAYOUT ===
 [Content-dominant / character-dominant / scene-narrative. Define title, information area, character safe area and fixed page-number position.]
@@ -67,6 +67,6 @@ Exactly one Mozai, matching the selected reference: a round plump black ink-drop
 
 Before generating, verify the cover's stated count equals the body card count, page roles fit the facts, all page text is frozen and each action can be performed with two arms. When the image channel is SenseNova (sensenova-u1.5-lite), apply the SENSENOVA-ONLY adaptations in [prompt-template.md](prompt-template.md) (size `1056x1408`, JSON edits payload, `prompt_extend:false`, anti-anthropomorphic retry notes) and mark the optimized prompt `<!-- SENSENOVA-ONLY -->`; a marked prompt must not be reused with other models.
 
-After each page, inspect the actual file at readable scale. A page is blocked if any of the following applies: it is not 3:4; the outer margin or page-number sequence is wrong; it contains more than one Mozai; it has extra/missing limbs or leaves; the brush is incompatible with the action; reference-card content appears; essential Chinese text, numbers or facts are wrong; a face appears in any icon/doodle; or a required card/bubble count is wrong.
+After each page, inspect the actual file at readable scale. **落盘格式（全渠道规则，2026-09-10）**：不论生图渠道返回何种格式，最终成图统一以正确的 JPEG 保存为 `.jpg`（PIL `quality≥90`，文件头 `FF D8 FF`），提升图片空间效率；PNG 数据须先转码，严禁扩展名与文件头不符；仅用户明确点名 PNG 时例外。**落盘后统一观感微调（2026-09-10 五轮校准定稿：干净透亮、宁中性勿发黄、黑线锐利、反灰雾、颜色宁淡勿浓）**：保存前用 PIL 做 `ImageEnhance.Contrast(im).enhance(1.04)` 轻微提对比去灰（历史值 0.88/0.96 会把黑线拉灰、整体泛白蒙尘，均弃用），再 `ImageEnhance.Color(im).enhance(0.88)` 降一档饱和防颜色偏重（用户反馈"颜色都偏重"），最后做极轻微暖色偏（R×1.015、G×1.005、B×0.98，逐通道 point 截断到 0–255）；**反灰雾锁**：整页不得蒙灰雾/柔光/磨砂感，纸面干净透亮、墨线边缘清晰锐利；水彩晕染只允许小面积局部点缀，禁止满幅雾霭铺底；**数字黑色锁**：画面内金额与数字一律黑色手写，严禁被画成红色，红色仅限指定的唯一警示符号。该步与 Prompt 内的透亮+黑度+反灰雾+减重描述同时使用，作为兜底。A page is blocked if any of the following applies: it is not 3:4; the outer margin or page-number sequence is wrong; it contains more than one Mozai; it has extra/missing limbs or leaves; **its Mozai body shape or proportion drifts from the other pages of the set (pear teardrop, height ≈ 1.1–1.2× width, locked — circle/ball/egg/slim variants are defects)**; the held pen is incompatible with the action or floats off the hand; reference-card content appears; essential Chinese text, numbers or facts are wrong; a face appears in any icon/doodle; or a required card/bubble count is wrong.
 
 Retry only the failed page. Retry 1 removes conflicting P2 detail and states the observed defect. Retry 2 simplifies the pose, card density or reference input. Then stop and report the remaining limitation rather than silently switching to a blank-text or altered-text design.

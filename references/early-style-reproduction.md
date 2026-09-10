@@ -6,7 +6,9 @@
 
 - 竖版 `3:4`；四周保留约 3% 留白，使用细黑线手绘边框，角部可有低密度卷草、叶片或蝴蝶结。
 - 背景是暖白至浅米黄、有纤维颗粒的纸张；可在局部加入极淡方格纸纹理。
+- **整体观感（2026-09-10 用户规则，四轮校准后定稿：干净透亮、反灰雾）**：纸面干净明亮通透，整页不得蒙灰雾/柔光/磨砂感；色温宁中性勿发黄。**黑度锁定**：黑色线稿、标题、墨仔身体与投影必须浓黑饱满、边缘锐利清晰，发灰、朦胧、泛白即缺陷。水彩晕染只允许小面积局部点缀（画面边缘或单一道具后 2–3 处极淡小渍），禁止满幅雾霭铺底；背景层次由"方格纸纹理 + 小面积淡渍 + 清晰前景线稿"构成，不靠雾感。封面手帐涂鸦感要足——星、闪光、箭头、螺旋、曲别针、和纸胶带条、音符、叶片、墨点等小涂鸦疏密有致散落在空白处，随手自然但不遮挡标题、场景与人物。落盘时统一做 PIL 后处理兜底（对比度 ×1.04 轻微提对比去灰 + 极轻暖偏 R×1.015/G×1.005/B×0.98；历史值 0.88/0.96 会泛白发灰，弃用）。
 - 画面以黑色铅笔、蜡笔涂黑和细排线为主，允许自然线宽变化和轻微不规则；拒绝摄影、塑料 3D、光滑商业矢量和霓虹渐变。
+- **标题字重（2026-09-10 用户规则）**：标题靠"字号大"建立层级，不靠"笔画粗"——中细、轻快的铅笔/细毛笔手写，严禁超粗毛笔字、飞白墨块糊字。
 - 点缀色仅用雾蓝、蜜桃粉、浅橄榄绿、淡奶黄；红色只用于必要的警示符号。不要把整页涂成大色块。
 - 封面默认采用：两枚顶部标签 → 两行大号手写标题 → 波浪下划线 → 一行事件副标题 → 中部单一情境 → 下方墨仔 → 三枚底部关键词胶囊。
 - 内容页优先在“三张叠卡、四宫格、左右对比、单一流程图”之间选择；每页只解释一个结论。
@@ -27,7 +29,7 @@
 早期手账热点卡片风格：暖白偏米黄色、带轻微纤维颗粒的纸张背景，局部极淡浅灰方格纸纹理；黑色手绘铅笔线稿与蜡笔排线为主，线条自然不均匀。仅以雾蓝、蜜桃粉、浅橄榄绿、淡奶黄作克制点缀。细黑色手绘边框和少量低密度角部卷草装饰。不是摄影、不是 3D、不是光滑矢量插画、没有霓虹渐变。
 
 === CHARACTER ===
-Exactly one Mozai character matching the supplied reference: a round plump black ink-drop body with organic hand-drawn ink texture; one thin, slightly curled sprout stem with exactly two light sage-green leaves; large round eyes with visible white sclera and subtly asymmetric pupils; a small restrained black mouth; exactly two thin arms and two short legs; no clothes and no extra limbs. Mozai is [动作] with [表情]. [毛笔或当前道具规则]。
+Exactly one Mozai character matching the supplied reference: a plump pear/teardrop black ink-drop body (height about 1.1-1.2x width, round heavy bottom tapering to a small point at the top — never a perfect circle, ball or egg; identical proportion on every page of the set) with organic hand-drawn ink texture; one thin, slightly curled sprout stem with exactly two light sage-green leaves; large round eyes with visible white sclera and subtly asymmetric pupils; a small restrained black mouth; exactly two thin arms and two short legs; no clothes and no extra limbs. Mozai is [动作] with [表情]. [持笔规则：笔型按主题自由（毛笔/铅笔/钢笔/马克笔），或当前道具规则]。
 
 === LAYOUT ===
 [封面：顶部两枚短标签、两行短标题与波浪下划线、一行副标题、中部单一情境、下方墨仔、底部三枚关键词胶囊。]
