@@ -42,10 +42,10 @@ Codex Skill：为“墨仔日记”进行日更图文生产。它会把当日与
 ## 日更工作流
 
 1. 搜索当天与近 7 天公开信号，建立事实卡并过滤来源不足的事件；
-2. 交付 10 条不同普通人问题的文案候选，每条包含标题、正文、互动、话题与来源口径；
+2. 交付 10 条不同普通人问题的文案候选，每条包含标题、正文、互动主钩子（仅供选题决策，不默认写入文案结尾或图内）、话题与来源口径；
 3. 被选中的主题按文案长度与信息量自适应拆成 4–10 页，而不是固定套页数；
 4. 依据墨仔人物卡、手账热点视觉和逐页文案生成图文；
-5. 默认逐页生成包含全部标题、正文、页码、标签与互动句的完整成图，并将最终文件存入当前工作区的主题文件夹。只有用户明确要求留白、纯插画、少字版或后期排字时才切换。
+5. 默认逐页生成包含全部标题、正文、页码、标签以及（如页面需要）互动句的完整成图，并将最终文件存入当前工作区的主题文件夹。只有用户明确要求留白、纯插画、少字版或后期排字时才切换。
 
 候选阶段还会为每个选题标出一个最适合的互动主钩子：共鸣点赞、可收藏方法、可评论选择、可分享提醒或可持续关注的墨仔观察。它用于帮助选择内容结构，不是强制追加的话术。
 
@@ -80,11 +80,7 @@ hotspot-mozai-deck/
 ├── SKILL.md
 ├── README.md
 ├── assets/
-│   ├── mozai-ip-sheet-4k.png
-│   ├── mozai-ip-sheet.png
-│   ├── mozai-three-view.png
-│   ├── mozai-expressions.png
-│   └── mozai-core-settings.png
+│   └── mozai-ip-sheet-4k.png
 └── references/
     ├── hotspot-template.md
     ├── character-lock.md
@@ -104,12 +100,12 @@ hotspot-mozai-deck/
 - [`references/hotspot-template.md`](references/hotspot-template.md)：热点搜索、事实卡、候选池与页数决策；
 - [`references/copy-template.md`](references/copy-template.md)：配套文案、互动主钩子及与 `master-copywriting` 的衔接；
 - [`references/prompt-template.md`](references/prompt-template.md)：逐页职责、完整文字成图和 Prompt 结构；
-- [`references/image-generation-protocol.md`](references/image-generation-protocol.md)：五张人物卡的选择与降级、可复制七字段 Prompt 母版、卡片/文字合同、跨页表情规划、逐页 QA 与定向重生；
+- [`references/image-generation-protocol.md`](references/image-generation-protocol.md)：单人物卡参考策略、可复制七字段 Prompt 母版、卡片/文字合同、跨页表情规划、逐页 QA 与定向重生；
 - [`references/character-lock.md`](references/character-lock.md) 与 [`references/style-lock.md`](references/style-lock.md)：墨仔角色与统一视觉语言；
-- [`references/v1.9-image-profile.md`](references/v1.9-image-profile.md)：默认原始手账出图基线（双线边框、角花、标签、涂鸦背景、右手毛笔、场景叙事与五卡一致性模式）；
+- [`references/v1.9-image-profile.md`](references/v1.9-image-profile.md)：默认原始手账出图基线（双线边框、角花、标签、涂鸦背景、右手毛笔、场景叙事与单人物卡一致性模式）；
 - [`references/qa-checklist.md`](references/qa-checklist.md)：事实、人物、文字、比例、页码和安全区检查；
 - [`references/early-style-reproduction.md`](references/early-style-reproduction.md)：仅在要求复刻早期账号风格或手账热点卡片时读取。
 
-## 版本 2.6.0
+## 版本 2.7.0
 
-v2.6.0 将《墨仔出图提示词模板》融入正式生成流程：新增模型中性的五卡出图协议，统一七字段 Prompt 结构、角色与毛笔锁、内容主导布局、完整文字成图、卡片计数、互动气泡、逐页 QA 和两次定向重生规则。它保留当前环境优先的工具适配，不绑定某个历史接口、模型或上传方式。
+v2.7.0 完成单人物卡资产收敛与全量文档审计：仅保留 4K 主人物卡，统一参考图、页面生成和 QA 规则，并明确互动元素只在用户要求或内容确有必要时启用。它保留当前环境优先的工具适配，不绑定某个历史接口、模型或上传方式。
