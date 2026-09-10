@@ -65,7 +65,7 @@ Exactly one Mozai, matching the selected reference: a round plump black ink-drop
 
 ## Preflight and QA
 
-Before generating, verify the cover's stated count equals the body card count, page roles fit the facts, all page text is frozen and each action can be performed with two arms.
+Before generating, verify the cover's stated count equals the body card count, page roles fit the facts, all page text is frozen and each action can be performed with two arms. When the image channel is SenseNova (sensenova-u1.5-lite), apply the SENSENOVA-ONLY adaptations in [prompt-template.md](prompt-template.md) (size `1056x1408`, JSON edits payload, `prompt_extend:false`, anti-anthropomorphic retry notes) and mark the optimized prompt `<!-- SENSENOVA-ONLY -->`; a marked prompt must not be reused with other models.
 
 After each page, inspect the actual file at readable scale. A page is blocked if any of the following applies: it is not 3:4; the outer margin or page-number sequence is wrong; it contains more than one Mozai; it has extra/missing limbs or leaves; the brush is incompatible with the action; reference-card content appears; essential Chinese text, numbers or facts are wrong; a face appears in any icon/doodle; or a required card/bubble count is wrong.
 

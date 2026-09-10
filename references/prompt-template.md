@@ -126,6 +126,20 @@ Prompt 发生冲突时删除 P2，不要用更多负面词补救。
 
 若支持参考图编辑，使用唯一的 4K 主人物卡；若只支持新图生成，在 Prompt 中完整写入身份锚点，并接受一致性可能较低。若完全没有图像能力，交付页面规划和可复制 Prompt，不虚构已生成结果。
 
+## 商汤 SenseNova 适配（2026-09-10 实测；优化后的 Prompt 须标注 SENSENOVA-ONLY，仅适用于商汤模型）
+
+经 SenseNova 通道（`sensenova-u1.5-lite`，`POST {SN_IMAGE_GEN_BASE_URL}/images/edits`）出图时，先完成以下优化，再在 Prompt 顶部加一行标注 `<!-- SENSENOVA-ONLY: 尺寸与请求格式不适用于其他模型 -->`。带标注的 Prompt 不得复用到其他模型；其他模型的 Prompt 未做下列适配时也不得直接发给商汤端点。
+
+墨仔账号日更的常规热点图，直接以 [sensenova-style-master.md](sensenova-style-master.md) 的固定融合模板为基底（已融合账号 192 张已发布图文的风格并内置商汤参数），仅替换当页槽位；非常规视觉需求才从 v1.9 母版重新组装。
+
+1. **尺寸**：3:4 竖版写 `1056x1408`。端点要求宽高均为 32 的倍数、范围 [512, 4096]、比例不超 3:1；`1024x1365` 一类非 32 倍数值会被 400 拒绝。生成后仍须实测像素复核。
+2. **参考图**：单卡模式（4K 主卡）。多卡叠加会使请求体超过 ~10MB 网关上限而被拒；单卡成图一致性已实测可用，Prompt 中仍须完整保留单角色/两臂两腿/两叶/右手毛笔锚点。
+3. **请求体**：JSON（非 multipart）：`{"model", "images":[{"image_url":"data:image/png;base64,..."}], "prompt", "n":1, "size":"1056x1408", "watermark":false, "prompt_extend":false, "response_format":"url"}`。技能自带 `sn_agent_runner.py sn-image-edit` 不暴露尺寸参数，需要固定比例时直连该端点。
+4. **prompt_extend 必须为 false**：文字成图页的可见文案是逐字契约，开启提示词扩展会改写文案，导致图中文字与冻结稿不一致。
+5. **反拟人强化（商汤高频故障）**：场景道具（火车、建筑、票据等）极易被拟人化。逐页 Prompt 末尾追加 RETRY NOTES 段：引擎正面必须素面；图标与票据不得有眼睛嘴部；不得出现伪文字/伪字母，票据只允许抽象虚线与纯图形轮廓。
+6. **返回**：`response_format:"url"` 返回临时链接，下载超时建议 ≥300s；响应也可能是 `b64_json`，解析时两者都需兼容。
+7. **扩展名与文件头强制一致（2026-09-10 用户规则）**：图片保存后必须校验文件头——`.png` 必须以 `89 50 4E 47 0D 0A 1A 0A` 开头，`.jpg` 必须以 `FF D8 FF` 开头。若接口返回的是 JPEG 数据而目标文件名是 `.png`，必须先转码为真 PNG 再保存（或改存 `.jpg`），严禁把 JPEG 字节直接写入 `.png` 文件。外部参照图传入前同样先校验文件头并按真实格式声明 data URL 的 media type（伪装成 .png 的 JPEG 会触发商汤 400 "media type does not match"）。
+
 ## 重试
 
 失败后只针对观察到的问题修改：

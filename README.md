@@ -88,6 +88,7 @@ hotspot-mozai-deck/
     ├── prompt-template.md
     ├── image-generation-protocol.md
     ├── early-style-reproduction.md
+    ├── sensenova-style-master.md
     ├── copy-template.md
     └── qa-checklist.md
 ```
@@ -104,7 +105,12 @@ hotspot-mozai-deck/
 - [`references/character-lock.md`](references/character-lock.md) 与 [`references/style-lock.md`](references/style-lock.md)：墨仔角色与统一视觉语言；
 - [`references/v1.9-image-profile.md`](references/v1.9-image-profile.md)：默认原始手账出图基线（双线边框、角花、标签、涂鸦背景、右手毛笔、场景叙事与单人物卡一致性模式）；
 - [`references/qa-checklist.md`](references/qa-checklist.md)：事实、人物、文字、比例、页码和安全区检查；
-- [`references/early-style-reproduction.md`](references/early-style-reproduction.md)：仅在要求复刻早期账号风格或手账热点卡片时读取。
+- [`references/early-style-reproduction.md`](references/early-style-reproduction.md)：仅在要求复刻早期账号风格或手账热点卡片时读取；
+- [`references/sensenova-style-master.md`](references/sensenova-style-master.md)：商汤 SenseNova 专属固定融合提示词模板（由账号 192 张已发布图文风格反推，内置商汤端点参数与版式规则）；走商汤通道出图时以其为基底。
+
+## 版本 2.8.0
+
+v2.8.0 新增商汤 SenseNova 专属出图通道与风格融合模板：从账号已发布的 192 张图文（重点反推早期图文）提炼出固定融合提示词模板 [`references/sensenova-style-master.md`](references/sensenova-style-master.md)，内置商汤端点参数（尺寸 `1056x1408`、JSON `images/edits` 请求体、`prompt_extend:false`、双参照画风模仿、标签居中与下半部主题场景版式）；`prompt-template.md` 增加 SENSENOVA-ONLY 适配段（含扩展名与文件头强制一致规则），`image-generation-protocol.md` 的 Preflight 增加商汤通道引用。带 `<!-- SENSENOVA-ONLY -->` 标注的 Prompt 不得复用到其他模型。
 
 ## 版本 2.7.0
 
