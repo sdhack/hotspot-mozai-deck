@@ -3,7 +3,7 @@ name: hotspot-mozai-deck
 description: 为墨仔 IP 日更制作抖音或小红书热点图文：核验当日热点，生成以种草、涨粉和自然互动为目标的文案，并按内容自适应规划 4–10 页场景与统一角色成图。用户要求墨仔日更、墨仔热点图文、结合热点出图或指定事件制作墨仔内容时使用。
 license: MIT
 metadata:
-  version: 2.20.0
+  version: 2.20.1
   author: helloianneo
   created: 2026-08-28
   updated: 2026-09-11
