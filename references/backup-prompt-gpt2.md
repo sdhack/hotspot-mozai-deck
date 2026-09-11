@@ -49,7 +49,10 @@ cross-hatching. This body proportion is identical on every page of the set. [当
   watercolor as the character's world: clearly colored, soft dusty tones — never ghost-pale, never vivid,
   slightly subordinate to the black character.
 - Cover: two small pastel label capsules at top CENTERED as a group; up to two title lines with a wavy
-  hand-drawn underline under the last line; one short subtitle; 3-4 keyword capsules near the bottom.
+  hand-drawn underline under the last line; one short subtitle; 3-4 keyword capsules in the lower third with
+  clean quiet paper beneath them.
+- **封面角色位置锁（2026-09-12 用户规则）**：封面墨仔不放在页面底部——站中部场景旁（如群聊卡片侧缘、约 15% 页高），
+  底部区域只留胶囊与干净纸面+小涂鸦；AVOID 中写明 "the character placed at the bottom edge or below the capsules"。
 - Inner pages: page number 「NN/05」 in a small hand-drawn circle at the top-left; sticky-note style cards or
   speech bubbles with small pastel circular icons; vary card/bubble alignment between pages.
 ```
@@ -98,3 +101,18 @@ im.save(path, "JPEG", quality=92)                # 一律 JPEG，FF D8 FF 头校
 - 未约束表情时"坚定点头"被画成怒眉 → 友善表情需显式；
 - 场景太素（ghost-pale）与太艳（vivid）各被打回一次 → 统一灰调水彩锁；
 - 生成文件名必须版本化（时间戳），严禁覆盖上一版；接口有日配额（429），批量脚本按页重跑。
+
+## 通道状态（2026-09-12 实测，随时效性自检）
+
+| 通道 | 端点 | 模型 | 状态 |
+|---|---|---|---|
+| jojocode | https://maxcdn.jojocode.com/v1/images/edits | gpt-image-2 | ❌ 403 SUBSCRIPTION_NOT_FOUND（订阅失效） |
+| 790053500 | https://api.790053500.com/v1/images/edits | gpt-image-2 | ✅ 可用；间歇 403 error 1010（瞬时风控，退避重试可过） |
+| bigmodel | https://open.bigmodel.cn/api/paas/v4/images/generations | cogview-3-flash | 兜底（中文文字渲染弱，仅应急） |
+
+- `images/generations` 端点未订阅：**只能走 edits**。纯 Prompt 无参考图出图时，把任意一张自有成品页作为
+  `image[]` 传入当"纸张画布"，Prompt 开头声明：`Replace the entire page with a BRAND NEW cover/page described
+  below. The attached image serves only as the paper/style canvas — do not keep any of its text, layout, page
+  number or scene.`（本套 5 图已验证：成图与画布内容无关，风格完全由 Prompt 决定）
+- 各通道 key 见工作区历史脚本（gen_cover_tuigroup.py / gen_teacher福利.py 等），使用前先跑一次小请求验活。
+- 选题侧配套规则（标签纪律、流量池漏斗逐池设计）在工作区 `.mozai/account-rules.md`，出主题前先过该过滤器。
