@@ -108,6 +108,10 @@ hotspot-mozai-deck/
 - [`references/early-style-reproduction.md`](references/early-style-reproduction.md)：仅在要求复刻早期账号风格或手账热点卡片时读取；
 - [`references/unified-style-template.md`](references/unified-style-template.md)：用户提供的统一视觉风格规范（温暖手绘知识科普海报：纸张真实纹理、黑色手绘粗线、低饱和水彩、板报式层级、中央萌系角色、四周轻量涂鸦，封面四胶囊 + 粗重飞白标题）；用户粘贴该模板或点名"统一视觉风格"时作为该次任务的视觉锁。
 
+## 版本 2.20.0
+
+- 统一技能文档版本与更新日期；人物卡统一使用 `assets/mozai-ip-sheet-4k.jpg`；清理已停用的供应商专属内容与参考文件；补充文档引用和结构校验要求。
+
 ## 版本 2.18.0
 
 v2.18.0 统一风格封面的两项用户校准：① **纸底恢复默认**——第三张纸底颜色参照改为按需启用（仅用户给图要求"打底"时使用，用完即弃），默认回到明亮暖白两参照通道；② **主标题细一号**——模板原样"粗重飞白"出图偏厚，定稿为中等偏轻马克笔手写（笔画约字高 1/12，少量飞白丝缕，严禁墨块），层级靠字号建立。校准记录写入 `unified-style-template.md` 字体气质段。
