@@ -7,7 +7,7 @@
 3. 头顶一根微卷细茎；
 4. 恰好两片浅鼠尾草绿色叶子；
 5. 大圆眼、眼白明显，瞳孔可轻微不对称；
-6. 小比例黑色嘴，表情克制；
+6. 小比例黑色嘴，表情克制；微笑时白色弧形笑口与红色舌头必须属于同一个连续口腔结构，彼此自然接触，不得分家、悬浮或出现黑色断缝；
 7. 正常情况下恰好两条细手臂和两条短腿；
 8. 无腮红、无衣服或未经要求的拟人身体部件。
 
@@ -47,7 +47,7 @@ tall slim teardrop. Scaling the character up or down must never change this prop
 
 系列页避免全部使用同一姿态。情绪连续时允许相近表情，只需在构图、视线、手势或身体朝向中至少改变一项。不要为了差异化选用与内容冲突的表情。
 
-张嘴时保持小比例，可以看见简单口腔层次；不强制每个张嘴表情都出现红色舌头。闭嘴、微笑、疑问和认真表情均可。
+张嘴时保持小比例，可以看见简单口腔层次；不强制每个张嘴表情都出现红色舌头。需要红色舌头时，必须从同一个黑色口腔轮廓的下缘自然连出，并与白色弧形微笑接触；禁止把白色微笑和红色舌头画成两个独立、分家的符号。闭嘴、微笑、疑问和认真表情均可。
 
 ## 尺寸与位置
 
@@ -74,7 +74,7 @@ tall slim teardrop. Scaling the character up or down must never change this prop
 
 ```text
 === CHARACTER ===
-Exactly one Mozai character, matching the supplied reference: a plump pear/teardrop black ink-drop body (height about 1.1-1.2x width, round heavy bottom tapering to a small point at the top — never a perfect circle, ball or egg; identical proportion on every page of this set) with organic hand-drawn ink texture; one thin slightly curled sprout stem with exactly two light sage-green leaves; large round eyes with visible white sclera and subtly asymmetric pupils; a small restrained black mouth; exactly two thin arms and two short legs; no blush. The character is [action] with [expression]. [Prop rule for this action: a pen, pencil, fountain pen or brush chosen for the page theme, fingers wrapped around the shaft.]
+Exactly one Mozai character, matching the supplied reference: a plump pear/teardrop black ink-drop body (height about 1.1-1.2x width, round heavy bottom tapering to a small point at the top — never a perfect circle, ball or egg; identical proportion on every page of this set) with organic hand-drawn ink texture; one thin slightly curled sprout stem with exactly two light sage-green leaves; large round eyes with visible white sclera and subtly asymmetric pupils; a small restrained black mouth. When smiling with a visible tongue, use one continuous mouth cavity: the white crescent smile and red tongue touch naturally inside the same mouth, with no gap, floating tongue, or separate white mouth symbol; exactly two thin arms and two short legs; no blush. The character is [action] with [expression]. [Prop rule for this action: a pen, pencil, fountain pen or brush chosen for the page theme, fingers wrapped around the shaft.]
 ```
 
 优先修复重复角色、叶片数量、肢体数量、身体形状和五官，其次修复动作与场景。装饰性误差不应无限重试。同一页最多两次定向重试；仍失败时减少动作复杂度、使用更干净的参考图或说明限制。
