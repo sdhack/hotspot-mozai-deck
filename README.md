@@ -80,7 +80,7 @@ hotspot-mozai-deck/
 ├── SKILL.md
 ├── README.md
 ├── assets/
-│   └── mozai-ip-sheet-4k.png
+│   └── mozai-ip-sheet-4k.jpg
 └── references/
     ├── hotspot-template.md
     ├── character-lock.md
@@ -89,7 +89,6 @@ hotspot-mozai-deck/
     ├── image-generation-protocol.md
     ├── early-style-reproduction.md
     ├── unified-style-template.md
-    ├── sensenova-style-master.md
     ├── copy-template.md
     └── qa-checklist.md
 ```
@@ -108,7 +107,6 @@ hotspot-mozai-deck/
 - [`references/qa-checklist.md`](references/qa-checklist.md)：事实、人物、文字、比例、页码和安全区检查；
 - [`references/early-style-reproduction.md`](references/early-style-reproduction.md)：仅在要求复刻早期账号风格或手账热点卡片时读取；
 - [`references/unified-style-template.md`](references/unified-style-template.md)：用户提供的统一视觉风格规范（温暖手绘知识科普海报：纸张真实纹理、黑色手绘粗线、低饱和水彩、板报式层级、中央萌系角色、四周轻量涂鸦，封面四胶囊 + 粗重飞白标题）；用户粘贴该模板或点名"统一视觉风格"时作为该次任务的视觉锁。
-- [`references/sensenova-style-master.md`](references/sensenova-style-master.md)：商汤 SenseNova 专属固定融合提示词模板（由账号 192 张已发布图文风格反推，内置商汤端点参数与版式规则）；走商汤通道出图时以其为基底。
 
 ## 版本 2.18.0
 
@@ -116,43 +114,33 @@ v2.18.0 统一风格封面的两项用户校准：① **纸底恢复默认**—�
 
 ## 版本 2.17.0
 
-v2.17.0 新增**纸底颜色锚点**（用户指令"用这张图的背景颜色打底"）：统一风格封面升级为三参照通道——画风参照 + 角色卡 + 纸底颜色参照（第三张仅取背景色与纸纹，声明不取构图与文字）。流程：先 PIL 采样参考图空白区均值得出精确色值（实测 #faf5e9 暖象牙）写入 Prompt，参照图降采样 ≤1024px 转 JPEG 控制请求体积；成图复测纸底色验证打底生效（#fcf9e5）。技法与采样流程写入 `unified-style-template.md` 商汤落地要点。
 
 ## 版本 2.16.0
 
-v2.16.0 收录用户提供的**统一视觉风格模板**（温暖手绘知识科普海报）为第三种可切换视觉锁 [`references/unified-style-template.md`](references/unified-style-template.md)：六项硬性特征（纸张真实纹理、黑色手绘粗线、低饱和水彩、中文板报式层级、中央萌系角色、四周轻量涂鸦）、米白泛黄纸+粗黑马克/毛笔/铅笔手绘+低饱和水彩、中心轴分层版式（顶部两枚居中标签→两行超大主标题→副标题+波浪线→中央萌系角色→浅灰线稿图标→底部四枚胶囊→不对称双线边框+四角藤蔓）、粗重飞白主标题（用户点名该模板时覆盖 v2.11 中细规则）、完整负面清单与商汤双参照落地要点。SKILL.md 路由同步：用户粘贴风格规范或点名"统一视觉风格/知识科普海报风"时读取该文件。实测：2026-09-10 家长群假老师封面按此模板出图，一次重试修复标签居中与手臂数后全部 QA 通过。
 
 ## 版本 2.15.0
 
-v2.15.0 观感第四轮校准：**反灰雾锁**。`Contrast×0.96` 仍会把黑线压灰、叠加满幅雾霭式水彩晕后整页发灰朦胧，定稿改为 `×1.04` 轻微提对比去灰；新增规则：整页禁止灰雾/柔光/磨砂感，纸面干净透亮、墨线边缘锐利；水彩晕染只允许小面积局部点缀（2–3 处极淡小渍），禁止满幅铺底，背景层次改由"方格纸纹理+小面积淡渍+清晰前景线稿"构成。历史值 0.88/0.96 标注弃用。规则写入 `sensenova-style-master.md`（OVERALL LOOK 重写为 CLEAN and CRISP）、`image-generation-protocol.md`、`early-style-reproduction.md` 视觉锁与 SKILL.md。
 
 ## 版本 2.14.0
 
-v2.14.0 观感第三轮校准：**修复整体泛白**。`Contrast×0.88` 会把黑线一起拉灰导致画面泛白蒙尘，定稿改为 `×0.96` 极轻柔化，并新增 **BLACK INK LOCK 黑度锁定**：黑色线稿、标题、角色与投影必须浓黑饱满清晰，"低对比柔和"只适用于水彩晕染与纸面，泛白发灰即阻断缺陷。规则同步写入 `sensenova-style-master.md`（OVERALL LOOK）、`image-generation-protocol.md`（落盘参数）、`early-style-reproduction.md` 视觉锁与 SKILL.md 图像生成原则。
 
 ## 版本 2.13.0
 
-v2.13.0 对 v2.12.0 的观感规则做第二轮校准并定稿：**色温宁中性勿发黄**——后处理暖偏从 R×1.035/G×1.008/B×0.955 收敛到 R×1.015/G×1.005/B×0.98，纸面回到中性奶油白；同时为封面新增**三层背景景深**（远层极高透明度雾蓝/灰绿水彩晕 + 中层若隐若现方格纸 + 近层清晰线稿）与**更足的手帐涂鸦密度**（星、闪光、箭头、螺旋、曲别针、和纸胶带条、音符、叶片、墨点），规则写入 `sensenova-style-master.md` 的 OVERALL LOOK / BACKGROUND DEPTH 段与 `early-style-reproduction.md` 视觉锁，`image-generation-protocol.md` 落盘参数同步。
 
 ## 版本 2.12.0
 
-v2.12.0 落实用户观感规则：**降低对比度、稍微拉高色温**。全套图统一为低对比、柔和、微暖的观感——墨线深但不死黑、纸面明亮暖奶油、无刺眼明暗跳变、色温带轻微奶油/琥珀倾向。采用双保险：① `sensenova-style-master.md` 的 STYLE 段与 `early-style-reproduction.md` 视觉锁写入 OVERALL LOOK 描述，从 Prompt 源头控制；② `image-generation-protocol.md` 落盘规则新增统一后处理兜底（PIL `Contrast×0.88` + 逐通道暖偏 R×1.035/G×1.008/B×0.955，截断 0–255），JPEG 保存前执行。SKILL.md 图像生成原则同步。
 
 ## 版本 2.11.0
 
-v2.11.0 落实用户字体规则：**标题字大但笔画中细**。商汤通道与 v1.9 母版原先把标题写成 "bold brush-marker / 干刷飞白"，成图笔画过粗糊字；现统一改为"字号大建立层级、笔画中等偏细轻盈（约字高 1/10），严禁超粗毛笔与飞白墨块"，写入 `sensenova-style-master.md`（STYLE + LAYOUT + 融合表）、`image-generation-protocol.md`、`v1.9-prompt-boilerplate.md` 与 `early-style-reproduction.md` 视觉锁。双参照出图时，画风模仿指令中必须显式声明"字体笔重覆盖参照"，防止模型照抄参照图的粗标题。
 
 ## 版本 2.10.0
 
-v2.10.0 落实两条用户角色规则：① **体态一致锁（P0 阻断项）**——同一套图所有页面的墨仔必须保持同一身体形状与比例（上窄下宽梨形/水滴形，高约宽 1.1–1.2 倍，顶端收小尖角长芽茎），禁止正圆、球形、鸡蛋形、细长泪滴与逐页高矮胖瘦漂移，缩放只等比改变占比；英文锁句已写入 `character-lock.md`、`image-generation-protocol.md`、`v1.9-prompt-boilerplate.md`、`early-style-reproduction.md` 与 `sensenova-style-master.md` 的 CHARACTER 段，QA 比对与阻断分级同步更新。② **持笔笔型自由**——毛笔不再是唯一锚点，毛笔/铅笔/钢笔/圆珠笔/马克笔均可按页面主题选择，握法不变（手指包裹笔杆、不悬空不分家、不为道具加第三只手）。
 
 ## 版本 2.9.0
 
-v2.9.0 将本地落盘格式统一为正确的 JPEG：不论生图渠道（商汤、gpt-image 或其他）返回何种格式，最终成图一律保存为 `.jpg`（PIL `quality≥90` 正确编码，文件头 `FF D8 FF`），以提升图片空间效率；PNG 数据须先转码再保存，扩展名与文件头不符仍为阻断项，仅用户明确点名 PNG 时例外。规则写入 SKILL.md 图像生成原则、`prompt-template.md` 商汤适配第 7 条与 `image-generation-protocol.md` 的逐页 QA 段。
 
 ## 版本 2.8.0
 
-v2.8.0 新增商汤 SenseNova 专属出图通道与风格融合模板：从账号已发布的 192 张图文（重点反推早期图文）提炼出固定融合提示词模板 [`references/sensenova-style-master.md`](references/sensenova-style-master.md)，内置商汤端点参数（尺寸 `1056x1408`、JSON `images/edits` 请求体、`prompt_extend:false`、双参照画风模仿、标签居中与下半部主题场景版式）；`prompt-template.md` 增加 SENSENOVA-ONLY 适配段（含扩展名与文件头强制一致规则），`image-generation-protocol.md` 的 Preflight 增加商汤通道引用。带 `<!-- SENSENOVA-ONLY -->` 标注的 Prompt 不得复用到其他模型。
 
 ## 版本 2.7.0
 
