@@ -43,3 +43,4 @@ tmp/
 # Doubao workspace (don't commit local workspace state)
 *.bak
 *.backup
+assets/gpt2-api-key.txt
