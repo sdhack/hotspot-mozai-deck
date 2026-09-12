@@ -102,3 +102,4 @@ numbers, English or pinyin, watermark, wide empty paper margins, dark or gloomy 
 - 2026-09-12 首次验收 pass：文字逐字正确（含小标签「攒钱中」放大核对）、孩子严格背影、红色仅闹钟、墨仔梨形排线+笔手贴合、画风迁移到位且未复制参考图构图。
 - 底部关键词行两侧可能生成 ≡ 类装饰小符，非错字，可接受；若要求零多余符号，在 CONTENT 中加「no decorative glyphs around the keyword line」。
 - 场景小标签（3 字以内）易被写成异体字，QA 时必须放大逐字核对。
+- 2026-09-12 补充：①标题含必要产品名（如 iPhone18）时，在 CONTENT 中声明「the string XXX is the ONLY permitted Latin text in the whole image」，AVOID 同步改为「no English or pinyin except XXX」；②标题逐字锁：禁止自动补句号（曾在「…三道锁」后生成「。」）；③墨仔肢体写入手足硬锁（恰好两臂两腿，放大清点）；④持笔可选——封面书桌场景可保留马克笔，其他页面按动作自然决定；⑤波浪线固定画在标题末行下。
