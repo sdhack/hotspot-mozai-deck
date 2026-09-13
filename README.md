@@ -105,6 +105,12 @@ hotspot-mozai-deck/
 - [`references/early-style-reproduction.md`](references/early-style-reproduction.md)：仅在要求复刻早期账号风格或手账热点卡片时读取；
 - [`references/unified-style-template.md`](references/unified-style-template.md)：用户提供的统一视觉风格规范（温暖手绘知识科普海报：纸张真实纹理、黑色手绘粗线、低饱和水彩、板报式层级、中央萌系角色、四周轻量涂鸦，封面四胶囊 + 粗重飞白标题）；用户粘贴该模板或点名"统一视觉风格"时作为该次任务的视觉锁。
 
+## 版本 2.27.0
+
+- 场景内页模版新增「标题版式多样性」：对齐、微倾、承载体、下划线四维度逐页轮换，杜绝每页居中顶排的呆板姿势。
+- 新增「相邻套次场景家族去重」：相邻两套不得复用同一家族；家族池扩至站牌对照、阳台暮色、书桌抽屉、厨房餐桌、放学路口、图书馆书架间。
+- gpt2-style-pipeline 已知坑补充：代理 400 拒绝窗口的串行+冷却策略、b64_json/url 双格式解析、URL 下载需带 UA/Referer、叠字错字换 seed 重做。
+
 ## 版本 2.20.1
 
 - 清理 README 中已废弃的互动钩子、空版本记录和过时说明；统一当前文档与技能行为。

@@ -41,6 +41,9 @@ python scripts/gen_gpt2_page.py --prompt page02.txt --out "02-v1.jpg" --mode can
 
 ## 4. 已知坑（直接规避）
 
+- 代理在单次真实失败(断连/超时/EOF)后会进入约 1–2 分钟的 400 拒绝窗口，脚本内置的连续重试会全部撞在窗口上 → 正确做法是冷却 60–120 秒后单发重试；批量出图按"串行 + 页间隔 30–40 秒"跑。
+- 返回可能是 `b64_json` 或 `url` 字段，解析需兼容双格式；URL 下载可能 403，需带浏览器 `User-Agent` 与 `Referer` 头。
+- 同页文字偶发叠字错字(如"原原文")，属 P0 阻断，换 seed 重做该页即可，勿改版式。
 - 参考卡拼贴漏进画面 → 强化「appearance only」声明，第二次重试减少其他视觉干扰。
 - 3 字小标签写成异体字 → 换措辞或重试，QA 放大核对。
 - 墨仔画得过大 → Prompt 写「strictly SMALL, clearly smaller than one content block」。

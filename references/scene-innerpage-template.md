@@ -56,3 +56,19 @@ with its props — never a corner sticker floating beside text blocks.
 - 2026-09-12 v3→v4：首版墨仔 26% 页高超标被打回 → Prompt 写「strictly SMALL, clearly smaller than one content block」后收敛到 9-15%。
 - P4 标题被自动补「。」→ CONTENT 中写「the last character must be X, NEVER add a period」后修复；波浪线也曾画到第一行下 → 明确「directly under the SECOND/LAST line」。
 - judge 误判教训：验收 Prompt 必须写清「边框铅笔涂鸦/笔筒道具不算墨仔持笔违规」，否则会把风格元素当缺陷。
+
+## 标题版式多样性（2026-09-13 用户定稿）
+
+同套内页的标题必须变化展示姿势，禁止每页都是"居中顶排+居中波浪线"。字体、手写感与"全页最大最黑"的层级不变，可轮换的维度：
+
+1. **对齐**：居中 / 左对齐 / 右对齐，整套内至少两种；
+2. **微倾**：整体 ±2–4° 手写倾斜，方向逐页变化；
+3. **承载体**：裸写在纸上 / 写在胶带纸条上 / 写在小黑板或告示牌等场景道具上（道具承载时标题与场景融合，可省略下划线）；
+4. **下划线**：居中短线 / 从左横扫到右的长线 / 标题关键字下局部着重线，三选一轮换；
+5. **强调**：关键词（城市名、数字、转折词）可加淡彩底晕或着重圈，位置随对齐方式变。
+
+Prompt 写法：在 LAYOUT 段明确当页标题用哪种组合（如 "title top-LEFT aligned, rotated -2 degrees, wavy underline sweeps from left edge under the whole line"），AVOID 中加 "the same centered title placement as other pages"。
+
+## 相邻套次场景家族去重（2026-09-13 用户定稿）
+
+相邻两套图文不得复用同一场景家族（如台阶立面、告别收束连续两套出现即判重复）。出图前先查上一套已用家族，从家族池中避开；家族池不足时优先扩写新家族（公交站牌对照、阳台暮色、书桌抽屉、厨房餐桌、放学路口、图书馆书架间等），再复用旧家族。
