@@ -1,0 +1,77 @@
+The FIRST attached image is a style reference: learn ONLY its art style, texture and lettering feel.
+The SECOND attached image is the character appearance truth (appearance only, never copy its sheet
+layout or poses). Replace everything with the BRAND NEW cover described below — keep no text,
+layout, page number or scene from either image.
+
+=== CANVAS ===
+True portrait 3:4 canvas. A thin, elegant single hand-drawn black border runs about 30px inside the canvas
+edges on all four sides, with delicate vine-leaf and star-dot corner flourishes like fine pen doodles. The
+composition fills the frame; outer paper margins stay thin and even.
+
+=== STYLE ===
+Learn ONLY the art style, texture and lettering feel of the attached style reference — do NOT copy its scene,
+composition, objects or layout. Cozy hand-drawn journal card on warm cream paper (never yellow, never beige)
+with a very faint square grid; soft grey pencil cross-hatch shading with gentle pastel watercolor blotches
+(dusty blue, muted orange, pale pink) floating loosely in empty wall areas; scattered tiny grey doodles of
+stars, hearts, pencils, leaves and sparkles; a muted, low-saturation watercolor world; no vivid, bright, neon
+or highly saturated color anywhere, no strong red, orange, magenta or golden yellow. All linework is confident
+black hand-drawn ink with wobbly sketch strokes and cross-hatched shading. Lettering style learned from the
+reference: all text is natural irregular Chinese handwriting with rounded confident marker strokes, slightly
+tilted and uneven — NEVER printed, typeset or computer-font. Title lines are the largest, deepest black
+elements with medium-thick crisp strokes; smaller text stays clearly subordinate.
+
+=== CHARACTER ===
+Exactly one Mozai: a plump pear/teardrop-shaped black ink-drop creature, body height 1.1-1.2 times its width,
+round heavy bottom tapering to a curled pointed top bearing a thin sprout with exactly two sage-green leaves;
+big white oval eyes with black pupils, subtle expressive eyebrows, a small black mouth (never red); exactly two
+thin arms and two short legs; no blush, no clothes; whole body filled with dense graphite-like scribble
+cross-hatching. This body proportion is identical across the set. Position: standing at the RIGHT edge of the
+scene, strictly SMALL, about 20% of the page height tall, worried caring expression with soft raised eyebrows,
+leaning slightly toward the child while holding a short black magnifying glass in his right hand, fingers
+clearly wrapped around the handle.
+
+=== LAYOUT ===
+CLEAR TITLE-BODY HIERARCHY: the TITLE is the single dominant text element — largest and heaviest, deep black,
+sitting slightly BELOW the top band with generous breathing space under the top border. Cover composition:
+two small pastel label capsules at top CENTERED as a group (soft dusty-blue and dusty-pink washes behind the
+labels); then two title lines, deep black, with a thin wavy hand-drawn underline under the last line; then one
+short subtitle. The MIDDLE-LOWER band holds ONE concrete hand-drawn life scene: a child's bedroom at night —
+a kid who has STOOD UP from his desk chair and now STANDS FACING the doorway in profile — feet flat on
+the floor, both arms hanging relaxed at his sides, shoulders level, a startled wide-eyed expression on his
+simple cartoon face; the empty swivel chair stays by the desk behind him; the tablet stays on the
+desk behind him, its screen showing a few faint unreadable grey doodle chat bubbles and a game-controller
+doodle (abstract sketch marks only, NO readable letters or numbers on screen); in the doorway on the left,
+the dark quiet silhouette of a mother standing naturally upright, seen from behind (simple backlit shape,
+no facial detail, relaxed arms); a small desk lamp glowing warmly; desk props of a pencil cup, a closed
+notebook and a water cup. EVERY figure keeps natural human posture and proportions — no twisted necks,
+no impossible body rotations. Not frightening — warm, soft, gently awkward moment. Mozai stands at
+the scene's right edge, never at the bottom edge or below the capsules. The BOTTOM band keeps clean quiet
+paper with one short keyword line and 3 slim capsules in a row, plus tiny grey doodles; no decorative glyphs
+around the keyword line.
+
+=== CONTENT ===
+Render this Chinese text exactly, character for character, each string exactly once:
+- Top capsule 1: 网络安全宣传周
+- Top capsule 2: 校园日
+- Title line 1: 今天是校园日，
+- Title line 2: 孩子上网这5个信号要看
+- Thin wavy underline under title line 2
+- Subtitle: 家长对照清单
+- Bottom keyword line: 五个信号，今晚对照
+- Bottom capsule 1: 风险信号 / Bottom capsule 2: 家长对照 / Bottom capsule 3: 家庭约定
+- The number 5 is black and correctly written; the ONLY red element is a single tiny warning/attention icon
+  outline beside the subtitle.
+
+=== CONSTRAINTS ===
+P0: exactly the listed strings, each once; one character only; two leaves, two arms, two legs; pear body
+proportion locked; screen shows only abstract unreadable doodles, no letters, numbers or brand logos; the
+mother is a plain dark silhouette with no facial detail; numbers black; red only on the single permitted red
+element. P1: title dominates the hierarchy; scene readable and tidy; Mozai clear and crisp against the scene,
+never at the bottom edge or below the capsules. P2: wall blotches, doodles, corner flourishes.
+
+=== AVOID ===
+copying the reference image's scene, layout or composition, a second character or extra limbs, wrong leaf
+count, circle/ball/egg body or body-shape drift, the character placed at the bottom edge or below the capsules,
+readable text or numbers on any screen, brand logos, printed or typeset-looking text anywhere, thin faint
+sketchy body text, vivid or saturated colors, red numbers, English or pinyin, watermark, wide empty paper
+margins, dark or gloomy overall tone, scary or horror mood.
