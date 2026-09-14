@@ -48,6 +48,12 @@ metadata:
 5. **生成与排版**：读取 [references/style-lock.md](references/style-lock.md)、[references/character-lock.md](references/character-lock.md)、[references/prompt-template.md](references/prompt-template.md)、[references/image-generation-protocol.md](references/image-generation-protocol.md) 和 [references/v1.9-image-profile.md](references/v1.9-image-profile.md)。**第二套备份出图提示词**：当用户点名"第二套风格/备份母版/浓黑排线手账风"，或 v1.9 母版不适用时，改用 [references/backup-prompt-gpt2.md](references/backup-prompt-gpt2.md)（2026-09-12 定稿：无参考图纯 Prompt 的浓黑排线墨仔 + 近白暖纸方格手账卡体系，含背景锁、全手写文字锁、标题层级锁、封面角色不在底部的构图锁、落盘白平衡+不均匀暖斑后处理链、校准史与可用通道表；generations 未订阅时用自有成品页作画布+整页替换声明）。出图提示词默认使用 [references/v1.9-prompt-boilerplate.md](references/v1.9-prompt-boilerplate.md) 的 v1.9 母版组装逐页 Prompt（原生 3:4 满幅构图、四边约 30px 留白、封面必带主题相关中层背景），并以单人物卡出图协议组织参考图选择、文本卡片和坏页重生：细双线边框、四角低密度纹样、波浪下划线、pastel 标签、铅笔网格与无生命小涂鸦、右手持笔锚点（笔型按主题自由）与全套梨形体态一致锁、场景与表情关联。用户明确要求极简、留白、纯插画或其他视觉体系时，以用户要求为准并仅保留角色与成品 QA 不变量。当用户要求"复刻早期作品 / 早期账号风格 / 手账热点卡片"时，额外读取 [references/early-style-reproduction.md](references/early-style-reproduction.md)，并将其视为该次任务的视觉锁。当用户直接提供统一视觉风格规范、或点名"统一视觉风格 / 知识科普海报风"时，读取 [references/unified-style-template.md](references/unified-style-template.md) 作为该次任务的视觉锁（六项硬性特征：纸张真实纹理、黑色手绘粗线、低饱和水彩、中文板报式层级、中央萌系角色、四周轻量涂鸦；封面四胶囊、粗重飞白标题以该模板为准）。当用户点名「固定封面模版 / 学风格封面 / 只学风格画风字体」出封面时，读取 [references/cover-template-style-ref.md](references/cover-template-style-ref.md) 作为该次封面的完整视觉锁（2026-09-12 定稿：双参考输入＝画风参考图只提供纸感/粉理/淡彩/涂鸦/字感＋墨仔人物卡只作外观真值，场景构图按当页主题原创，儿童严格背影、封面角色不在底部、红色仅限单一警示元素，落盘沿用白平衡+暖斑后处理链）。当使用 gpt-image-2（image2）通道出图时，读取 [references/gpt2-style-pipeline.md](references/gpt2-style-pipeline.md) 并直接运行 [scripts/gen_gpt2_page.py](scripts/gen_gpt2_page.py)（双参考＝assets/style-ref-cream-journal.jpg 风格参考＋assets/mozai-ip-sheet-4k.jpg 人物卡；key 从环境变量 GPT2_API_KEY 或本地 assets/gpt2-api-key.txt 读取，该 key 文件不入公开仓库），脚本内置退避重试、版本化命名保护与统一落盘后处理链，保证与既有成品同风格。使用当前环境可用的图像生成或编辑能力；先检查工具实际参数，不假定固定供应商、模型名、上传器或批量格式。
 6. **文案与交付**：读取 [references/copy-template.md](references/copy-template.md)，再按 [references/qa-checklist.md](references/qa-checklist.md) 检查全部 N 页、事实卡和文案。交付时附来源链接与检索日期。
 
+## 发布正文口吻硬约束（2026-09-14 用户规则，长期生效）
+
+- 每篇作品的发布正文（caption）固定以"我是墨仔。"开头，全文以墨仔第一人称口吻书写，此规则优先于任何"避免固定开头"类表述。
+- 墨仔口吻 = 第一人称的观察、提醒和陪伴，不是资讯播报腔；墨仔以"我注意到/我整理了/我帮大家看了"的方式引入事实，事实和来源仍按事实卡口径，不因口吻虚构墨仔的亲身经历（不得写"我家孩子""我上次被骗"等未授权经历）。
+- 封面与内页标题不受此规则约束，仍按首图信息密度优先的原则拟题。
+
 ## 内容结构硬约束（2026-09-06 用户偏好，长期生效）
 
 - 不做"墨仔想说"独立金句页；不生成"你被XX过吗/评论区说说"类引导评论互动页（含画面内"评论区聊聊"气泡）；不用这两类页凑页数。
