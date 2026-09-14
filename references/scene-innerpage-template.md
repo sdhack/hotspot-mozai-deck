@@ -12,6 +12,7 @@
 6. **标题逐字锁**：标题末字后禁止自动补句号等标点（曾在「…三道锁」后生成「。」被打回）。
 7. **人物安全**：画面中儿童一律严格背影/后脑勺，零面部特征；无大人形象；手机屏幕空白无 logo。
 8. **无红色**：内页无红色元素；低饱和粉/绿/蓝点缀不限。
+9. **标题位置锁（2026-09-14 用户定稿）**：页码圈等顶部小元素独占最上一行；标题块从距顶边框约 12–14% 页高处开始，禁止贴顶。Prompt 的 LAYOUT 段写明「the page number circle sits alone on the very top row; the title block starts clearly lower, about 12-14% of the page height down from the top border, never crowding the top edge」；QA 检查标题顶端与顶边框的实际间距，贴顶即重做该页。封面不适用本条（封面按「封面标题稍微靠下」规则执行）。
 
 ## 双参考输入与开头声明（逐字）
 
