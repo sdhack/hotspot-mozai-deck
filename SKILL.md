@@ -3,7 +3,7 @@ name: hotspot-mozai-deck
 description: 为墨仔 IP 日更制作抖音或小红书热点图文：核验当日热点，生成以种草、涨粉和自然互动为目标的文案，并按内容自适应规划 4–10 页场景与统一角色成图。用户要求墨仔日更、墨仔热点图文、结合热点出图或指定事件制作墨仔内容时使用。
 license: MIT
 metadata:
-  version: 2.38.0
+  version: 2.39.0
   author: helloianneo
   created: 2026-08-28
   updated: 2026-09-15
@@ -69,7 +69,7 @@ metadata:
 
 先判断用户需要哪种模式：
 
-- **日更选题 / 今日文案**：用 anysearch 搜索当日与近 7 天热点，核验后默认给 10 条短文案候选；读取 [references/hotspot-template.md](references/hotspot-template.md)。
+- **日更选题 / 今日文案（默认调用提示词）**：本模式默认执行 [references/default-selection-prompt.md](references/default-selection-prompt.md) 的「爆款选题策划」提示词——基于用户提供的 Excel 作品数据与 anysearch 核验的当日热点，按四维评分（收藏价值×1.5＋人群精准度×1.2＋时效性×1.0＋系列化空间×1.3）筛选 5 条爆款候选主题；用户未提供该提示词时它即默认口径，用户给了自定义提示词时以用户为准。补充文案候选时可再读取 [references/hotspot-template.md](references/hotspot-template.md)。
 - **自动选题**：用户只要求推荐时，核验后给出精简候选；读取 [references/hotspot-template.md](references/hotspot-template.md)。
 - **指定事件**：核验用户给出的事件后直接规划；若只是虚构主题或常青内容，明确它不是实时新闻并跳过热点排名。
 - **只做策划或文案**：不生成图片，仍执行事实核验与内容 QA。
