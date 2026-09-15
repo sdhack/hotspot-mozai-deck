@@ -35,7 +35,7 @@ composition fills the frame; outer paper margins stay thin and even.
 Learn ONLY the art style, texture and lettering feel of the attached style reference — do NOT copy its scene,
 composition, objects or layout. Cozy hand-drawn journal card on warm cream paper (never yellow, never beige)
 with a very faint square grid; soft grey pencil cross-hatch shading with gentle pastel watercolor blotches
-(dusty blue, muted orange, pale pink) floating loosely in empty wall areas; scattered tiny grey doodles of
+(dusty blue, pale sage green, cream — NO dusty pink, NO orange/salmon per the 2026-09-15 no-red-orange lock) floating loosely in empty wall areas; scattered tiny grey doodles of
 stars, hearts, pencils, leaves and sparkles; a muted, low-saturation watercolor world; no vivid, bright, neon
 or highly saturated color anywhere, no strong red, orange, magenta or golden yellow. All linework is confident
 black hand-drawn ink with wobbly sketch strokes and cross-hatched shading. Lettering style learned from the
@@ -55,11 +55,14 @@ the barrel. [表情与动作按当页主题替换；默认友善，需担忧时�
 
 === LAYOUT ===
 CLEAR TITLE-BODY HIERARCHY: the TITLE is the single dominant text element — largest and heaviest, deep black,
-top band. Cover composition: two small pastel label capsules at top CENTERED as a group (soft dusty-blue and
-dusty-pink washes behind the labels); then two title lines, deep black, with a thin wavy hand-drawn underline
+top band. Cover composition: two small pastel label capsules at top CENTERED as a group (washes only dusty-blue /
+sage-green / cream — no pink, no orange); then two title lines in STAGGERED rhythm per the 2026-09-15 rule:
+line 1 starts at the left margin, line 2 indented one character and slightly larger, key word(s) carrying a
+soft pale-sage watercolor halo, deep black, with a thin wavy hand-drawn underline
 under the last line; then one short subtitle. The MIDDLE-LOWER band holds ONE concrete hand-drawn life scene:
-[当页具体生活场景，必含：儿童严格背影/后脑勺（零面部特征）+ 主题道具组合 + 台灯或光源 + 桌面/床面小物件；
-禁大人手、大人形象、正面人脸、品牌 logo、可读屏幕内容]。 No adult hand or adult figure anywhere. Mozai stands
+[当页具体生活场景，必含：主题人物（按 2026-09-15 表情口径：孩子可回头露正脸，表情走"忐忑带期待"；家长可正面入场，表情温和迟疑，双人对视优先；
+两人视线共同指向故事焦点）+ 主题道具组合 + 台灯或光源 + 桌面/床面小物件；
+禁哭脸/惊恐表情、品牌 logo、可读屏幕内容]。 人物动作链按「封面人物动作逻辑锁」执行。Mozai stands
 at the scene's edge, never at the bottom edge or below the capsules. The BOTTOM band keeps clean quiet paper
 with one short keyword line and 3-4 slim capsules in a row, plus tiny grey doodles.
 
@@ -74,23 +77,24 @@ Render this Chinese text exactly, character for character, each string exactly o
 - [场景小标签（如 攒钱中），可选项]
 - Bottom keyword line: [一句关键词行]
 - Bottom capsule 1: [胶囊1] / Bottom capsule 2: [胶囊2] / Bottom capsule 3: [胶囊3]
-- All numbers black and correctly written; the ONLY red element is a tiny alarm-clock outline on the scene
-  showing black handwritten [时间数字]（无时间主题时改为：the ONLY red element is a single tiny
-  warning/attention icon outline）。
+- All numbers black and correctly written; red/orange/salmon are FORBIDDEN anywhere in the image
+  （2026-09-15 全套禁红橙锁：旧"单一红色元素"默认取消；确需警示色时用尘蓝或灰色图标替代）。
 
 === CONSTRAINTS ===
 P0: exactly the listed strings, each once; one character only; two leaves, two arms, two legs; pear body
-proportion locked; the child strictly back view with zero facial features; no adult hand or adult figure; no
-brand logos; screen blank; numbers black; red only on the single permitted red element. P1: title dominates the
-hierarchy; scene readable and tidy; Mozai clear and crisp against the scene, never at the bottom edge or below
+proportion locked; child/parent faces only in the approved gentle expression range (worried-hopeful child,
+hesitant-gentle parent, never crying or terrified); brand logos; screen blank; numbers black; NO red,
+orange or salmon anywhere（2026-09-15）. P1: title dominates the
+hierarchy with the staggered two-line layout and key-word halo（排版审美验收：错位+底晕+层级缺一即重做）; scene readable and tidy; Mozai clear and crisp against the scene, never at the bottom edge or below
 the capsules. P2: wall blotches, doodles, corner flourishes.
 
 === AVOID ===
 copying the reference image's scene, layout or composition, a second character or extra limbs, wrong leaf
 count, circle/ball/egg body or body-shape drift, the character placed at the bottom edge or below the capsules,
-the child's face or profile from any angle, adult hands or adult figures, readable screen content or brand
+crying, terrified or distressed faces on child or parent, rigid flat aligned title rows without the staggered
+rhythm, readable screen content or brand
 logos, printed or typeset-looking text anywhere, thin faint sketchy body text, vivid or saturated colors, red
-numbers, English or pinyin, watermark, wide empty paper margins, dark or gloomy overall tone.
+or orange elements anywhere, English or pinyin, watermark, wide empty paper margins, dark or gloomy overall tone.
 ```
 
 ## 落盘后处理链（与 backup-prompt-gpt2.md 相同，顺序固定）
@@ -104,3 +108,4 @@ numbers, English or pinyin, watermark, wide empty paper margins, dark or gloomy 
 - 场景小标签（3 字以内）易被写成异体字，QA 时必须放大逐字核对。
 - 2026-09-12 补充：①标题含必要产品名（如 iPhone18）时，在 CONTENT 中声明「the string XXX is the ONLY permitted Latin text in the whole image」，AVOID 同步改为「no English or pinyin except XXX」；②标题逐字锁：禁止自动补句号（曾在「…三道锁」后生成「。」）；③墨仔肢体写入手足硬锁（恰好两臂两腿，放大清点）；④持笔可选——封面书桌场景可保留马克笔，其他页面按动作自然决定；⑤波浪线固定画在标题末行下。
 - 2026-09-14 补充（网安周封面 v1–v4 四轮迭代沉淀）：①「儿童严格背影/屏幕空白/无大人形象」三项降级为按文案灵活调整的软约束（底线：无可读屏幕文字、无品牌、不渲染恐惧）；大人可入场且**不限于剪影或背影**，可按文案画出动作、姿态与面部，同受动作逻辑锁约束；②封面必须有故事性瞬间（谁/在哪/正在发生什么），非静态摆拍；③人物动作逻辑锁：姿势必须是完整自然动作链，v3 的「身体朝门却双手反扣身后椅背」被用户打回，v4 改为「STOOD UP from the chair, FACING the doorway in profile, feet flat, arms at sides」一次通过——写动作就写最简单可读的完整动作，并附 no twisted necks, no impossible body rotations 禁词；④接口失败模式再次验证：真实超时后连续 400 拒绝窗口，冷却 90–120 秒后单发重试即成功。
+- 2026-09-15 定稿（「放学独自回家」封面 v1–v3 三轮迭代沉淀，用户确认固化）：①封面标题错位排版锁——两行标题第一行顶左边距、第二行缩进一字且略大，重点词加淡鼠尾草绿水彩底晕，波浪线在末行下，QA 加排版审美验收；②人物表情口径——孩子回头露正脸"忐忑带期待"、家长正面"温和迟疑半抬手"，双人对视为优先构图，禁哭脸惊恐；③全套禁红橙锁——胶囊底晕只用尘蓝/鼠尾草绿/奶白，树叶只用灰绿，v1 因粉色胶囊+橙红树叶被打回，v2 收紧后通过；④教训：模型会把"淡粉"当合规色，禁令必须写 NO red, NO orange, NO salmon 并逐处列举可用色。
