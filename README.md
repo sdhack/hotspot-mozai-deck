@@ -126,6 +126,6 @@ hotspot-mozai-deck/
    - `GPT2_MODEL`：模型名（默认 gpt-image-2）
    仓库内不含任何真实端点、密钥或账号数据。
 3. **依赖**：脚本路径需要 `python` + `requests` + `numpy` + `Pillow`；不运行脚本、仅用 Prompt 模板时零依赖。
-4. **硬依赖**：文案生成强依赖 `master-copywriting` 技能（https://github.com/sdhack/master-copywriting），调用时必须已加载；缺失则先克隆安装，安装失败须暂停并告知用户。
+4. **硬依赖（两个，缺失先克隆安装，安装失败须暂停并告知用户）**：①`anysearch` 搜索技能（https://github.com/anysearch-ai/anysearch-skill），热点检索与来源核验必用；②`master-copywriting` 文案技能（https://github.com/sdhack/master-copywriting），文案规范唯一来源。
 5. **账号私有规则外置**：选题过滤器、标签纪律、发布纪律等账号级规则不属于本仓库，由部署方在自有工作区挂载（建议 `.mozai/account-rules.md`）。
 6. **合规**：AI 生成内容按发布平台现行标识规范添加声明；医疗、未成年人等类目红线见 `references/platform-compliance-douyin.md`，分发到其他平台时替换为对应平台规范。

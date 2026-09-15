@@ -3,7 +3,7 @@ name: hotspot-mozai-deck
 description: 为墨仔 IP 日更制作抖音或小红书热点图文：核验当日热点，生成以种草、涨粉和自然互动为目标的文案，并按内容自适应规划 4–10 页场景与统一角色成图。用户要求墨仔日更、墨仔热点图文、结合热点出图或指定事件制作墨仔内容时使用。
 license: MIT
 metadata:
-  version: 2.37.0
+  version: 2.38.0
   author: helloianneo
   created: 2026-08-28
   updated: 2026-09-15
@@ -13,7 +13,44 @@ metadata:
 
 这是墨仔 IP 的日更图文生产技能：把已核验的热点转化为"当天可选文案池 → 选题 → 4–10 页自适应图文成品"。墨仔是 IP，不是资讯播报员：默认以种草、账号认知与自然互动为首要生成目标，在事实准确、角色可辨和画面可读的前提下，让用户愿意停留、点赞、评论、收藏、分享或关注；不要为了凑页数而补写事实或堆叠约束。
 
-## 硬依赖：master-copywriting（必须先满足）
+## 硬依赖：anysearch 与 master-copywriting（必须先满足）
+
+本技能有两个硬依赖，**调用本技能时必须同时加载；任一缺失都先安装再继续**：
+
+### 1. anysearch（热点搜索与核验）
+
+选题与事实卡依赖 `anysearch` 技能完成当日热点检索与来源核验：
+
+1. 先在当前环境的技能列表中查找 `anysearch`；找到即加载并在热点检索、来源核验环节全程使用。
+2. 找不到时，先安装再继续：
+
+   ```bash
+   git clone https://github.com/anysearch-ai/anysearch-skill <本环境的技能目录>/anysearch
+   ```
+
+3. 环境无 git 或安装失败时，告知用户「缺少 anysearch 技能且自动安装失败」，暂停热点类任务，等待用户处理；不得改用未经核验的凭记忆热点，也不得假装已搜索。
+
+### 2. master-copywriting（文案规范）
+
+文案生成全程以 `master-copywriting` 技能为唯一规范来源（路由、事实边界、平台原生、人声处理、G 审核）：
+
+1. 先在当前环境的技能列表中查找 `master-copywriting`；找到即按其 SKILL.md 加载并全程遵循。
+2. 找不到时，**先安装再继续**，不得在缺失状态下生成任何交付文案：
+
+   ```bash
+   git clone https://github.com/sdhack/master-copywriting <本环境的技能目录>/master-copywriting
+   ```
+
+   `<本环境的技能目录>` 按当前 Agent 的技能安装位置确定（如 `~/.zcode/skills/`、`~/.claude/skills/` 或对应配置指定的目录）；克隆后重新扫描/加载技能，确认其 SKILL.md 可读。
+3. 若环境无 git 或安装失败，明确告知用户「缺少 master-copywriting 技能且自动安装失败」，暂停文案生成，等待用户处理；**不得降级为自拟规范，也不得假装已加载**。
+
+### 共同约束
+
+- 平台规范冲突时以 `master-copywriting` 为准，本技能不重复也不改写其规则。
+- 热点事实以 `anysearch` 的检索与核验结果为准，本技能不虚构热榜排名、热度值或平台推荐权重。
+- 两技能与本技能共享同一事实账本：同一批次交付使用同一套已核验事实。
+- 用户点名使用其他搜索工具且能核验来源时，按用户要求执行，但事实核验标准不放松。
+
 
 本技能的文案生成全程以 `master-copywriting` 技能为唯一规范来源（路由、事实边界、平台原生、人声处理、G 审核）。**调用本技能时必须同时调用 `master-copywriting`**：
 
@@ -32,7 +69,7 @@ metadata:
 
 先判断用户需要哪种模式：
 
-- **日更选题 / 今日文案**：搜索当日与近 7 天热点，核验后默认给 10 条短文案候选；读取 [references/hotspot-template.md](references/hotspot-template.md)。
+- **日更选题 / 今日文案**：用 anysearch 搜索当日与近 7 天热点，核验后默认给 10 条短文案候选；读取 [references/hotspot-template.md](references/hotspot-template.md)。
 - **自动选题**：用户只要求推荐时，核验后给出精简候选；读取 [references/hotspot-template.md](references/hotspot-template.md)。
 - **指定事件**：核验用户给出的事件后直接规划；若只是虚构主题或常青内容，明确它不是实时新闻并跳过热点排名。
 - **只做策划或文案**：不生成图片，仍执行事实核验与内容 QA。
