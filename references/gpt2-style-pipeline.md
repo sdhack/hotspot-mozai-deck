@@ -5,7 +5,7 @@
 ## 0. 前置检查
 
 - 依赖：`python` + `requests` + `numpy` + `Pillow`。
-- Key：环境变量 `GPT2_API_KEY`，或技能本地文件 `assets/gpt2-api-key.txt`（该文件不入 git，公开仓库不含 key；缺失时脚本会明确报错）。接口为 `https://api.790053500.com/v1/images/edits`，模型 `gpt-image-2`；**只有 edits 端点可用**，generations 未订阅。
+- Key：环境变量 `GPT2_API_KEY`，或技能本地文件 `assets/gpt2-api-key.txt`（该文件不入 git，公开仓库不含 key；缺失时脚本会明确报错）。端点通过环境变量 `GPT2_API_BASE` 指向**任意 OpenAI 兼容的 images/edits URL**（如 `https://your-host/v1/images/edits`），模型默认 `gpt-image-2`、可用 `GPT2_MODEL` 覆盖；本仓库不内置任何端点或密钥。**只支持 edits 端点**（无参考图时用 canvas 模式，见 backup-prompt-gpt2.md）。
 - 通道时效自检：正式批量前先跑 1 张小图验活；间歇 403(error 1010)/429/502 均为瞬时，退避 20s 重试即可（脚本已内置 4 次重试）。
 
 ## 1. 选模版并写 Prompt 文件（UTF-8 无 BOM）

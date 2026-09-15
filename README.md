@@ -1,6 +1,6 @@
 # Hotspot Mozai Deck
 
-Codex Skill：为“墨仔日记”进行日更图文生产。它会把当日与近 7 天的可核验信号转成以种草、涨粉和自然互动为目标的可选文案，再将选中的主题按文案长度和内容丰富度制作成 4–10 页抖音或小红书图文。
+通用 Agent Skill（适配任何具备图文生成能力的 Agent）：为“墨仔日记”进行日更图文生产。它会把当日与近 7 天的可核验信号转成以种草、涨粉和自然互动为目标的可选文案，再将选中的主题按文案长度和内容丰富度制作成 4–10 页抖音或小红书图文。
 
 抖音图文与小红书图文的文案生成、平台原生表达、真实性和去 AI 审核，遵循 `master-copywriting` 技能的对应规范；本技能在文案通过该规范后负责墨仔角色、页面拆分与成图。
 
@@ -114,3 +114,17 @@ hotspot-mozai-deck/
 ## 版本 2.20.1
 
 - 清理 README 中已废弃的互动钩子、空版本记录和过时说明；统一当前文档与技能行为。
+
+## 移植与适配（分发给其他 Agent / 其他软件）
+
+本技能为纯文件包（SKILL.md + references/ + assets/ + scripts/），不依赖任何特定 Agent 运行时，移植步骤：
+
+1. **目录约定**：保持 `SKILL.md`、`references/`、`assets/` 相对结构不变即可；Agent 按各自 Skill 加载机制读取 SKILL.md 并按需读取引用文件。文件一律 UTF-8（无 BOM）。
+2. **出图通道无关**：SKILL.md 不绑定供应商。具备"参考图编辑"能力的 Agent 直接按模板出图；只有文生图能力的 Agent 走 `references/backup-prompt-gpt2.md` 的 canvas 模式（拿任意成品页当画布）。配套脚本 `scripts/gen_gpt2_page.py` 是可选参考实现，任何 OpenAI 兼容 images/edits 端点均可：
+   - `GPT2_API_BASE`：端点 URL（必填，如 `https://your-host/v1/images/edits`）
+   - `GPT2_API_KEY`：密钥（或 `assets/gpt2-api-key.txt`，该文件已被 .gitignore 排除）
+   - `GPT2_MODEL`：模型名（默认 gpt-image-2）
+   仓库内不含任何真实端点、密钥或账号数据。
+3. **依赖**：脚本路径需要 `python` + `requests` + `numpy` + `Pillow`；不运行脚本、仅用 Prompt 模板时零依赖。
+4. **账号私有规则外置**：选题过滤器、标签纪律、发布纪律等账号级规则不属于本仓库，由部署方在自有工作区挂载（建议 `.mozai/account-rules.md`）。
+5. **合规**：AI 生成内容按发布平台现行标识规范添加声明；医疗、未成年人等类目红线见 `references/platform-compliance-douyin.md`，分发到其他平台时替换为对应平台规范。

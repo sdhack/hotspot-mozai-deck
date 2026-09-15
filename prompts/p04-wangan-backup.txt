@@ -1,0 +1,66 @@
+Replace the entire page with a BRAND NEW inner page described below. The attached image serves only as the
+paper/style canvas — do not keep any of its text, layout, page number or scene.
+
+=== CANVAS ===
+True portrait 3:4 canvas. A double-line hand-drawn black border runs about 30px inside the canvas edges on all
+four sides, with dense vine-leaf, bow and star-dot corner flourishes climbing along the corners and sides,
+drawn with bold wobbly strokes. The composition fills the frame; outer paper margins stay thin and even.
+
+=== STYLE ===
+Cozy hand-drawn journal storybook card on an off-white, near-white warm paper with only a very subtle creamy
+tint (never yellow, never beige), covered with sparse subtle fiber speckles and a VERY FAINT hand-drawn square
+grid pattern across the entire background: thin even light-grey pencil lines forming small squares, like fine
+graph paper — visible on close look, extremely subtle at first glance. All linework is bold confident black
+hand-drawn ink with naturally wobbly sketch strokes and heavy cross-hatched shading. Colors are ONLY a
+restrained muted dusty palette — dusty pink, pale sage, cream yellow, pale lavender at low saturation on the
+white paper; no vivid, bright, neon or highly saturated color anywhere (no strong red, orange, magenta or golden
+yellow); every colored element stays quiet and gentle. A few tiny scattered doodles (stars, hearts, sparkles,
+leaves) fill empty areas away from text. Bright and airy overall, never grey or gloomy.
+
+=== CHARACTER ===
+Exactly one Mozai: a plump pear/teardrop-shaped black ink-drop creature, body height 1.1-1.2 times its width,
+round heavy bottom tapering to a curled pointed top bearing a thin sprout with exactly two sage-green leaves;
+big white oval eyes with black pupils, subtle expressive eyebrows, a small black mouth (never red); exactly two
+thin arms and two short legs; no blush, no clothes; the whole body filled with dense graphite-like scribble
+cross-hatching. This body proportion is identical on every page of the set. Position: standing at the lower-left
+beside the big speech-bubble card, about 11% of the page height, friendly warm smile with relaxed kind eyebrows,
+one arm gently presenting the bubble like offering advice, the other arm relaxed at his side. LIMB COUNT HARD
+LOCK: exactly TWO arms and TWO legs — count them before finalizing.
+
+=== LAYOUT ===
+The page number circle sits alone on the very top row (small hand-drawn circle 「04/05」, top-left); the title
+block starts clearly lower, about 12-14% of the page height down from the top border, never crowding the top
+edge. Title RIGHT-aligned, deep black, dominant, with a thin wavy hand-drawn underline sweeping under it from
+the right edge. The MIDDLE band holds the hero element: ONE large hand-drawn speech-bubble card (soft pale-sage
+wash) containing the key sentence in two lines, big and readable; small empty doodle circles and squiggle lines
+decorate the bubble tail — never avatar silhouettes or faces inside the bubble. Below the bubble, a small
+sticky-note card (cream yellow wash, slightly tilted) carries the "first step" note. The BOTTOM band keeps clean
+quiet paper with two caption rows led by small pastel dots (dusty pink, pale lavender), one short source line in
+smaller text, and tiny grey doodles.
+
+=== CONTENT ===
+Render this Chinese text exactly, character for character, each string exactly once:
+- Page number circle: 04 / 05
+- Title: 对上了，先别急着发火
+- Wavy underline sweeping under the title from the right edge
+- Speech bubble, line 1: 带我也看看，
+- Speech bubble, line 2: 最近网上什么好玩？
+- Sticky note card: 第一步不是没收手机
+- Caption row 1: 零花钱花得快，问去向就含糊
+- Caption row 2: 他肯给你看，门就没关上
+- Source line: 信号整理自《未成年人新型网络风险防护指南》公开提醒
+- ALL TEXT IS HANDWRITTEN: natural irregular Chinese handwriting, uneven sizes, slightly tilted strokes — NEVER
+  printed, typeset or computer-font. Body text LARGE, DARK, DEEP-BLACK, crisp at phone-screen size. The last
+  character of the title is 火, NEVER add a period or any punctuation after it. All numbers black.
+
+=== CONSTRAINTS ===
+P0: exactly the listed strings, each once; one character only; two leaves, two arms, two legs; pear body
+proportion locked; no child or adult figure; no faces or avatars inside the bubble; numbers black; no red
+element anywhere. P1: title dominant; bubble readable and tidy; Mozai crisp beside the bubble. P2: doodles,
+flourishes.
+
+=== AVOID ===
+a second character or extra limbs, wrong leaf count, circle/ball/egg body or body-shape drift between pages,
+printed or typeset-looking text anywhere, thin faint sketchy body text, vivid or saturated colors, avatar
+silhouettes or faces inside the bubble, angry eyebrows, red elements, English or pinyin, watermark, wide empty
+paper margins, dark or gloomy overall tone.

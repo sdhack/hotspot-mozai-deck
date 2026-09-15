@@ -9,6 +9,8 @@
   python gen_gpt2_page.py --prompt prompt.txt --out 03-页面.jpg --mode canvas --canvas last-ok.jpg --seed 9
 
 Key 解析顺序：环境变量 GPT2_API_KEY → assets/gpt2-api-key.txt（本地文件，不入库）。
+端点：环境变量 GPT2_API_BASE 指向任意 OpenAI 兼容的 images/edits 端点（如 https://your-host/v1/images/edits），
+模型可用 GPT2_MODEL 覆盖（默认 gpt-image-2）。本仓库不内置任何私有端点或密钥。
 --mode dual   双参考：风格参考图 + 墨仔人物卡（默认，封面与场景内页用这个）
 --mode canvas 单画布整页替换：无风格参考时，传一张自有成品页当纸张画布
 """
@@ -17,8 +19,8 @@ import numpy as np
 import requests
 from PIL import Image, ImageEnhance
 
-API = "https://api.790053500.com/v1/images/edits"
-MODEL = "gpt-image-2"
+API = os.environ.get("GPT2_API_BASE", "").strip().rstrip("/")
+MODEL = os.environ.get("GPT2_MODEL", "gpt-image-2")
 SIZE = "1024x1365"
 SKILL_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ASSETS = os.path.join(SKILL_DIR, "assets")
@@ -47,6 +49,12 @@ def resolve_key():
     sys.exit("missing key: set env GPT2_API_KEY or create assets/gpt2-api-key.txt")
 
 
+def resolve_api():
+    if API:
+        return API
+    sys.exit("missing endpoint: set env GPT2_API_BASE to an OpenAI-compatible images/edits URL")
+
+
 def request_image(prompt, mode, style_ref, canvas, mozai_ref, seed):
     data = {"model": MODEL, "prompt": prompt, "size": SIZE, "n": "1"}
     if seed is not None:
@@ -58,7 +66,7 @@ def request_image(prompt, mode, style_ref, canvas, mozai_ref, seed):
         files = [("image", ("canvas.jpg", open(canvas, "rb"), "image/jpeg"))]
     for attempt in range(4):
         try:
-            r = requests.post(API, headers={"Authorization": "Bearer " + resolve_key()},
+            r = requests.post(resolve_api(), headers={"Authorization": "Bearer " + resolve_key()},
                               data=data, files=files, timeout=560)
             if r.status_code in (403, 429, 502):
                 print(f"attempt {attempt+1}: status {r.status_code}, backoff 20s")

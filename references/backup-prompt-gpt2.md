@@ -106,13 +106,15 @@ im.save(path, "JPEG", quality=92)                # 一律 JPEG，FF D8 FF 头校
 
 | 通道 | 端点 | 模型 | 状态 |
 |---|---|---|---|
-| jojocode | https://maxcdn.jojocode.com/v1/images/edits | gpt-image-2 | ❌ 403 SUBSCRIPTION_NOT_FOUND（订阅失效） |
-| 790053500 | https://api.790053500.com/v1/images/edits | gpt-image-2 | ✅ 可用；间歇 403 error 1010（瞬时风控，退避重试可过） |
-| bigmodel | https://open.bigmodel.cn/api/paas/v4/images/generations | cogview-3-flash | 兜底（中文文字渲染弱，仅应急） |
+| 自建/代理 A | （已脱敏：经环境变量 `GPT2_API_BASE` 注入，不入库） | gpt-image-2 | 主通道；曾见间歇 403 error 1010（瞬时风控，退避重试可过） |
+| 自建/代理 B | （已弃用） | gpt-image-2 | ❌ 403 SUBSCRIPTION_NOT_FOUND（订阅失效） |
+| 公有云大模型 generations | （任意 cogview 类端点） | cogview-3-flash | 兜底（中文文字渲染弱，仅应急） |
 
-- `images/generations` 端点未订阅：**只能走 edits**。纯 Prompt 无参考图出图时，把任意一张自有成品页作为
+通道经验已泛化：主通道必须是**OpenAI 兼容 edits 端点**；公有云 generations 中文文字精度不足，只做无文字要求页面的应急兜底。
+
+- `images/generations` 类端点中文文字精度差：**正文页只走 edits**。纯 Prompt 无参考图出图时，把任意一张自有成品页作为
   `image[]` 传入当"纸张画布"，Prompt 开头声明：`Replace the entire page with a BRAND NEW cover/page described
   below. The attached image serves only as the paper/style canvas — do not keep any of its text, layout, page
-  number or scene.`（本套 5 图已验证：成图与画布内容无关，风格完全由 Prompt 决定）
-- 各通道 key 见工作区历史脚本（gen_cover_tuigroup.py / gen_teacher福利.py 等），使用前先跑一次小请求验活。
-- 选题侧配套规则（标签纪律、流量池漏斗逐池设计）在工作区 `.mozai/account-rules.md`，出主题前先过该过滤器。
+  number or scene.`（已验证：成图与画布内容无关，风格完全由 Prompt 决定）
+- 密钥一律经环境变量（`GPT2_API_KEY` / `GPT2_API_BASE` / `GPT2_MODEL`）注入，使用前先跑一次小请求验活。
+- 选题侧配套规则（标签纪律、发布纪律等账号私有规则）不放本仓库，由各部署环境自行挂载。

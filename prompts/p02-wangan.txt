@@ -1,0 +1,70 @@
+The FIRST attached image is a style reference: learn ONLY its art style, texture and lettering feel.
+The SECOND attached image is the character appearance truth (appearance only, never copy its sheet layout or
+poses). Replace everything with the BRAND NEW inner page described below — keep no text, layout, page number
+or scene from either image.
+
+=== CANVAS ===
+True portrait 3:4 canvas. A thin, elegant single hand-drawn black border runs about 30px inside the canvas
+edges on all four sides, with delicate vine-leaf and star-dot corner flourishes like fine pen doodles. The
+composition fills the frame; outer paper margins stay thin and even.
+
+=== STYLE ===
+Learn ONLY the art style, texture and lettering feel of the attached style reference — do NOT copy its scene,
+composition, objects or layout. Cozy hand-drawn journal card on warm cream paper (never yellow, never beige)
+with a very faint square grid; soft grey pencil cross-hatch shading with gentle pastel watercolor blotches
+(dusty blue, muted orange, pale pink) floating loosely in empty areas; scattered tiny grey doodles of stars,
+hearts, pencils, leaves and sparkles; a muted, low-saturation watercolor world; no vivid, bright, neon or
+highly saturated color anywhere, no strong red, orange, magenta or golden yellow. All linework is confident
+black hand-drawn ink with wobbly sketch strokes and cross-hatched shading. Lettering style learned from the
+reference: all text is natural irregular Chinese handwriting with rounded confident marker strokes, slightly
+tilted and uneven — NEVER printed, typeset or computer-font. The page title is the largest, deepest black
+element with medium-thin crisp strokes (about one tenth of character height in stroke weight); smaller text
+stays clearly subordinate. Bright and airy overall, never grey or gloomy.
+
+=== CHARACTER ===
+Exactly one Mozai: a plump pear/teardrop-shaped black ink-drop creature, body height 1.1-1.2 times its width,
+round heavy bottom tapering to a curled pointed top bearing a thin sprout with exactly two sage-green leaves;
+big white oval eyes with black pupils, subtle expressive eyebrows, a small black mouth (never red); no blush,
+no clothes; whole body filled with dense graphite-like scribble cross-hatching. LIMB COUNT HARD LOCK: exactly
+TWO thin arms and exactly TWO short legs — count them before finalizing; a third arm, a third leg, an extra
+hand or a split limb is a blocking defect. The pen is OPTIONAL: this page Mozai holds NO pen. Mozai is INSIDE
+the scene and interacts with its props — never a corner sticker floating beside text blocks. Size: strictly
+SMALL, about 10% of the page height, clearly smaller than one content block.
+
+=== LAYOUT ===
+The page number circle sits alone on the very top row (small hand-drawn circle, top-left); the title block
+starts clearly lower, about 12-14% of the page height down from the top border, never crowding the top edge.
+Title top-LEFT aligned, rotated -2 degrees, deep black, with a thin wavy hand-drawn underline sweeping from
+the left edge under the whole line. The MIDDLE band holds ONE large scene illustration filling about half the
+page: a child seen strictly FROM BEHIND (back of head, zero facial features) sitting at a desk in the evening
+looking at a tablet whose screen is blank pale grey; above the child's head float TWO big clear hand-drawn
+thought bubbles, one slightly higher than the other; on the desk a small lamp, a pencil cup, a closed notebook;
+Mozai sits on the corner of the desk leaning toward the bubbles, curious tilted-head expression, one arm
+pointing up at the higher bubble. The BOTTOM band keeps clean paper with two caption rows (each led by a small
+pastel dot: dusty-blue, dusty-pink) and one short conclusion line at the very bottom under a thin pencil rule,
+plus tiny grey doodles in the margins.
+
+=== CONTENT ===
+Render this Chinese text exactly, character for character, each string exactly once:
+- Page number circle: 02 / 05
+- Title: 这不是长大，是信号
+- Thin wavy underline sweeping under the whole title line
+- Thought bubble 1 (higher): 删了省内存
+- Thought bubble 2 (lower): 普通同学而已
+- Caption row 1: 聊天记录总是空的
+- Caption row 2: 一提网友就岔开话题
+- Conclusion line: 每条都像理由，连起来是信号
+- The last character of the title is 号, NEVER add a period or any punctuation after it. All numbers black.
+
+=== CONSTRAINTS ===
+P0: exactly the listed strings, each once; one character only; two leaves, two arms, two legs; pear body
+proportion locked; the child strictly back view with zero facial features; no adult figure; screen blank;
+numbers black; no red element anywhere. P1: title is the dominant text element; scene readable and tidy;
+Mozai crisp, sitting ON the desk corner, about 10% page height. P2: blotches, doodles, corner flourishes.
+
+=== AVOID ===
+copying the reference image's scene, layout or composition, a second character or extra limbs, wrong leaf
+count, circle/ball/egg body or body-shape drift, the child's face or profile from any angle, adult figures,
+readable screen content or brand logos, printed or typeset-looking text anywhere, thin faint sketchy body
+text, vivid or saturated colors, red elements, English or pinyin, watermark, wide empty paper margins, dark
+or gloomy overall tone, the same centered title placement as other pages.
