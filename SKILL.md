@@ -69,7 +69,7 @@ metadata:
 
 先判断用户需要哪种模式：
 
-- **日更选题 / 今日文案（默认调用提示词）**：本模式默认执行 [references/default-selection-prompt.md](references/default-selection-prompt.md) 的「爆款选题策划」提示词——基于用户提供的 Excel 作品数据与 anysearch 核验的当日热点，按四维评分（收藏价值×1.5＋人群精准度×1.2＋时效性×1.0＋系列化空间×1.3）筛选 5 条爆款候选主题；用户未提供该提示词时它即默认口径，用户给了自定义提示词时以用户为准。补充文案候选时可再读取 [references/hotspot-template.md](references/hotspot-template.md)。
+- **日更选题 / 今日文案（默认调用提示词）**：本模式默认执行 [references/default-selection-prompt.md](references/default-selection-prompt.md) 的「爆款选题策划」提示词——基于用户提供的 Excel 作品数据与 anysearch 核验的当日热点，按四维评分（收藏价值×1.5＋人群精准度×1.2＋时效性×1.0＋系列化空间×1.3）筛选 5 条爆款候选主题；候选主题受 2026-09-17 用户定稿的硬性约束：必须严格符合账号作品数据的已验证规律（每条给出真实数据依据，无数据支撑或与数据规律相悖的主题不得入选）并严格符合抖音起量规则（对照算法权重论证收藏驱动/人群精准/系列化，不达标即淘汰，宁缺毋滥不硬凑），详见该提示词第三节的「硬性约束」；用户未提供该提示词时它即默认口径，用户给了自定义提示词时以用户为准。补充文案候选时可再读取 [references/hotspot-template.md](references/hotspot-template.md)。
 - **自动选题**：用户只要求推荐时，核验后给出精简候选；读取 [references/hotspot-template.md](references/hotspot-template.md)。
 - **指定事件**：核验用户给出的事件后直接规划；若只是虚构主题或常青内容，明确它不是实时新闻并跳过热点排名。
 - **只做策划或文案**：不生成图片，仍执行事实核验与内容 QA。
